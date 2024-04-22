@@ -1,4 +1,4 @@
-package com4.server;
+package com.podo.server;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
