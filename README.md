@@ -10,4 +10,4 @@ Project Name : Podo News
 
 1. 최초 사용시 Fork -> Clone 후 사용하세요.
 2. 작업 전 Fork sync -> pull 후 사용하세요.
-3. 작업 후 add -> commit -> push -> pull request 순으로 요청해주세요.
+3. 작업 후 add -> commit -> push -> pull request -> 충돌 없으면 직접 merge 순으로 요청해주세요.
