@@ -2,7 +2,7 @@
 
 Team project (start 2024-04-22)
 Team Name : 404 Not Found
-Project Name : Podo News
+Project Name : 나만의 작은 건강 비서 : 필팩 (Pill-Pack)
 
 2024/04/22
 
