@@ -1,6 +1,6 @@
 function App() {
-  return <>
-  </>;
+  console.log(M.navigator.os());
+  return <>Here is react</>;
 }
 
 export default App;
