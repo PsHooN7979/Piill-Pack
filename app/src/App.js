@@ -1,6 +1,10 @@
+import AppRouter from "./(route)/Router";
+
 function App() {
   console.log(M.navigator.os());
-  return <>Here is react</>;
+  return <>
+    <AppRouter />
+  </>;
 }
 
 export default App;
