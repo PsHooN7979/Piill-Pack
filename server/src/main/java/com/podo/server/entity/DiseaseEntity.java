@@ -43,4 +43,10 @@ public class DiseaseEntity {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_uuid")
+    private PatientEntity patient_uuid;
+
+
 }

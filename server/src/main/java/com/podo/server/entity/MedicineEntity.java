@@ -22,7 +22,6 @@ public class MedicineEntity {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @Column(nullable = false)
@@ -34,4 +33,8 @@ public class MedicineEntity {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "prescription_uuid")
+    private PrescriptionEntity prescription_uuid;
 }
