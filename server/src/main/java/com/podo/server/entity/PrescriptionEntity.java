@@ -41,4 +41,9 @@ public class PrescriptionEntity {
     @OneToMany(mappedBy = "prescription_uuid", cascade = CascadeType.PERSIST)
     @Builder.Default
     private List<MedicineEntity> prescription_medicine = new ArrayList<>();
+
+    // UUID만 받는 생성자
+    public PrescriptionEntity(UUID id) {
+        this.id = id;
+    }
 }
