@@ -2,18 +2,19 @@ package com.podo.server.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "patient")
 
 public class PatientEntity {
@@ -49,5 +50,15 @@ public class PatientEntity {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<DiseaseEntity> patient_disease = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<PrescriptionEntity> patient_prescription = new ArrayList<>();
 
 }
