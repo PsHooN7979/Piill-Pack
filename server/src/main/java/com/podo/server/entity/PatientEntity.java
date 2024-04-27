@@ -24,10 +24,10 @@ public class PatientEntity {
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
-    @Column(nullable = false)
+    @Column
     private Integer age;
 
-    @Column(nullable = false)
+    @Column
     private Boolean gender;
 
     @Column
@@ -42,8 +42,16 @@ public class PatientEntity {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String nickname;
+
+    @Column
+    @Builder.Default
+    private Boolean is_email = false;
+
+    @Column
+    @Builder.Default
+    private Boolean is_fist = true;
 
     @Column(nullable = false)
     private LocalDateTime created;
