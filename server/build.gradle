@@ -29,6 +29,10 @@ dependencies {
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
