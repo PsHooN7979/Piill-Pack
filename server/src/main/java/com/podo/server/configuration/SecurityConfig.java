@@ -3,6 +3,9 @@ package com.podo.server.configuration;
 //import com.podo.server.jwt.JWTFilter;
 //import com.podo.server.jwt.JWTUtil;
 //import com.podo.server.jwt.LoginFilter;
+import com.podo.server.jwt.JWTFilter;
+import com.podo.server.jwt.JWTUtil;
+import com.podo.server.jwt.LoginFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,10 +31,10 @@ import java.util.Collections;
 public class SecurityConfig {
 
     //AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
-//    private final AuthenticationConfiguration authenticationConfiguration;
+    private final AuthenticationConfiguration authenticationConfiguration;
 
     //JWTUtil 주입
-//    private final JWTUtil jwtUtil;
+    private final JWTUtil jwtUtil;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -39,11 +42,11 @@ public class SecurityConfig {
     }
 
     //AuthenticationManager Bean 등록
-//    @Bean
-//    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-//
-//        return configuration.getAuthenticationManager();
-//    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+
+        return configuration.getAuthenticationManager();
+    }
 
 
 
@@ -90,12 +93,12 @@ public class SecurityConfig {
                         .anyRequest().authenticated());
 
         //JWTFilter 등록
-//        http
-//                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
 
-//        http
-//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+        http
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         //세션 설정
         http
