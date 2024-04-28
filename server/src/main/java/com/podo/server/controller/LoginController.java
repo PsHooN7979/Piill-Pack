@@ -1,5 +1,6 @@
 package com.podo.server.controller;
 
+import com.podo.server.dto.PatientDto;
 import com.podo.server.dto.UserDto;
 import com.podo.server.repository.PatientRepository;
 import com.podo.server.service.PatientService;
@@ -7,10 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -25,4 +25,8 @@ public class LoginController {
         return "ok";
     }
 
+    @PutMapping("/join/{id}")
+    public void infoRegister(@PathVariable UUID id, @RequestBody PatientDto dto){
+
+    }
 }

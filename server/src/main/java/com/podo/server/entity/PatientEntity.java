@@ -1,6 +1,7 @@
 package com.podo.server.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -36,6 +37,7 @@ public class PatientEntity {
     private Integer height;
 
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
 
     @Column(nullable = false)
