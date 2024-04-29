@@ -10,6 +10,6 @@ public class MvcConfig implements WebMvcConfigurer {
   @Override
   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/web/**")
-        .addResourceLocations("classpath:/static");
+        .addResourceLocations("classpath:/static/web/dist/");
   }
 }
