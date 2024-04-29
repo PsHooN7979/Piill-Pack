@@ -1,20 +1,26 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-function LoginForm({ onLogin }) {
-    const navigate = useNavigate();
+function LoginFormModal({ onLogin, onClose }) {
 
     const handleClose = () => {
-        navigate(-1);
+        onClose();
     }
 
     const handleLoginClick = () => {
         onLogin({ email: 'email', password: 'pass' });
+        onClose(); // 로그인 후 모달 닫기
+    };
+
+    // 모달 바깥쪽 클릭 시 모달 닫기
+    const handleBackdropClick = (e) => {
+        if (e.target.id === "backdrop") {
+        onClose();
+        }
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex justify-center items-center">
-            <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
+        <div id="backdrop" className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50" onClick={handleBackdropClick}>
+        <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
                 {/* 닫기 버튼 */}
                 <div className="flex justify-end mb-1">
                     <button onClick={handleClose} className="p-2">
@@ -56,5 +62,4 @@ function LoginForm({ onLogin }) {
     );
 }
 
-export default LoginForm;
-  
+export default LoginFormModal;
