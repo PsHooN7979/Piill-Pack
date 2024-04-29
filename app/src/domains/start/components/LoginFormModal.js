@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function LoginFormModal({ onLogin, onClose }) {
+function LoginFormModal({ onLogin, onClose, onJoinClick }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isKeepLogin, setIsKeepLogin] = useState(false);
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+    const handleCheckboxChange = (event) => {
+        setIsKeepLogin(event.target.value);
+    };
 
     const handleClose = () => {
         onClose();
     }
 
     const handleLoginClick = () => {
-        onLogin({ email: 'email', password: 'pass' });
+        onLogin(email, password, isKeepLogin);
         onClose(); // 로그인 후 모달 닫기
     };
 
@@ -20,7 +35,7 @@ function LoginFormModal({ onLogin, onClose }) {
 
     return (
         <div id="backdrop" className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50" onClick={handleBackdropClick}>
-        <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
+            <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
                 {/* 닫기 버튼 */}
                 <div className="flex justify-end mb-1">
                     <button onClick={handleClose} className="p-2">
@@ -34,17 +49,19 @@ function LoginFormModal({ onLogin, onClose }) {
                     <input
                         type="text"
                         placeholder="이메일 형식의 아이디"
+                        onChange={handleEmailChange}
                         className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                     />
                     <input
                         type="password"
-                        placeholder="비밀번호(나중에 MUI적용하면 바꿀예정)"
+                        placeholder="비밀번호"
+                        onChange={handlePasswordChange}
                         className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                     />
                 </div>
                 {/* 로그인 상태 유지 */}
                 <div className="flex items-center mb-8 justify-start ml-6">
-                    <input type="checkbox" id="keepLoggedIn" className="mr-2" />
+                    <input type="checkbox" id="keepLoggedIn" className="mr-2" onChange={handleCheckboxChange} />
                     <label htmlFor="keepLoggedIn" className="text-xs">로그인 상태 유지</label>
                 </div>
                 {/* 로그인 버튼 */}
@@ -55,7 +72,7 @@ function LoginFormModal({ onLogin, onClose }) {
                     로그인
                 </button>
                 <div className="text-center text-xs text-gray-600 mt-2">
-                    회원정보가 없나요? <span className=" text-warn02 cursor-pointer no-underline hover:underline">회원가입</span>
+                    회원정보가 없나요? <span className=" text-warn02 cursor-pointer no-underline hover:underline" onClick={onJoinClick}>회원가입</span>
                 </div>
             </div>
         </div>
