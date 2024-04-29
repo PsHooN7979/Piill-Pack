@@ -1,8 +1,5 @@
 package com.podo.server.configuration;
 
-//import com.podo.server.jwt.JWTFilter;
-//import com.podo.server.jwt.JWTUtil;
-//import com.podo.server.jwt.LoginFilter;
 import com.podo.server.jwt.JWTFilter;
 import com.podo.server.jwt.JWTUtil;
 import com.podo.server.jwt.LoginFilter;
@@ -29,85 +26,85 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-        // AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
-        private final AuthenticationConfiguration authenticationConfiguration;
+	// AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
+	private final AuthenticationConfiguration authenticationConfiguration;
 
-        // JWTUtil 주입
-        private final JWTUtil jwtUtil;
+	// JWTUtil 주입
+	private final JWTUtil jwtUtil;
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-                return new BCryptPasswordEncoder();
-        }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-        // AuthenticationManager Bean 등록
-        @Bean
-        public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+	// AuthenticationManager Bean 등록
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
-                return configuration.getAuthenticationManager();
-        }
+		return configuration.getAuthenticationManager();
+	}
 
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-                http
-                                .cors((corsCustomizer -> corsCustomizer
-                                                .configurationSource(new CorsConfigurationSource() {
+		http
+				.cors((corsCustomizer -> corsCustomizer
+						.configurationSource(new CorsConfigurationSource() {
 
-                                                        @Override
-                                                        public CorsConfiguration getCorsConfiguration(
-                                                                        HttpServletRequest request) {
+							@Override
+							public CorsConfiguration getCorsConfiguration(
+									HttpServletRequest request) {
 
-                                                                CorsConfiguration configuration = new CorsConfiguration();
+								CorsConfiguration configuration = new CorsConfiguration();
 
-                                                                configuration.setAllowedOrigins(Collections
-                                                                                .singletonList("http://localhost:3000"));
-                                                                configuration.setAllowedMethods(
-                                                                                Collections.singletonList("*"));
-                                                                configuration.setAllowCredentials(true);
-                                                                configuration.setAllowedHeaders(
-                                                                                Collections.singletonList("*"));
-                                                                configuration.setMaxAge(3600L);
+								configuration.setAllowedOrigins(Collections
+										.singletonList("http://localhost:3000"));
+								configuration.setAllowedMethods(
+										Collections.singletonList("*"));
+								configuration.setAllowCredentials(true);
+								configuration.setAllowedHeaders(
+										Collections.singletonList("*"));
+								configuration.setMaxAge(3600L);
 
-                                                                configuration.setExposedHeaders(Collections
-                                                                                .singletonList("Authorization"));
+								configuration.setExposedHeaders(Collections
+										.singletonList("Authorization"));
 
-                                                                return configuration;
-                                                        }
-                                                })));
+								return configuration;
+							}
+						})));
 
-                http
-                                .csrf((auth) -> auth.disable());
+		http
+				.csrf((auth) -> auth.disable());
 
-                // From 로그인 방식 disable
-                http
-                                .formLogin((auth) -> auth.disable());
+		// From 로그인 방식 disable
+		http
+				.formLogin((auth) -> auth.disable());
 
-                // http basic 인증 방식 disable
-                http
-                                .httpBasic((auth) -> auth.disable());
+		// http basic 인증 방식 disable
+		http
+				.httpBasic((auth) -> auth.disable());
 
-                // 경로별 인가 작업
-                http
-                                .authorizeHttpRequests((auth) -> auth
-                                                .requestMatchers("/login", "/**", "/join").permitAll()
-                                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                                .anyRequest().authenticated());
+		// 경로별 인가 작업
+		http
+				.authorizeHttpRequests((auth) -> auth
+						.requestMatchers("/login", "/**", "/join").permitAll()
+						.requestMatchers("/admin/**").hasRole("ADMIN")
+						.anyRequest().authenticated());
 
-                // JWTFilter 등록
-                http
-                                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
+		// JWTFilter 등록
+		http
+				.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
-                http
-                                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),
-                                                jwtUtil), UsernamePasswordAuthenticationFilter.class);
+		http
+				.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),
+						jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
-                // 세션 설정
-                http
-                                .sessionManagement((session) -> session
-                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		// 세션 설정
+		http
+				.sessionManagement((session) -> session
+						.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-                return http.build();
-        }
+		return http.build();
+	}
 
 }

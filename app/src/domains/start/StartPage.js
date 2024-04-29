@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import LoginBtn from "./components/buttons";
 import LoginFormModal from './components/LoginFormModal';
 
+function StartPage({ isLoggingIn }) {
+  return (
+    <div
+      className={`flex flex-col relative  ${
+        isLoggingIn ? "blur-sm opacity-95" : ""
+      }`}
+    >
+      <div className="flex justify-center">
+        <div className="flex flex-col text-right w-80 mt-20 mr-4">
+          <div className="text-xs mr-4">나만의 작은 건강비서</div>
 
 function StartPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,6 +54,14 @@ function StartPage() {
 
     );
 
+
+      {!isLoggingIn && (
+        <div className="absolute bottom-0 mb-10 w-full flex justify-center">
+          <LoginBtn />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default StartPage;
