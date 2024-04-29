@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
 
   @Override
-  public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/web/**")
         .addResourceLocations("classpath:/static/web/dist/");
   }

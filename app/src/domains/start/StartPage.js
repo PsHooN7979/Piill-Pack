@@ -64,12 +64,12 @@ function StartPage() {
         <div className="absolute bottom-0 w-full">
           <div className="relative w-full h-auto bottom-0">
             <img
-              src="web/images/wave.png"
+              src="/web/images/wave.png"
               alt="Background"
               className="absolute bottom-0 w-full h-60 z-0"
             />
             <img
-              src="web/images/logo.png"
+              src="/web/images/logo.png"
               alt="Logo"
               className="absolute bottom-28 left-1/2 transform -translate-x-1/2 w-20 z-10"
             />

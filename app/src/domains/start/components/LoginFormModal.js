@@ -44,7 +44,7 @@ function LoginFormModal({ onLogin, onClose, onJoinClick }) {
         <div className="flex justify-end mb-1">
           <button onClick={handleClose} className="p-2">
             <img
-              src="web/images/ico/close.png"
+              src="/web/images/ico/close.png"
               alt="Close"
               className="h-4 w-4"
             />
