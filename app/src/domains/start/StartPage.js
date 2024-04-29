@@ -68,6 +68,7 @@ function StartPage() {
               alt="Background"
               className="absolute bottom-0 w-full h-60 z-0"
             />
+            {/* Public url resource route */}
             <img
               src="/web/images/logo.png"
               alt="Logo"

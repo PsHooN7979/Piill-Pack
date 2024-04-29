@@ -10,6 +10,9 @@ import {
 
 function AppRouter() {
   return (
+    /**
+     * June. SSR routing refactoring
+     */
     <HashRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />

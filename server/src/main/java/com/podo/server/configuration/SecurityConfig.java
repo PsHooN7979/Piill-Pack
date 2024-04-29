@@ -87,7 +87,9 @@ public class SecurityConfig {
 		// 경로별 인가 작업
 		http
 				.authorizeHttpRequests((auth) -> auth
-						// J. 1. 에러 라우팅 시 필터 프리패스로 설정 2. 웹 서버 라우팅 시 필터 프리패스로 설정
+						/*
+						 * June. error routing permit all && client web routing permit all
+						 */
 						.requestMatchers("/web/**", "/error/**").permitAll()
 						.requestMatchers("/login", "/join").permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
@@ -97,15 +99,14 @@ public class SecurityConfig {
 		http
 				.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
-		// http
-		// .addFilterAt(new
-		// LoginFilter(authenticationManager(authenticationConfiguration),
-		// jwtUtil), UsernamePasswordAuthenticationFilter.class);
+		http
+				.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),
+						jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
 		// 세션 설정
-		// http
-		// .sessionManagement((session) -> session
-		// .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		http
+				.sessionManagement((session) -> session
+						.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 		return http.build();
 	}
