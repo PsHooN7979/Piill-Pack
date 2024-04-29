@@ -18,9 +18,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "watch": "mode=development react-scripts build --watch",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch-build": "react-scripts build --watch",
+    "remote-build": "react-scripts build && rsync -av --delete ./dist/ ../server/src/main/resources/static/web/dist/",
+    "watch": "nodemon --watch src --exec \"npm run remote-build\""
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "nodemon": "^3.1.0",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
     "tailwindcss": "^3.4.3"
