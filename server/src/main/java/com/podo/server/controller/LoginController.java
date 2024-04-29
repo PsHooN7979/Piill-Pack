@@ -17,8 +17,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class LoginController {
     private final PatientService patientService;
+
     @PostMapping("/join")
-    public String register(@RequestBody UserDto dto){
+    public String register(@RequestBody UserDto dto) {
 
         patientService.register(dto);
 
@@ -26,7 +27,7 @@ public class LoginController {
     }
 
     @PutMapping("/join/{id}")
-    public void infoRegister(@PathVariable UUID id, @RequestBody PatientDto dto){
+    public void infoRegister(@PathVariable UUID id, @RequestBody PatientDto dto) {
 
     }
 }

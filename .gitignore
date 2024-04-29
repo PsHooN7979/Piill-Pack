@@ -1,4 +1,7 @@
-
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,react,visualstudiocode,java,intellij,intellij+all,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,react,visualstudiocode,java,intellij,intellij+all,gradle
