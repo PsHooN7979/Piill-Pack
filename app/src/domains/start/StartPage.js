@@ -31,12 +31,12 @@ function StartPage() {
             <img
               src="images/wave.png"
               alt="Background"
-              className="absolute bottom-0 w-full h-56 z-0"
+              className="absolute bottom-0 w-full h-60 z-0"
             />
             <img
               src="images/logo.png"
               alt="Logo"
-              className="absolute bottom-24 left-1/2 transform -translate-x-1/2 w-20 z-10"
+              className="absolute bottom-28 left-1/2 transform -translate-x-1/2 w-20 z-10"
             />
           </div>
         </div>
