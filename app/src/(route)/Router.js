@@ -10,14 +10,12 @@ import {
 
 function AppRouter() {
   return (
-    <>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<StartPage />} />
-          <Route path="/info-input" element={<UserInfoRegistrationPage />} />
-        </Routes>
-      </HashRouter>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/info-input" element={<UserInfoRegistrationPage />} />
+      </Routes>
+    </HashRouter>
   );
 }
 
