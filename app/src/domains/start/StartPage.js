@@ -1,18 +1,39 @@
 import React, { useState } from "react";
 import LoginBtn from "./components/buttons";
 import LoginFormModal from "./components/LoginFormModal";
+import JoinFormModal from "./components/JoinFormModal";
 
 function StartPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+        setIsJoinModalOpen(false); // 로그인 모달을 열 때 회원가입 모달 닫기
+    };
+    const closeLoginModal = () => setIsLoginModalOpen(false);
+
+    const openJoinModal = () => {
+        setIsJoinModalOpen(true);
+        setIsLoginModalOpen(false); // 회원가입 모달을 열 때 로그인 모달 닫기
+    };
+    const closeJoinModal = () => setIsJoinModalOpen(false);
+
+    const handleLogin = (email, password, isKeepLogin) => {
+        // 로그인 핸들러
+        console.log("아이디: " + email + ", 비밀번호: " + password + ", 로그인 상태 유지 여부: " + isKeepLogin);
+    };
+
+    const handleJoin = (email, password, isAgree) => {
+        // 회원가입 핸들러
+        console.log("아이디: " + email + ", 비밀번호: " + password + ", 이메일 수신 동의 여부: " + isAgree);
+    };
 
   return (
     <>
       <div
         className={`flex flex-col min-h-screen relative  ${
-          isModalOpen ? "blur-sm opacity-95" : ""
+            isLoginModalOpen || isJoinModalOpen ? "blur-sm opacity-95" : ""
         }`}
       >
         <div className="flex justify-center">
@@ -41,15 +62,18 @@ function StartPage() {
           </div>
         </div>
 
-        {!isModalOpen && (
+        {!isLoginModalOpen && !isJoinModalOpen && (
           <div className="absolute bottom-0 mb-10 w-full flex justify-center">
-            <LoginBtn onLoginClick={openModal} />
+            <LoginBtn onLoginClick={openLoginModal} />
           </div>
         )}
       </div>
       {/* 모달 컴포넌트를 조건부로 표시 */}
-      {isModalOpen && (
-        <LoginFormModal onLoginClick={openModal} onClose={closeModal} />
+      {isLoginModalOpen && (
+        <LoginFormModal onLogin={handleLogin} onClose={closeLoginModal} onJoinClick={openJoinModal} />
+      )}
+      {isJoinModalOpen && (
+        <JoinFormModal onJoin={handleJoin} onClose={closeJoinModal} />
       )}
     </>
   );
