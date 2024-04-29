@@ -16,12 +16,13 @@ public class JWTUtil {
 
     public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
 
-
-        this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().getAlgorithm());
+        this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8),
+                Jwts.SIG.HS256.key().build().getAlgorithm());
     }
 
     public String getUsername(String token) {
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username",
+                String.class);
     }
 
     public UUID getId(String token) {
@@ -31,10 +32,9 @@ public class JWTUtil {
 
     public Boolean isExpired(String token) {
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration()
+                .before(new Date());
     }
-
-
 
     public String createJwt(String username, UUID id, Long expiredMs) {
 
@@ -46,6 +46,5 @@ public class JWTUtil {
                 .signWith(secretKey)
                 .compact();
     }
-
 
 }

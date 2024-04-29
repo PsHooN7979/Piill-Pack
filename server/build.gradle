@@ -8,9 +8,9 @@ plugins {
 group = 'com.podo'
 version = '0.0.1-SNAPSHOT'
 
-java {
-	sourceCompatibility = '17'
-}
+// java {
+// 	sourceCompatibility = '17'
+// }
 
 repositories {
 	mavenCentral()
@@ -32,7 +32,8 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+	// implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+	implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.3.0'
 
 	// compileOnly 'org.projectlombok:lombok'
 	implementation 'org.projectlombok:lombok'
