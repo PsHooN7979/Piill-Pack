@@ -51,7 +51,7 @@ function JoinFormModal({ onJoin, onClose }) {
 
     return (
         <div id="backdrop" className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50" onClick={handleBackdropClick}>
-        <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
+            <div className="bg-white pt-1 rounded-xl shadow-custom01 w-80 h-80">
                 {/* 닫기 버튼 */}
                 <div className="flex justify-end mb-1">
                     <button onClick={handleClose} className="p-2">
