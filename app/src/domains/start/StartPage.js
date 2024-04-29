@@ -1,18 +1,17 @@
 import LoginBtn from "./components/buttons";
 
-
 function StartPage( { isLoggingIn } ) {
 
     return(
         <div className={`flex flex-col min-h-screen relative  ${isLoggingIn ? 'blur-sm opacity-95' : ''}`}>
             <div className="flex justify-center">
                 <div className="flex flex-col text-right w-80 mt-20 mr-4">
-                    <div className="text-xs mr-4">
+                    <div className=" text-sm mr-4">
                         나만의 작은 건강비서
                     </div>
                     
-                    <div className="text-3xl text-shadow-custom01 font-bold mt-1">
-                        <div>필</div>
+                    <div className="text-5xl text-shadow-custom01 font-bold mt-1">
+                        <div className="mb-2">필</div>
                         <div>팩</div>
                     </div>
                 </div>
