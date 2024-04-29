@@ -7,7 +7,7 @@ function AppRouter() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<StartPage />} />
+          <Route path="/web" element={<StartPage />} />
         </Routes>
       </Router>
     </>

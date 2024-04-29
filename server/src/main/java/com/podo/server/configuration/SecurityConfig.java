@@ -87,7 +87,7 @@ public class SecurityConfig {
 		// 경로별 인가 작업
 		http
 				.authorizeHttpRequests((auth) -> auth
-						// 범준 : 1. 에러 라우팅 시 필터 프리패스로 설정 2. 웹 서버 라우팅 시 필터 프리패스로 설정
+						// J. 1. 에러 라우팅 시 필터 프리패스로 설정 2. 웹 서버 라우팅 시 필터 프리패스로 설정
 						.requestMatchers("/web/**", "/error/**").permitAll()
 						.requestMatchers("/login", "/join").permitAll()
 						.requestMatchers("/admin/**").hasRole("ADMIN")
