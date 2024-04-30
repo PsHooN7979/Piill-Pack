@@ -1,12 +1,7 @@
 import StartPage from "../domains/start/StartPage";
 import UserInfoRegistPage from "../domains/registration/UserInfoRegistPage";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  HashRouter,
-} from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 
 function AppRouter() {
   return (
