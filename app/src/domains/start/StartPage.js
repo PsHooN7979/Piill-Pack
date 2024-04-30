@@ -33,7 +33,7 @@ function StartPage() {
         isKeepLogin
     );
 
-    navigate("/info-input");
+    navigate("/first");
   };
 
   const handleJoin = (email, password, isAgree) => {
