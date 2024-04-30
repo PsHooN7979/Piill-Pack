@@ -11,7 +11,7 @@ function AppRouter() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/info" element={<UserInfoRegistrationPage />} />
+        <Route path="/frist" element={<UserInfoRegistrationPage />} />
       </Routes>
     </HashRouter>
   );
