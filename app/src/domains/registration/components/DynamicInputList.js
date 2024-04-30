@@ -56,7 +56,7 @@ function DynamicInputList({ onItemsChange, placeholder }) {
         {tags.map((tag, index) => (
           <div
             key={index}
-            className="flex items-center bg-gray-200 rounded px-2 py-1 text-sm mr-2"
+            className="flex items-center bg-gray-200 rounded px-2 py-1 text-sm mr-2 "
           >
             {tag}
             <button
