@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import LoginBtn from "./components/buttons";
 import LoginFormModal from "./components/LoginFormModal";
 import JoinFormModal from "./components/JoinFormModal";
+import { useNavigate } from "react-router-dom";
 
 function StartPage() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -29,6 +32,8 @@ function StartPage() {
         ", 로그인 상태 유지 여부: " +
         isKeepLogin
     );
+
+    navigate("/info-input");
   };
 
   const handleJoin = (email, password, isAgree) => {
