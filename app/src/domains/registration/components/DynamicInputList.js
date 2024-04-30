@@ -52,7 +52,7 @@ function DynamicInputList({ onItemsChange, placeholder }) {
         </button>
       </div>
       {/* 태그 리스트 */}
-      <div className="flex flex-wrap gap-2 mb-2">
+      <div className="flex flex-wrap w-full gap-2 mb-2">
         {tags.map((tag, index) => (
           <div
             key={index}
