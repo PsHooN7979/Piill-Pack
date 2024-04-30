@@ -89,13 +89,13 @@ function UserInfoRegistPage() {
                     <div className="flex flex-row justify-between">
                         <button
                             onClick={handleHome}
-                            className="w-24 py-1 border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
+                            className="w-24 py-1 font-semibold border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
                         >
                             처음으로
                         </button>
                         <button
                             onClick={handleDone}
-                            className="w-24 py-1 border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
+                            className="w-24 py-1 font-semibold border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
                         >
                             완료
                         </button>
