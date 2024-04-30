@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GenderSelectBtn from "./components/GenderSelectBtn";
 import TopMenu from "./components/TopMenu";
+import DynamicInputList from './components/DynamicInputList';
 
 function UserInfoRegistPage() {
     const [nick, setNick] = useState('');
-    const [tall, setTall] = useState(null);
-    const [weight, setWeight] = useState(null);
-    const [selectedGender, setSelectedGender] = useState(null);
+    const [tall, setTall] = useState('');
+    const [weight, setWeight] = useState('');
+    const [selectedGender, setSelectedGender] = useState('');
+    const [diseaseList, setDiseaseList] = useState([]);
+
+
+    const navigate = useNavigate();
 
     const handleNickChange = (event) => {
         setNick(event.target.value);
@@ -24,8 +30,25 @@ function UserInfoRegistPage() {
         setSelectedGender(gender);
     };
 
+    const handleInputsChange = (newInputs) => {
+        setDiseaseList(newInputs);
+      };
+
+    const handleHome = () => {
+        navigate('/');
+    };
+
     const handleDone = () => {
-        console.log(selectedGender);
+        // 모든 필드가 비어있지 않고, tall과 weight가 숫자인지 검사
+        if (!nick || !selectedGender || !tall || !weight || isNaN(Number(tall)) || isNaN(Number(weight))) {
+            console.log("정보 입력 후 회원가입을 진행해 주세요");
+            return;
+        }
+        // 정보 입력 성공
+        console.log("회원 정보 입력이 완료되었습니다");
+        console.log("닉네임: " + nick + ", 키: " + tall + ", 몸무게: " + weight + ", 성별: " + selectedGender);
+        console.log("질환 목록 -> " + diseaseList);
+        navigate('/'); // 임시로 홈으로 리다이렉트
     };
 
     return(
@@ -58,12 +81,14 @@ function UserInfoRegistPage() {
                         />
                         <div className="text-sm mb-1 ml-1">성별</div>
                         <GenderSelectBtn onGenderSelect={handleGenderSelect} />
+                        <div className="text-sm mt-3 mb-1 ml-1">질환 입력</div>
+                        <DynamicInputList onItemsChange={handleInputsChange} placeholder="병명을 입력하세요" />
 
                     </div>
                     {/* 버튼 */}
                     <div className="flex flex-row justify-between">
                         <button
-                            onClick={null}
+                            onClick={handleHome}
                             className="w-24 py-1 border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
                         >
                             처음으로

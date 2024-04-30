@@ -9,7 +9,7 @@ function GenderSelectBtn({ onGenderSelect }) {
   };
 
   return (
-    <div className="flex border rounded-lg overflow-hidden">
+    <div className="flex border border-slate-300 rounded-lg overflow-hidden">
       <button
         onClick={() => selectGender('male')}
         className={`flex-1 p-2 ${gender === 'male' ? 'bg-blue-100' : 'bg-white'}`}
