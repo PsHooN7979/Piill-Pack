@@ -52,10 +52,10 @@ function UserInfoRegistPage() {
     };
 
     return(
-        <div>
+        <div className='relative'>
             <TopMenu title="회원 정보 입력" />
             <div className="flex justify-center items-center">
-                <div className="bg-white mt-6 w-80 min-h-screen">
+                <div className="bg-opacity-100 mt-6 w-80 min-h-screen">
                     {/* 입력 필드 */}
                     <div className="mb-3 px-6">
                         <div className="text-sm mb-1 ml-1">닉네임</div>
@@ -100,6 +100,16 @@ function UserInfoRegistPage() {
                             완료
                         </button>
                     </div>
+                </div>
+            </div>
+            {/* 배경 */}
+            <div className="absolute bottom-0 w-full">
+                <div className="relative w-full h-auto bottom-0">
+                    <img
+                        src="/web/images/wave.png"
+                        alt="Background"
+                        className="fixed bottom-0 w-full h-60 z-[-1]"
+                    />
                 </div>
             </div>
         </div>
