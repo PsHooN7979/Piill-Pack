@@ -1,12 +1,7 @@
 import StartPage from "../domains/start/StartPage";
 import UserInfoRegistrationPage from "../domains/registration/UserInfoRegistrationPage";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  HashRouter,
-} from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 
 function AppRouter() {
   return (
@@ -16,7 +11,7 @@ function AppRouter() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/info-input" element={<UserInfoRegistrationPage />} />
+        <Route path="/info" element={<UserInfoRegistrationPage />} />
       </Routes>
     </HashRouter>
   );

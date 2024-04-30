@@ -92,7 +92,7 @@ public class SecurityConfig {
 						 */
 						.requestMatchers("/web/**", "/error/**").permitAll()
 						.requestMatchers("/login", "/join").permitAll()
-						.requestMatchers("/admin/**").hasRole("ADMIN")
+						// .requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
 
 		// JWTFilter 등록

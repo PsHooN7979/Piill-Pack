@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * June. Re routing Handling to index
  */
-@Controller
-public class WebController implements ErrorController {
-  @GetMapping({ "/", "/error" })
-  public String index() {
-    return "web/dist/index.html";
-  }
+// @Controller
+// public class WebController implements ErrorController {
+// @GetMapping({ "/", "/error" })
+// public String index() {
+// return "web/";
+// }
 
-}
+// }
