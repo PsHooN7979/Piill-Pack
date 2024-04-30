@@ -63,7 +63,7 @@ function UserInfoRegistPage() {
         selectedGender
     );
     console.log("질환 목록 -> " + diseaseList);
-    navigate("/"); // 임시로 홈으로 리다이렉트
+    navigate("/home");
   };
 
   return (

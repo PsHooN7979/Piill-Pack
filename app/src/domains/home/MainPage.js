@@ -5,7 +5,7 @@ function MainPage() {
     return(
         <div className="relative">
 
-            <BottomNavigation active="4" />
+            <BottomNavigation active="1" />
             {/* 배경 */}
             <div className="absolute bottom-0 w-full">
                 <div className="relative w-full h-auto bottom-0">
