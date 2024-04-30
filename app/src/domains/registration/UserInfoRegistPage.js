@@ -73,10 +73,10 @@ function UserInfoRegistPage() {
         <div className="bg-opacity-100 mt-6 w-80 min-h-screen">
           {/* 입력 필드 */}
           <div className="mb-3 px-6">
-            <div className="text-sm mb-1 ml-1">닉네임</div>
+            <div className="text-sm mb-1 ml-1">별명</div>
             <input
               type="text"
-              placeholder="닉네임을 입력하세요"
+              placeholder="별명을 입력하세요"
               onChange={handleNickChange}
               className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
             />
@@ -96,7 +96,7 @@ function UserInfoRegistPage() {
             />
             <div className="text-sm mb-1 ml-1">성별</div>
             <GenderSelectBtn onGenderSelect={handleGenderSelect} />
-            <div className="text-sm mt-3 mb-1 ml-1">질환 입력</div>
+            <div className="text-sm mt-3 mb-1 ml-1">질병 입력</div>
             <DynamicInputList
               onItemsChange={handleInputsChange}
               placeholder="병명을 입력하세요"
