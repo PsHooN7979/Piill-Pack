@@ -1,6 +1,32 @@
+import React, { useState } from 'react';
+import GenderSelectBtn from "./components/GenderSelectBtn";
 import TopMenu from "./components/TopMenu";
 
-function UserInfoRegistrationPage() {
+function UserInfoRegistPage() {
+    const [nick, setNick] = useState('');
+    const [tall, setTall] = useState(null);
+    const [weight, setWeight] = useState(null);
+    const [selectedGender, setSelectedGender] = useState(null);
+
+    const handleNickChange = (event) => {
+        setNick(event.target.value);
+    };
+
+    const handleTallChange = (event) => {
+        setTall(event.target.value);
+    };
+
+    const handleWeightChange = (event) => {
+        setWeight(event.target.value);
+    };
+
+    const handleGenderSelect = (gender) => {
+        setSelectedGender(gender);
+    };
+
+    const handleDone = () => {
+        console.log(selectedGender);
+    };
 
     return(
         <div>
@@ -13,23 +39,26 @@ function UserInfoRegistrationPage() {
                         <input
                             type="text"
                             placeholder="닉네임을 입력하세요"
-                            onChange={null}
+                            onChange={handleNickChange}
                             className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                         />
                         <div className="text-sm mb-1 ml-1">키</div>
                         <input
-                            type="password"
+                            type="number"
                             placeholder="키를 입력하세요(cm)"
-                            onChange={null}
+                            onChange={handleTallChange}
                             className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                         />
                         <div className="text-sm mb-1 ml-1">몸무게</div>
                         <input
-                            type="password"
+                            type="number"
                             placeholder="몸무게를 입력하세요(kg)"
-                            onChange={null}
+                            onChange={handleWeightChange}
                             className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                         />
+                        <div className="text-sm mb-1 ml-1">성별</div>
+                        <GenderSelectBtn onGenderSelect={handleGenderSelect} />
+
                     </div>
                     {/* 버튼 */}
                     <div className="flex flex-row justify-between">
@@ -40,7 +69,7 @@ function UserInfoRegistrationPage() {
                             처음으로
                         </button>
                         <button
-                            onClick={null}
+                            onClick={handleDone}
                             className="w-24 py-1 border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"
                         >
                             완료
@@ -52,4 +81,4 @@ function UserInfoRegistrationPage() {
     );
 }
 
-export default UserInfoRegistrationPage;
+export default UserInfoRegistPage;

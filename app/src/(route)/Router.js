@@ -1,5 +1,5 @@
 import StartPage from "../domains/start/StartPage";
-import UserInfoRegistrationPage from "../domains/registration/UserInfoRegistrationPage";
+import UserInfoRegistPage from "../domains/registration/UserInfoRegistPage";
 
 import {
   BrowserRouter as Router,
@@ -16,7 +16,7 @@ function AppRouter() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/info-input" element={<UserInfoRegistrationPage />} />
+        <Route path="/first" element={<UserInfoRegistPage />} />
       </Routes>
     </HashRouter>
   );
