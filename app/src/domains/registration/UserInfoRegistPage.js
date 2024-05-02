@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import GenderSelectBtn from "./components/GenderSelectBtn";
 import TopMenu from "./components/TopMenu";
 import DynamicInputList from "./components/DynamicInputList";
+import images from "../../constants/image.constant";
 
 function UserInfoRegistPage() {
   const [nick, setNick] = useState("");
@@ -123,7 +124,7 @@ function UserInfoRegistPage() {
       <div className="absolute bottom-0 w-full">
         <div className="relative w-full h-auto bottom-0">
           <img
-            src="/web/images/wave.png"
+            src={images.wave}
             alt="Background"
             className="fixed bottom-0 w-full h-60 z-[-1]"
           />

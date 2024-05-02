@@ -1,8 +1,12 @@
-import AppRouter from "./(route)/Router";
+import Router from "./(route)/Router";
 
 function App() {
-  console.log(M.navigator.os());
-  return <AppRouter />;
+  /**
+   * Test Mopheus Api
+   * console.log(M.navigator.os());
+   */
+
+  return <Router />;
 }
 
 export default App;

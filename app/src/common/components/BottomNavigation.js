@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import uis from "../../constants/ui.constant";
 
 // 바텀 네비게이션 사용방법 <BottomNavigation active="숫자(1,2,3,4)" />
 function BottomNavigation({ active }) {
@@ -14,11 +15,7 @@ function BottomNavigation({ active }) {
         onClick={() => navigate("/home")}
       >
         <img
-          src={
-            active === "1"
-              ? "/web/images/ico/home_active.png"
-              : "/web/images/ico/home.png"
-          }
+          src={active === "1" ? uis.home_active : uis.home}
           alt="Home"
           className={active === "1" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
         />
@@ -37,11 +34,7 @@ function BottomNavigation({ active }) {
         onClick={() => navigate("/presc")}
       >
         <img
-          src={
-            active === "2"
-              ? "/web/images/ico/invoice_active.png"
-              : "/web/images/ico/invoice.png"
-          }
+          src={active === "2" ? uis.invoice_active : uis.invoice}
           alt="PrescriptionList"
           className={active === "2" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
         />
@@ -60,11 +53,7 @@ function BottomNavigation({ active }) {
         onClick={() => navigate("/health")}
       >
         <img
-          src={
-            active === "3"
-              ? "/web/images/ico/heart_active.png"
-              : "/web/images/ico/heart.png"
-          }
+          src={active === "3" ? uis.heart_active : uis.heart}
           alt="Health"
           className={active === "3" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
         />
@@ -83,11 +72,7 @@ function BottomNavigation({ active }) {
         onClick={() => navigate("/profile")}
       >
         <img
-          src={
-            active === "4"
-              ? "/web/images/ico/person_active.png"
-              : "/web/images/ico/person.png"
-          }
+          src={active === "4" ? uis.person_active : uis.person}
           alt="Profile"
           className={active === "4" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
         />

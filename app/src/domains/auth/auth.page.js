@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import images from "../../constants/image.constant";
+
 import LoginBtn from "./components/buttons";
 import LoginFormModal from "./components/LoginFormModal";
 import JoinFormModal from "./components/JoinFormModal";
-import { useNavigate } from "react-router-dom";
 
-function StartPage() {
+export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
 
@@ -49,7 +52,7 @@ function StartPage() {
   };
 
   return (
-    <>
+    <div>
       <div
         className={`flex flex-col min-h-screen relative  ${
           isLoginModalOpen || isJoinModalOpen ? "blur-sm opacity-95" : ""
@@ -69,13 +72,13 @@ function StartPage() {
         <div className="absolute bottom-0 w-full">
           <div className="relative w-full h-auto bottom-0">
             <img
-              src="/web/images/wave.png"
+              src={images.wave}
               alt="Background"
               className="absolute bottom-0 w-full h-60 z-0"
             />
             {/* Public url resource route */}
             <img
-              src="/web/images/logo.png"
+              src={images.logo}
               alt="Logo"
               className="absolute bottom-28 left-1/2 transform -translate-x-1/2 w-20 z-10"
             />
@@ -99,8 +102,6 @@ function StartPage() {
       {isJoinModalOpen && (
         <JoinFormModal onJoin={handleJoin} onClose={closeJoinModal} />
       )}
-    </>
+    </div>
   );
 }
-
-export default StartPage;

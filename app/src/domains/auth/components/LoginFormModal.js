@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import uis from "../../../constants/ui.constant";
 
 function LoginFormModal({ onLogin, onClose, onJoinClick }) {
   const [email, setEmail] = useState("");
@@ -43,11 +44,7 @@ function LoginFormModal({ onLogin, onClose, onJoinClick }) {
         {/* 닫기 버튼 */}
         <div className="flex justify-end mb-1">
           <button onClick={handleClose} className="p-2">
-            <img
-              src="/web/images/ico/close.png"
-              alt="Close"
-              className="h-4 w-4"
-            />
+            <img src={uis.close} alt="Close" className="h-4 w-4" />
           </button>
         </div>
         {/* 폼 제목 */}
