@@ -23,11 +23,13 @@ module.exports = {
         md: "0 4px 6px rgba(0, 0, 0, 0.10)",
         lg: "0 6px 8px rgba(0, 0, 0, 0.10)",
         custom01: "1px 2px 4px rgba(0, 0, 0, 0.50)",
-        custom02: "1px 2px 4px rgba(0, 0, 0, 0.40)"
+        custom02: "1px 2px 4px rgba(0, 0, 0, 0.40)",
+        custom03: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
       dropShadow: {
         // 드롭 쉐도우 추가
-        custom: "1px 2px 4px rgba(0, 0, 0, 0.40)"
+        custom: "1px 2px 4px rgba(0, 0, 0, 0.40)",
+        custom2: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
     },
   },
