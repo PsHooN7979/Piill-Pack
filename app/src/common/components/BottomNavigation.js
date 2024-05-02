@@ -24,7 +24,7 @@ function BottomNavigation({ active }) {
         />
         <div
           className={
-            active === "1" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "1" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           홈
@@ -47,7 +47,7 @@ function BottomNavigation({ active }) {
         />
         <div
           className={
-            active === "2" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "2" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           처방 목록
@@ -70,7 +70,7 @@ function BottomNavigation({ active }) {
         />
         <div
           className={
-            active === "3" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "3" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           건강 상태
@@ -93,7 +93,7 @@ function BottomNavigation({ active }) {
         />
         <div
           className={
-            active === "4" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "4" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           내 정보
