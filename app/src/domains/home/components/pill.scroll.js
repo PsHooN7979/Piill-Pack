@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ScrollableTabs({ tabs , wordLimit }) {
+export default function PillScroll({ tabs, wordLimit }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -30,12 +30,12 @@ function ScrollableTabs({ tabs , wordLimit }) {
         <div className="flex space-x-4 pl-2">
           {tabs[activeTab].items.map((item, index) => (
             <div key={index} className="flex flex-col items-center min-w-max">
-              <img
-                src={item.image}
-                alt={item.label}
-                className="h-16 px-3"
-              />
-              <div className="text-xs mt-1">{item.label && item.label.length > 15 ? `${item.label.substring(0, wordLimit)}...` : item.label}</div>
+              <img src={item.image} alt={item.label} className="h-16 px-3" />
+              <div className="text-xs mt-1">
+                {item.label && item.label.length > 15
+                  ? `${item.label.substring(0, wordLimit)}...`
+                  : item.label}
+              </div>
             </div>
           ))}
         </div>
@@ -43,5 +43,3 @@ function ScrollableTabs({ tabs , wordLimit }) {
     </div>
   );
 }
-
-export default ScrollableTabs;

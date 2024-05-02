@@ -1,10 +1,10 @@
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 
-import LogoHeader from "./components/LogoHeader";
-import ScrollableTabs from "./components/ScrollableTabs";
+import HomeHeader from "./components/home.header";
+import PillScroll from "./components/pill.scroll";
 
-function MainPage() {
+export default function Home() {
   // 탭 테스트 데이터
   const tabData = [
     {
@@ -12,23 +12,23 @@ function MainPage() {
       items: [
         {
           label: "페라트라정2.5밀리그램(레트로졸)",
-          image: "/web/images/example/Pill_example01.png",
+          image: images.logo,
         },
         {
           label: "약 아이템2",
-          image: "/web/images/example/Pill_example01.png",
+          image: images.logo,
         },
         {
           label: "약 아이템3",
-          image: "/web/images/example/Pill_example01.png",
+          image: images.logo,
         },
         {
           label: "약 아이템4",
-          image: "/web/images/example/Pill_example01.png",
+          image: images.logo,
         },
         {
           label: "약 아이템5",
-          image: "/web/images/example/Pill_example01.png",
+          image: images.logo,
         },
       ],
     },
@@ -37,41 +37,41 @@ function MainPage() {
       items: [
         {
           label: "페라트라정2.5밀리그램(레트로졸)",
-          image: "/web/images/logo.png",
+          image: images.logo,
         },
-        { label: "약 아이템2", image: "/web/images/logo.png" },
-        { label: "약 아이템3", image: "/web/images/logo.png" },
-        { label: "약 아이템4", image: "/web/images/logo.png" },
+        { label: "약 아이템2", image: images.logo },
+        { label: "약 아이템3", image: images.logo },
+        { label: "약 아이템4", image: images.logo },
       ],
     },
     {
       name: "처방3",
-      items: [{ label: "약 아이템1", image: "/web/images/logo.png" }],
+      items: [{ label: "약 아이템1", image: images.logo }],
     },
     {
       name: "처방4",
-      items: [{ label: "약 아이템1", image: "/web/images/logo.png" }],
+      items: [{ label: "약 아이템1", image: images.logo }],
     },
     {
       name: "처방5",
-      items: [{ label: "약 아이템1", image: "/web/images/logo.png" }],
+      items: [{ label: "약 아이템1", image: images.logo }],
     },
     {
       name: "처방6",
-      items: [{ label: "약 아이템1", image: "/web/images/logo.png" }],
+      items: [{ label: "약 아이템1", image: images.logo }],
     },
   ];
 
   return (
     <div className="relative">
-      <LogoHeader />
+      <HomeHeader />
       <div className="flex justify-center items-center">
-        <div className="bg-opacity-100 w-80 min-h-screen">
+        <div className="bg-opacity-100 w-[95%] min-h-screen">
           <div className="font-semibold my-2">
             지금 복용중인 <strong className="text-xl text-warn02">약</strong>
             이에요
           </div>
-          <ScrollableTabs tabs={tabData} wordLimit={10} />
+          <PillScroll tabs={tabData} wordLimit={10} />
         </div>
       </div>
 
@@ -89,5 +89,3 @@ function MainPage() {
     </div>
   );
 }
-
-export default MainPage;

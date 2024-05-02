@@ -2,8 +2,6 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 
 import Pages from "../domains";
 
-import MainPage from "../domains/home/MainPage";
-
 function Router() {
   return (
     /**
@@ -13,7 +11,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<Pages.Auth />} />
         <Route path="/first" element={<Pages.FistLogin />} />
-        <Route path="/home" element={<MainPage />} />
+        <Route path="/home" element={<Pages.Home />} />
       </Routes>
     </HashRouter>
   );

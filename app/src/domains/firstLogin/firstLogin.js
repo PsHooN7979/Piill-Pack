@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GenderSelectBtn from "./components/GenderSelectBtn";
-import FirstLoginHeader from "./components/fistLogin.header";
-import DynamicInputList from "./components/DynamicInputList";
+
 import images from "../../constants/image.constant";
+
+import GenderButton from "./components/gender.button";
+import FirstLoginHeader from "./components/fistLogin.header";
+import TagList from "./components/tagList";
 
 export default function FistLogin() {
   const [nick, setNick] = useState("");
@@ -96,9 +98,9 @@ export default function FistLogin() {
               className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
             />
             <div className="text-sm mb-1 ml-1">성별</div>
-            <GenderSelectBtn onGenderSelect={handleGenderSelect} />
+            <GenderButton onGenderSelect={handleGenderSelect} />
             <div className="text-sm mt-3 mb-1 ml-1">질병 입력</div>
-            <DynamicInputList
+            <TagList
               onItemsChange={handleInputsChange}
               placeholder="병명을 입력하세요"
             />
