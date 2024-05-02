@@ -54,7 +54,7 @@ public class PatientEntity {
     @Builder.Default
     private Boolean is_fist = true;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime created;
 
     @Column(nullable = false)
@@ -69,5 +69,6 @@ public class PatientEntity {
     @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
     @Builder.Default
     private List<PrescriptionEntity> patient_prescription = new ArrayList<>();
+
 
 }

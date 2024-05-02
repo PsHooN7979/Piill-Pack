@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, UUID> {
 
-    Optional<PatientEntity> findByEmail(String email);
+    PatientEntity findByEmail(String email);
     Boolean existsByEmail(String email);
 }
