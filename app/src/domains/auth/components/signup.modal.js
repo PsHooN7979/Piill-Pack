@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import uis from "../../../constants/ui.constant";
 
-function JoinFormModal({ onJoin, onClose }) {
+export default function SignupModal({ onJoin, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -110,5 +110,3 @@ function JoinFormModal({ onJoin, onClose }) {
     </div>
   );
 }
-
-export default JoinFormModal;

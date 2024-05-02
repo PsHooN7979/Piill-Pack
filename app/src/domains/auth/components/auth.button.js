@@ -1,6 +1,6 @@
 import images from "../../../constants/image.constant";
 
-function LoginBtn({ onLoginClick }) {
+export default function AuthButton({ onLoginClick }) {
   return (
     <div className="flex justify-center items-center">
       <button
@@ -13,5 +13,3 @@ function LoginBtn({ onLoginClick }) {
     </div>
   );
 }
-
-export default LoginBtn;

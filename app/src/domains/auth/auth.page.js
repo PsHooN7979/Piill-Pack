@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import images from "../../constants/image.constant";
 
-import LoginBtn from "./components/buttons";
-import LoginFormModal from "./components/LoginFormModal";
-import JoinFormModal from "./components/JoinFormModal";
+import AuthButton from "./components/auth.button";
+import LoginModal from "./components/login.modal";
+import SignupModal from "./components/signup.modal";
 
 export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -87,20 +87,20 @@ export default function Auth() {
 
         {!isLoginModalOpen && !isJoinModalOpen && (
           <div className="absolute bottom-0 mb-10 w-full flex justify-center">
-            <LoginBtn onLoginClick={openLoginModal} />
+            <AuthButton onLoginClick={openLoginModal} />
           </div>
         )}
       </div>
       {/* 모달 컴포넌트를 조건부로 표시 */}
       {isLoginModalOpen && (
-        <LoginFormModal
+        <LoginModal
           onLogin={handleLogin}
           onClose={closeLoginModal}
           onJoinClick={openJoinModal}
         />
       )}
       {isJoinModalOpen && (
-        <JoinFormModal onJoin={handleJoin} onClose={closeJoinModal} />
+        <SignupModal onJoin={handleJoin} onClose={closeJoinModal} />
       )}
     </div>
   );

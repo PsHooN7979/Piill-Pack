@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GenderSelectBtn from "./components/GenderSelectBtn";
-import TopMenu from "./components/TopMenu";
+import FirstLoginHeader from "./components/fistLogin.header";
 import DynamicInputList from "./components/DynamicInputList";
 import images from "../../constants/image.constant";
 
-function UserInfoRegistPage() {
+export default function FistLogin() {
   const [nick, setNick] = useState("");
   const [tall, setTall] = useState("");
   const [weight, setWeight] = useState("");
@@ -69,7 +69,7 @@ function UserInfoRegistPage() {
 
   return (
     <div className="relative">
-      <TopMenu title="회원 정보 입력" />
+      <FirstLoginHeader title="회원 정보 입력" />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 mt-6 w-80 min-h-screen">
           {/* 입력 필드 */}
@@ -133,5 +133,3 @@ function UserInfoRegistPage() {
     </div>
   );
 }
-
-export default UserInfoRegistPage;

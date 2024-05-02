@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import uis from "../../../constants/ui.constant";
 
-function TopMenu({ title }) {
+export default function FirstLoginHeader({ title }) {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -21,5 +21,3 @@ function TopMenu({ title }) {
     </div>
   );
 }
-
-export default TopMenu;
