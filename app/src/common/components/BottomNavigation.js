@@ -89,7 +89,7 @@ function BottomNavigation({ active }) {
               : "/web/images/ico/person.png"
           }
           alt="Profile"
-          className={active === "4" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "4" ? "w-6 h-6 drop-shadow-custom" : "w-5 h-5"}
         />
         <div
           className={
