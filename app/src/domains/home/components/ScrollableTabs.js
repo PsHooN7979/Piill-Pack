@@ -33,7 +33,7 @@ function ScrollableTabs({ tabs }) {
               <img
                 src={item.image}
                 alt={item.label}
-                className="w-16 h-16 px-2"
+                className="h-16 px-3"
               />
               <div className="text-xs mt-1">{item.label}</div>
             </div>

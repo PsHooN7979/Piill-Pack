@@ -9,11 +9,11 @@ function MainPage() {
         {
             name: "처방1",
             items: [
-                { label: "약 아이템1", image: "/web/images/logo.png" },
-                { label: "약 아이템2", image: "/web/images/logo.png" },
-                { label: "약 아이템3", image: "/web/images/logo.png" },
-                { label: "약 아이템4", image: "/web/images/logo.png" },
-                { label: "약 아이템5", image: "/web/images/logo.png" }
+                { label: "약 아이템1", image: "/web/images/example/Pill_example01.png" },
+                { label: "약 아이템2", image: "/web/images/example/Pill_example01.png" },
+                { label: "약 아이템3", image: "/web/images/example/Pill_example01.png" },
+                { label: "약 아이템4", image: "/web/images/example/Pill_example01.png" },
+                { label: "약 아이템5", image: "/web/images/example/Pill_example01.png" }
             ]
         },
         {
