@@ -17,11 +17,11 @@ function BottomNavigation({ active }) {
         <img
           src={active === "1" ? uis.home_active : uis.home}
           alt="Home"
-          className={active === "1" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "1" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
-            active === "1" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "1" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           홈
@@ -36,11 +36,11 @@ function BottomNavigation({ active }) {
         <img
           src={active === "2" ? uis.invoice_active : uis.invoice}
           alt="PrescriptionList"
-          className={active === "2" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "2" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
-            active === "2" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "2" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           처방 목록
@@ -55,11 +55,11 @@ function BottomNavigation({ active }) {
         <img
           src={active === "3" ? uis.heart_active : uis.heart}
           alt="Health"
-          className={active === "3" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "3" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
-            active === "3" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "3" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           건강 상태
@@ -74,11 +74,11 @@ function BottomNavigation({ active }) {
         <img
           src={active === "4" ? uis.person_active : uis.person}
           alt="Profile"
-          className={active === "4" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "4" ? "w-6 h-6 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
-            active === "4" ? "text-xs text-shadow-custom01" : "text-xs"
+            active === "4" ? "text-xs text-shadow-custom02" : "text-xs"
           }
         >
           내 정보

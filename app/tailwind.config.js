@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -22,16 +24,36 @@ module.exports = {
         default: "0 2px 4px rgba(0, 0, 0, 0.10)",
         md: "0 4px 6px rgba(0, 0, 0, 0.10)",
         lg: "0 6px 8px rgba(0, 0, 0, 0.10)",
-        custom01: "1px 2px 4px lightgray",
+        custom01: "1px 2px 4px rgba(0, 0, 0, 0.50)",
+        custom02: "1px 2px 4px rgba(0, 0, 0, 0.40)",
+        custom03: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
       dropShadow: {
         // 드롭 쉐도우 추가
-        custom: "1px 2px 4px ",
+        custom: "1px 2px 4px rgba(0, 0, 0, 0.40)",
+        custom2: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
     },
   },
   variants: {
     dropShadow: ["responsive"], // 반응형 드롭 쉐도우 사용
   },
-  plugins: [require("tailwindcss-textshadow")],
+  plugins: [
+    require("tailwindcss-textshadow"),
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-hide': {
+          /* Chrome, Safari, Opera*/
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+        }
+      };
+      addUtilities(newUtilities, ['responsive']);
+    })
+  ],
 };

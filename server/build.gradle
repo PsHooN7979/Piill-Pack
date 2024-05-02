@@ -41,7 +41,10 @@ dependencies {
 
 	// testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.2.5'
+
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.5.0'
+	implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
 
 	runtimeOnly 'com.h2database:h2'
 
