@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ScrollableTabs({ tabs }) {
+function ScrollableTabs({ tabs , wordLimit }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -35,7 +35,7 @@ function ScrollableTabs({ tabs }) {
                 alt={item.label}
                 className="h-16 px-3"
               />
-              <div className="text-xs mt-1">{item.label}</div>
+              <div className="text-xs mt-1">{item.label && item.label.length > 15 ? `${item.label.substring(0, wordLimit)}...` : item.label}</div>
             </div>
           ))}
         </div>

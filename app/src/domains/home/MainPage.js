@@ -9,7 +9,7 @@ function MainPage() {
         {
             name: "처방1",
             items: [
-                { label: "약 아이템1", image: "/web/images/example/Pill_example01.png" },
+                { label: "페라트라정2.5밀리그램(레트로졸)", image: "/web/images/example/Pill_example01.png" },
                 { label: "약 아이템2", image: "/web/images/example/Pill_example01.png" },
                 { label: "약 아이템3", image: "/web/images/example/Pill_example01.png" },
                 { label: "약 아이템4", image: "/web/images/example/Pill_example01.png" },
@@ -19,7 +19,7 @@ function MainPage() {
         {
             name: "처방2",
             items: [
-                { label: "약 아이템1", image: "/web/images/logo.png" },
+                { label: "페라트라정2.5밀리그램(레트로졸)", image: "/web/images/logo.png" },
                 { label: "약 아이템2", image: "/web/images/logo.png" },
                 { label: "약 아이템3", image: "/web/images/logo.png" },
                 { label: "약 아이템4", image: "/web/images/logo.png" },
@@ -57,7 +57,7 @@ function MainPage() {
             <div className="flex justify-center items-center">
                 <div className="bg-opacity-100 mt-6 w-80 min-h-screen">
                     <div className="font-semibold">지금 복용중인 <strong className="text-xl text-warn02">약</strong>이에요</div>
-                    <ScrollableTabs tabs={tabData}/>
+                    <ScrollableTabs tabs={tabData} wordLimit={10}/>
                 </div>
             </div>
 
