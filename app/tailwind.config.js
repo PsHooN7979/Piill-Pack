@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -36,5 +38,22 @@ module.exports = {
   variants: {
     dropShadow: ["responsive"], // 반응형 드롭 쉐도우 사용
   },
-  plugins: [require("tailwindcss-textshadow")],
+  plugins: [
+    require("tailwindcss-textshadow"),
+    plugin(function({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-hide': {
+          /* Chrome, Safari, Opera*/
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+        }
+      };
+      addUtilities(newUtilities, ['responsive']);
+    })
+  ],
 };

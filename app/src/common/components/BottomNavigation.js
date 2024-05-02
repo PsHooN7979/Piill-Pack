@@ -20,7 +20,7 @@ function BottomNavigation({ active }) {
               : "/web/images/ico/home.png"
           }
           alt="Home"
-          className={active === "1" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "1" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
@@ -43,7 +43,7 @@ function BottomNavigation({ active }) {
               : "/web/images/ico/invoice.png"
           }
           alt="PrescriptionList"
-          className={active === "2" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "2" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
@@ -66,7 +66,7 @@ function BottomNavigation({ active }) {
               : "/web/images/ico/heart.png"
           }
           alt="Health"
-          className={active === "3" ? "w-5 h-5 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "3" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
@@ -89,7 +89,7 @@ function BottomNavigation({ active }) {
               : "/web/images/ico/person.png"
           }
           alt="Profile"
-          className={active === "4" ? "w-6 h-6 drop-shadow-custom" : "w-5 h-5"}
+          className={active === "4" ? "w-6 h-6 drop-shadow-custom2" : "w-5 h-5"}
         />
         <div
           className={
