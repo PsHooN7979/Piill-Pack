@@ -1,5 +1,6 @@
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
+import AdSlider from "./components/ad.slider";
 
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
@@ -72,6 +73,25 @@ export default function Home() {
     },
   ];
 
+  // 슬라이더 테스트 더미 데이터
+  const products = [
+    {
+      name: "상품 이름1",
+      image: null,
+      desc: "설명"
+    },
+    {
+      name: "상품 이름2",
+      image: null,
+      desc: "설명"
+    },
+    {
+      name: "상품 이름 길이 테스트 상품 이름 길이 테스트",
+      image: null,
+      desc: "상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트"
+    }
+  ];
+
   return (
     <div className="relative">
       <HomeHeader />
@@ -82,6 +102,7 @@ export default function Home() {
             이에요
           </div>
           <PillScroll tabs={tabData} wordLimit={10} />
+          <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>
       </div>
 
