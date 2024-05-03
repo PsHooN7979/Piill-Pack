@@ -8,7 +8,7 @@ export default function useLogic() {
         mediaType: "PHOTO",
         saveAlbum: true,
         callback: function (status, result, option) {
-          if (status == "SUCCESS") {
+          if (status === "SUCCESS") {
             resolve(result.fullpath);
           } else {
             reject(new Error("Failed to camera"));
@@ -23,7 +23,7 @@ export default function useLogic() {
       const fullPath = await useCamera();
       return fullPath;
     } catch (error) {
-      console.error(error);
+      return { status: "error", message: error };
     }
   }
 
@@ -49,18 +49,25 @@ export default function useLogic() {
       const imageToBase64 = await useRead(path);
       return "data:image/png;base64," + imageToBase64.data;
     } catch (error) {
-      console.error(error);
+      return { status: "error", message: error };
     }
   }
 
   async function takePhoto() {
     const fullPath = await AsyncUseCamera();
+    if (fullPath.status === "error") {
+      return fullPath.status;
+    }
     const path = getNativePath(fullPath);
+
     const photo = await AsyncUseRead(path);
+    if (photo.status === "error") {
+      return photo.status;
+    }
 
     return photo;
   }
 
-  const Logic = { takePhoto };
-  return Logic;
+  const L = { takePhoto };
+  return L;
 }

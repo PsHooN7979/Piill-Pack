@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   nativeState: "",
+  isCamera: false,
+  isRead: false,
 };
 
 const nativeSlice = createSlice({
@@ -11,8 +13,15 @@ const nativeSlice = createSlice({
     setNativeState: (state, action) => {
       state.nativeState = action.payload;
     },
+    setCameraState: (state, action) => {
+      state.isCamera = action.payload;
+    },
+    setReadState: (state, action) => {
+      state.isRead = action.payload;
+    },
   },
 });
 
-export const { setNativeState } = nativeSlice.actions;
+export const { setNativeState, setCameraState, setReadState } =
+  nativeSlice.actions;
 export default nativeSlice.reducer;
