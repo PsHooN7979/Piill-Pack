@@ -6,12 +6,12 @@ export default function Scan() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex p-2 mt-2 rounded border border-gray-300" onClick={() => navigate('/prescription')}>
-      <div className="flex flex-col items-center justify-center grow">
-        <div className="font-bold text-xs">진단서</div>
-        <div className="font-bold text-xs">스캔하기</div>
+    <div className="flex items-center p-1 mt-2 rounded border border-gray-300 transition duration-300 ease-in-out transform active:scale-95 active:bg-mint01" onClick={() => navigate('/prescription')}>
+      <div className="flex flex-col items-center justify-center grow ml-1">
+        <div className="font-bold text-xxs">처방전</div>
+        <div className="font-bold text-xxs">스캔하기</div>
       </div>
-      <CameraAltOutlined className="text-[#00CFAC] w-10 h-10 p-1 ml-3 mr-1 rounded" />
+      <CameraAltOutlined className=" text-mint03 w-6 h-6 ml-2 mr-1 rounded" />
     </div>
   );
 }
