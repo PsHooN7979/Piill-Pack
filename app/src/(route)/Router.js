@@ -6,12 +6,14 @@ function Router() {
   return (
     /**
      * June. render of routing in SSR refactoring
+     * + 개발용으로 바로 홈으로 가도록 임시 라우팅
      */
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Pages.Auth />} />
+        <Route path="/" element={<Pages.Home />} />
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
+        <Route path="/prescription" element={<Pages.Prescription />} />
       </Routes>
     </HashRouter>
   );

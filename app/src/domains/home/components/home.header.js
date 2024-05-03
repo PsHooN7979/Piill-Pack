@@ -1,5 +1,5 @@
 import images from "../../../constants/image.constant";
-import Scan from "./scan";
+import Scan from "./scan/scan";
 
 export default function HomeHeader() {
   return (
