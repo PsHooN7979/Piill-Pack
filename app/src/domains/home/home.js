@@ -20,19 +20,19 @@ export default function Home() {
         },
         {
           label: "약 아이템3",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템4",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템5",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템6",
-          image: images.logo,
+          image: null,
         },
       ],
     },
@@ -41,11 +41,11 @@ export default function Home() {
       items: [
         {
           label: "페라트라정2.5밀리그램(레트로졸)",
-          image: images.logo,
+          image: null,
         },
-        { label: "약 아이템2", image: images.logo },
-        { label: "약 아이템3", image: images.logo },
-        { label: "약 아이템4", image: images.logo },
+        { label: "약 아이템2", image: null },
+        { label: "약 아이템3", image: null },
+        { label: "약 아이템4", image: null },
       ],
     },
     {
@@ -53,22 +53,22 @@ export default function Home() {
       items: [
       {
         label: "페라트라정2.5밀리그램(레트로졸)",
-        image: images.logo,
+        image: null,
       },
-      { label: "약 아이템1", image: images.logo }
+      { label: "약 아이템1", image: null }
       ],
     },
     {
       name: "처방4",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
     {
       name: "처방5",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
     {
       name: "처방6",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
   ];
 
