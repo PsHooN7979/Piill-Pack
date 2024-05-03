@@ -1,22 +1,25 @@
+import StartPage from "../domains/start/StartPage";
+import UserInfoRegistPage from "../domains/registration/UserInfoRegistPage";
+import MainPage from "../domains/home/MainPage";
+import PrescPage from "../domains/prescList/PrescPage";
+
+
 import { Routes, Route, HashRouter } from "react-router-dom";
 
-import Pages from "../domains";
-
-function Router() {
+function AppRouter() {
   return (
     /**
-     * June. render of routing in SSR refactoring
-     * + 개발용으로 바로 홈으로 가도록 임시 라우팅
+     * June. SSR routing refactoring
      */
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Pages.Home />} />
-        <Route path="/first" element={<Pages.FistLogin />} />
-        <Route path="/home" element={<Pages.Home />} />
-        <Route path="/prescription" element={<Pages.Prescription />} />
+        <Route path="/" element={<StartPage />} />
+        <Route path="/first" element={<UserInfoRegistPage />} />
+        <Route path="/home" element={<MainPage />} />
+        <Route path="/presc" element={<PrescPage />} />
       </Routes>
     </HashRouter>
   );
 }
 
-export default Router;
+export default AppRouter;
