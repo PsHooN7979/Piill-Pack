@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import images from "../../../constants/image.constant";
 
 export default function PillScroll({ tabs, wordLimit }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -30,7 +31,11 @@ export default function PillScroll({ tabs, wordLimit }) {
         <div className="flex space-x-4 pl-2">
           {tabs[activeTab].items.map((item, index) => (
             <div key={index} className="flex flex-col items-center min-w-max">
-              <img src={item.image} alt={item.label} className="h-16 px-3" />
+              <img
+                src={item.image || images.no_img}
+                alt={item.label}
+                className="h-16 px-3"
+              />
               <div className="text-xs mt-1">
                 {item.label && item.label.length > 15
                   ? `${item.label.substring(0, wordLimit)}...`
