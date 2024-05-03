@@ -30,6 +30,10 @@ export default function Home() {
           label: "약 아이템5",
           image: images.logo,
         },
+        {
+          label: "약 아이템6",
+          image: images.logo,
+        },
       ],
     },
     {
