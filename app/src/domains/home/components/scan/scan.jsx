@@ -1,14 +1,9 @@
 import S from "./scan.style";
-import { useNavigate } from "react-router-dom";
+import N from "../../../../common/hooks/useCustomNavigate";
 
 export default function Scan() {
-  const navigate = useNavigate();
   return (
-    <S.Container
-      onClick={() => {
-        navigate("/prescription");
-      }}
-    >
+    <S.Container onClick={N().goPrescription}>
       <S.TextContainer>
         <S.TextBox>진단서</S.TextBox>
         <S.TextBox>스캔하기</S.TextBox>
