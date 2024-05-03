@@ -8,6 +8,12 @@ const Container = styled(Box)({
   marginTop: "7px",
   borderRadius: "5px",
   border: "1px solid lightgray",
+
+  transition: "transform 0.2s, background-color 0.2s",
+  "&:active": {
+    transform: "scale(0.95)",
+    backgroundColor: "lightblue",
+  },
 });
 
 const TextContainer = styled(Box)({
