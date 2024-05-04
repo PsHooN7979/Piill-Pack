@@ -13,7 +13,7 @@ function Router() {
         <Route path="/" element={<Pages.Home />} />
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
-        <Route path="/prescription" element={<Pages.Prescription />} />
+        <Route path="/prescription" element={<Pages.Scanner />} />
       </Routes>
     </HashRouter>
   );

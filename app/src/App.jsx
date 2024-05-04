@@ -12,10 +12,11 @@ function App() {
    * Test Mopheus Api
    * console.log(M.navigator.os());
    */
+  const queryClient = new QueryClient();
 
   return (
     <Provider store={store}>
-      <QueryClientProvider client={QueryClient}>
+      <QueryClientProvider client={queryClient}>
         <Router />
       </QueryClientProvider>
     </Provider>
