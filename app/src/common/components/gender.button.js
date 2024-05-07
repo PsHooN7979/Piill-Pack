@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function GenderButton({ onGenderSelect }) {
-  const [gender, setGender] = useState(null);
+export default function GenderButton({ onGenderSelect, selectedGender }) {
+  const [gender, setGender] = useState(selectedGender);
 
   const selectGender = (selectedGender) => {
     setGender(selectedGender);

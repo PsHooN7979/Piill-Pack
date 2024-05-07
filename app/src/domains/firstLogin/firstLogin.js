@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import images from "../../constants/image.constant";
 
-import GenderButton from "./components/gender.button";
+import GenderButton from "../../common/components/gender.button";
 import FirstLoginHeader from "./components/fistLogin.header";
-import TagList from "./components/tagList";
+import TagList from "../../common/components/tagList";
 
 export default function FistLogin() {
   const [nick, setNick] = useState("");
@@ -102,6 +102,7 @@ export default function FistLogin() {
             <div className="text-sm mt-3 mb-1 ml-1">질병 입력</div>
             <TagList
               onItemsChange={handleInputsChange}
+              tagDatas={[]}
               placeholder="병명을 입력하세요"
             />
           </div>
