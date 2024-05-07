@@ -40,7 +40,7 @@ export default function MyPage() {
                     <div className="font-semibold text-sm  my-2">
                         내 프로필
                     </div>
-                    <ProfileCard data={profileData} />
+                    <ProfileCard data={profileData} diseasesLimit={25} />
                 </div>
             </div>
 
