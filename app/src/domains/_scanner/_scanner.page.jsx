@@ -1,13 +1,18 @@
+//Library
 import React from "react";
 
+//Logic and Style
 import L from "./logic";
 import S from "./style";
 
+//Hooks
 import useCustomNavigate from "../../common/hooks/useCustomNavigate";
 import useSelect from "./hooks/useSelect";
 import useMutate from "./hooks/useMutate";
 
+//Components
 import Progress from "./components/progress/progress";
+import Medicine from "./components/medicine/_medicine";
 
 export default function Scanner() {
   const { OCR } = useMutate();
@@ -19,13 +24,12 @@ export default function Scanner() {
 
   React.useEffect(() => {
     if (nativeState !== "Init" || isCamera === true || isRead === true) {
-      return N.goHome();
+      // return N.goHome();
     }
     async function getNativeData() {
       const imageToBase64 = await L().takePhoto();
       if (imageToBase64 === "error") {
-        console.log("native error");
-        return N.goHome();
+        // return N.goHome();
       }
       OCR.mutateAsync(imageToBase64).then((result) => {});
     }
@@ -33,5 +37,5 @@ export default function Scanner() {
     setIsProcessing(false);
   }, []);
 
-  return isProcessing ? <Progress /> : <></>;
+  return isProcessing ? <Progress /> : <Medicine />;
 }
