@@ -15,6 +15,7 @@ function Router() {
         <Route path="/home" element={<Pages.Home />} />
         <Route path="/prescription" element={<Pages.Scanner />} />
         <Route path="/profile" element={<Pages.MyPage />} />
+        <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
       </Routes>
     </HashRouter>
   );
