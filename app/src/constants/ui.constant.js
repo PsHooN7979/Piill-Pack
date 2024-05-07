@@ -1,6 +1,7 @@
 const uis = {
   prev: require("../assets/icons/prev.png"),
   next: require("../assets/icons/next.png"),
+  edit: require("../assets/icons/edit.png"),
   close: require("../assets/icons/close.png"),
   heart_active: require("../assets/icons/heart_active.png"),
   heart: require("../assets/icons/heart.png"),
