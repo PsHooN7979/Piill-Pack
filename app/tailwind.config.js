@@ -37,6 +37,10 @@ module.exports = {
   },
   variants: {
     dropShadow: ["responsive"], // 반응형 드롭 쉐도우 사용
+    extend: {
+      backgroundColor: ['hover'], // hover 상태에서의 배경색 변경을 활성화
+      opacity: ['hover']          // hover 상태에서의 투명도 변경을 활성화
+    }
   },
   plugins: [
     require("tailwindcss-textshadow"),
