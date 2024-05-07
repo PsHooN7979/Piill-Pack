@@ -1,3 +1,5 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import MyPageHeader from "./compoents/mypage.header";
@@ -7,6 +9,7 @@ import base64String from "./image.sample"; // base64 이미지 문자열 샘플
 
 
 export default function MyPage() {
+    const navigate = useNavigate();
 
     // 테스트용 프로필 정보 더미 데이터
     const profileData = {
@@ -32,6 +35,20 @@ export default function MyPage() {
         ]
     }
 
+    const navigateTo = (path) => {
+        navigate(path);
+    };
+
+    const withdrawalHandler = () => {
+        // 회원 탈퇴 로직
+        console.log("회원탈퇴 버튼 누름");
+    }
+
+    const logOutHandler = () => {
+        // 로그 아웃 로직
+        console.log("로그아웃 버튼 누름");
+    }
+
     return (
         <div className="relative">
             <MyPageHeader />
@@ -41,6 +58,32 @@ export default function MyPage() {
                         내 프로필
                     </div>
                     <ProfileCard data={profileData} diseasesLimit={25} />
+
+                    <div className="mt-6">
+                        <div className="font-semibold text-sm mb-2">이용 안내</div>
+                        <div className="text-xs text-gray-500 mb-2">
+                            <button onClick={() => navigateTo('/guide')} className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40 hover:">
+                                이용 안내
+                            </button>
+                        </div>
+                        <hr />
+                        <div className="font-semibold text-sm mb-2 mt-4">기타</div>
+                        <div className="text-xs text-gray-500 mb-2">
+                            <button onClick={() => navigateTo('/terms')} className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40">
+                                서비스 이용약관
+                            </button>
+                            <button onClick={() => navigateTo('/privacy')} className="w-full text-left no-underline hover:underline hover:text-mint03 p-2 hover:bg-gray-100 hover:opacity-40">
+                                개인정보 처리 방침
+                            </button>
+                            <button onClick={withdrawalHandler} className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40">
+                                회원 탈퇴
+                            </button>
+                            <button onClick={logOutHandler} className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40">
+                                로그아웃
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
