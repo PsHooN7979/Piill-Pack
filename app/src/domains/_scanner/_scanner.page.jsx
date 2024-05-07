@@ -31,10 +31,10 @@ export default function Scanner() {
       if (imageToBase64 === "error") {
         // return N.goHome();
       }
+      setIsProcessing(false);
       OCR.mutateAsync(imageToBase64).then((result) => {});
     }
     getNativeData();
-    setIsProcessing(false);
   }, []);
 
   return isProcessing ? <Progress /> : <Medicine />;
