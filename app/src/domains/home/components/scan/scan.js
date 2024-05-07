@@ -17,7 +17,7 @@ export default function Scan() {
     dispatch(setNativeState(Native.Init));
     dispatch(setCameraState(Native.CameraOff));
     dispatch(setReadState(Native.ReadOff));
-    navigate("/prescription");
+    navigate("/scanner");
   };
 
   return (

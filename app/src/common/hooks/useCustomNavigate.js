@@ -6,12 +6,21 @@ function useACustomNavigate() {
   const goAuth = () => navigate("/");
   const goFirst = () => navigate("/first");
   const goHome = () => navigate("/home");
+  const goScanner = () => navigate("/scanner");
   const goPrescription = () => navigate("/prescription");
 
   const goBack = () => navigate(-1);
   const goToPage = (path) => navigate(path);
 
-  return { goAuth, goFirst, goHome, goPrescription, goBack, goToPage };
+  return {
+    goAuth,
+    goFirst,
+    goHome,
+    goPrescription,
+    goBack,
+    goToPage,
+    goScanner,
+  };
 }
 
 export default useACustomNavigate;
