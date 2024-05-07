@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import uis from "../../../constants/ui.constant";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function PrescSelect({ presc }) {
     const [prescList, setPrescList] = useState('');
     const [activeTab, setActiveTab] = useState(-1);
-
+    const navigate = useNavigate();
 
     const selectList = (e) => {
         setPrescList(e.target.value);
-        setActiveTab(e.target.selectedIndex -1);
+        setActiveTab(e.target.selectedIndex - 1);
     }
 
+    const handleEditPresc = () => {
+        navigate("/prescription/edit");
+    }
+
+    const handleDetailPresc = () => {
+        navigate("/prescription/detail");
+    }
 
     return (
 
@@ -25,38 +34,55 @@ export default function PrescSelect({ presc }) {
                         <option key={index} value={presc.name} >
                             {presc.name}
                         </option>
+                        
                     ))}
                 </select>
             </div>
             <p className="mt-2">복용 기간: xxxxxxx </p>
-
+                    
 
 
             {/*  약 목록 컨테이너 */}
 
-            <div className='w-full max-w-screen-lg mx-auto p-4 '>
             {activeTab >= 0 && presc[activeTab].pills.map((pill, index) => (
-                    <div key={index} className='pb-3'>
-                        <div className="flex flex-row items-stretch bg-white p-4  rounded-t-xl border-4">
-                            <div>
-                                <img
-                                    src={pill.image}
-                                    alt={`${pill.name} 로고`}
-                                    className="w-6 mx-2 drop-shadow-custom2"
-                                />
-                            </div>
-                            <div className='flex-col'>
-                                <strong className='text-lg text-gray-700 '>{pill.name}</strong>
-                                <p className='text-sm text-gray-700'>{pill.description}</p>
-                            </div>
+                <div key={index} className="flex flex-col justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2">
+                    <div className="flex items-center w-full p-3">
+                        {/* 이미지 컨테이너 */}
+                        <div>
+                            <img
+                                src={pill.image}
+                                alt={`${pill.name} 로고`}
+                                className="flex-none  overflow-hidden w-20 h-25 bg-white border-2 border-gray-300"
+                            />
                         </div>
-                        <div className="bg-gradient-to-r from-cyan-300 to-blue-200 p-2 rounded-b-xl text-right  justify-between shadow-md ">
-                            <a href="#" className="text-sm text-black ">약 상세정보 보기 {'>'}</a>
+                        {/* 텍스트 컨테이너 */}
+                        <div className="flex-grow ml-4">
+                            <div className="text-sm font-semibold">
+                                {pill.name}
+                            </div>
+                            <div className="text-xs">
+                                {pill.description}
+                            </div>
                         </div>
                     </div>
+                    <div className="w-full">
+                        <button
+                            className="relative flex justify-between items-center w-full py-2 bg-white rounded-b-lg hover:bg-mint01 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                        onClick={handleDetailPresc}
+                        >
+                            <span className="absolute top-0 left-1/2 transform -translate-x-1/2 w-5/6 h-[0.1rem] rounded-lg bg-gray-300"></span>
+                            <div className='flex items-center text-sm text-mint03 font-semibold pl-4'>
+                                <span className='ml-1'>약 상세 정보</span>
+                            </div>
+                            <img src={uis.next} alt="next" className='h-3 pr-4' />
+                        </button>
+                        <div className="fixed inset-x-0 bottom-20 mx-auto w-full px-4 flex justify-center">
+                            <button className="bg-warn01 rounded-lg text-white p-2 mx-auto hover:bg-warn02" onClick={handleEditPresc}> 처방 정보 수정</button>
+                        </div>
+                    </div>
+                </div>
+            ))}
 
-                ))}
-            </div>
 
         </div>
     )

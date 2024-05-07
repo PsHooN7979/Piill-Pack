@@ -17,7 +17,10 @@ function Router() {
         <Route path="/scanner" element={<Pages.Scanner />} />
         <Route path="/profile" element={<Pages.MyPage />} />
         <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
+        <Route path="/prescription/edit" element={<Pages.PrescriptionEditPage />} />
         <Route path="/prescription" element={<Pages.Prescription />} />
+        <Route path="/prescription/detail" element={<Pages.PrescriptionDetailPage />} />
+
 
       </Routes>
     </HashRouter>
