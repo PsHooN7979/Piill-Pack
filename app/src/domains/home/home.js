@@ -52,11 +52,11 @@ export default function Home() {
     {
       name: "처방3",
       items: [
-      {
-        label: "페라트라정2.5밀리그램(레트로졸)",
-        image: null,
-      },
-      { label: "약 아이템1", image: null }
+        {
+          label: "페라트라정2.5밀리그램(레트로졸)",
+          image: null,
+        },
+        { label: "약 아이템1", image: null }
       ],
     },
     {

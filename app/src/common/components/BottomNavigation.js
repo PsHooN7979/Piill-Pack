@@ -31,7 +31,7 @@ function BottomNavigation({ active }) {
         className={`flex flex-col items-center ${
           active === "2" ? "text-gray-900" : "text-gray-400"
         }`}
-        onClick={() => navigate("/presc")}
+        onClick={() => navigate("/prescription")}
       >
         <img
           src={active === "2" ? uis.invoice_active : uis.invoice}

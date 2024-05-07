@@ -1,5 +1,6 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 
+
 import Pages from "../domains";
 
 function Router() {
@@ -13,9 +14,11 @@ function Router() {
         <Route path="/" element={<Pages.Home />} />
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
-        <Route path="/prescription" element={<Pages.Scanner />} />
+        <Route path="/scanner" element={<Pages.Scanner />} />
         <Route path="/profile" element={<Pages.MyPage />} />
         <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
+        <Route path="/prescription" element={<Pages.Prescription />} />
+
       </Routes>
     </HashRouter>
   );
