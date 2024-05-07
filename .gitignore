@@ -1,3 +1,10 @@
+**/dist/
+
+app/dist/** 
+/app/dist/
+/app/dist
+/app/dist/index.html
+
 .DS_Store
 ._.DS_Store
 **/.DS_Store

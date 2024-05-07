@@ -7,7 +7,7 @@ function BottomNavigation({ active }) {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white shadow-md flex justify-around items-center py-2">
+    <div className="fixed bottom-0 left-0 right-0 h-16 bg-white shadow-md flex justify-around items-center py-2 z-50">
       <button
         className={`flex flex-col items-center ${
           active === "1" ? "text-gray-900" : "text-gray-400"

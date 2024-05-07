@@ -1,5 +1,6 @@
 const uis = {
-  back: require("../assets/icons/back.png"),
+  prev: require("../assets/icons/prev.png"),
+  next: require("../assets/icons/next.png"),
   close: require("../assets/icons/close.png"),
   heart_active: require("../assets/icons/heart_active.png"),
   heart: require("../assets/icons/heart.png"),
@@ -8,7 +9,7 @@ const uis = {
   invoice_active: require("../assets/icons/invoice_active.png"),
   invoice: require("../assets/icons/invoice.png"),
   person_active: require("../assets/icons/person_active.png"),
-  person: require("../assets/icons/person.png"),
+  person: require("../assets/icons/person.png")
 };
 
 export default uis;

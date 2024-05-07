@@ -1,5 +1,6 @@
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
+import AdSlider from "./components/ad.slider";
 
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
@@ -20,19 +21,19 @@ export default function Home() {
         },
         {
           label: "약 아이템3",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템4",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템5",
-          image: images.logo,
+          image: null,
         },
         {
           label: "약 아이템6",
-          image: images.logo,
+          image: null,
         },
       ],
     },
@@ -41,11 +42,11 @@ export default function Home() {
       items: [
         {
           label: "페라트라정2.5밀리그램(레트로졸)",
-          image: images.logo,
+          image: null,
         },
-        { label: "약 아이템2", image: images.logo },
-        { label: "약 아이템3", image: images.logo },
-        { label: "약 아이템4", image: images.logo },
+        { label: "약 아이템2", image: null },
+        { label: "약 아이템3", image: null },
+        { label: "약 아이템4", image: null },
       ],
     },
     {
@@ -53,23 +54,42 @@ export default function Home() {
       items: [
       {
         label: "페라트라정2.5밀리그램(레트로졸)",
-        image: images.logo,
+        image: null,
       },
-      { label: "약 아이템1", image: images.logo }
+      { label: "약 아이템1", image: null }
       ],
     },
     {
       name: "처방4",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
     {
       name: "처방5",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
     {
       name: "처방6",
-      items: [{ label: "약 아이템1", image: images.logo }],
+      items: [{ label: "약 아이템1", image: null }],
     },
+  ];
+
+  // 슬라이더 테스트 더미 데이터
+  const products = [
+    {
+      name: "상품 이름1",
+      image: null,
+      desc: "설명"
+    },
+    {
+      name: "상품 이름2",
+      image: null,
+      desc: "설명"
+    },
+    {
+      name: "상품 이름 길이 테스트 상품 이름 길이 테스트",
+      image: null,
+      desc: "상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트"
+    }
   ];
 
   return (
@@ -82,6 +102,7 @@ export default function Home() {
             이에요
           </div>
           <PillScroll tabs={tabData} wordLimit={10} />
+          <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>
       </div>
 
