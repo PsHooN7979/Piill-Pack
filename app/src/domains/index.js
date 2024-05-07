@@ -1,7 +1,7 @@
 import Auth from "./auth/auth.page";
 import FistLogin from "./firstLogin/firstLogin";
 import Home from "./home/home";
-import Scanner from "./_scanner/scanner.page";
+import Scanner from "./_scanner/_scanner.page";
 
 const Pages = { Auth, FistLogin, Home, Scanner };
 
