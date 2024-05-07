@@ -2,13 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import uis from "../../../constants/ui.constant";
 
-function ProfileCard( {data} ) {
+function ProfileCard( {data, diseasesLimit} ) {
 
     const navigate = useNavigate();
 
     const handleEditProfile = () => {
         navigate('/profile/edit');
     };
+
+    const diseasesString = data.diseaseList.map(disease => disease.name).join(", ");
 
     return(
         <div className="flex flex-col justify-center items-center border border-gray-400 rounded-lg shadow-custom01">
@@ -22,7 +24,7 @@ function ProfileCard( {data} ) {
                 {data.tall}cm, {data.weight}kg
             </div>
             <div className="text-xs text-gray-500">
-                지병목록: {data.diseaseList.map(disease => <span key={disease.name} className="mx-1">{disease.name},</span>)}
+                지병목록: {diseasesString && diseasesString.length > diseasesLimit ? `${diseasesString.substring(0, diseasesLimit)}...` : diseasesString}
             </div>
 
             <div className="w-full pt-1 mt-1">
