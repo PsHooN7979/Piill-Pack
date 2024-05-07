@@ -2,7 +2,7 @@ import { Box, Typography, styled } from "@mui/material";
 
 const TitleContainer = styled(Box)({
   fontWeight: "bold",
-  margin: "2px 10px",
+  margin: "2px 15px",
 });
 
 const Text = styled(Typography)({

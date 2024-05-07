@@ -68,6 +68,12 @@ export default function useLogic() {
     return photo;
   }
 
-  const L = { takePhoto };
+  function goBack(N) {
+    M.onBack(function (e) {
+      return N.goHome();
+    });
+  }
+
+  const L = { takePhoto, goBack };
   return L;
 }
