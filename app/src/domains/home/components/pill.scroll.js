@@ -37,7 +37,7 @@ export default function PillScroll({ tabs, wordLimit }) {
                 className="h-16 px-3"
               />
               <div className="text-xs mt-1">
-                {item.label && item.label.length > 15
+                {item.label && item.label.length > wordLimit
                   ? `${item.label.substring(0, wordLimit)}...`
                   : item.label}
               </div>

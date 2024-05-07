@@ -1,5 +1,5 @@
 const Native = {
-  Init: "",
+  Init: "Init",
   Camera: "Camera",
   Read: "Read",
 
