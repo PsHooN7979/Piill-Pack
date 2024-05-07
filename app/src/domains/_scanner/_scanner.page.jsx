@@ -7,11 +7,11 @@ import S from "./style";
 
 //Hooks
 import useCustomNavigate from "../../common/hooks/useCustomNavigate";
-import useSelect from "./hooks/useSelect";
-import useMutate from "./hooks/useMutate";
-import useText from "./hooks/useText";
-import useScannerState from "./hooks/useScannerState";
-import useScan from "./hooks/useScan";
+import useSelect from "./hooks/___useSelect";
+import useMutate from "./hooks/__useMutate";
+import useScannerState from "./hooks/_useScannerState";
+import useTextEffect from "./hooks/useTextEffect";
+import useScanEffect from "./hooks/useScanEffect";
 
 //Constant
 import images from "../../constants/image.constant";
@@ -22,7 +22,11 @@ import Title from "./components/title/title";
 import { Box } from "@mui/material";
 
 export default function Scanner() {
-  const initialState = { medicineList: [], isProcessing: true, isActive: true };
+  const initialState = {
+    medicineList: [],
+    isProcessing: true,
+    isActive: true,
+  };
   const {
     medicineList,
     setMedicineList,
@@ -35,9 +39,9 @@ export default function Scanner() {
   const { OCR } = useMutate();
   const { nativeState, isCamera, isRead } = useSelect();
   const navigate = useCustomNavigate();
-  const loadingText = useText(isActive);
+  const loadingText = useTextEffect(isActive);
 
-  useScan({
+  useScanEffect({
     isActive,
     nativeState,
     isCamera,
@@ -46,6 +50,8 @@ export default function Scanner() {
     takePhoto: L().takePhoto,
     OCR,
     setIsProcessing,
+    setMedicineList,
+    setIsActive,
   });
 
   if (isProcessing)
@@ -53,11 +59,17 @@ export default function Scanner() {
   return (
     <S.ScannerContainer>
       <AppBar />
-      <Title />
+      <Title isActive={isActive} />
       <S.AnalysisSection>
         <S.AnalysisPaper elevation={3}>
-          <S.LoadingImage src={images.loading} />
-          <S.AnalysisTitle>{loadingText}</S.AnalysisTitle>
+          {isActive ? (
+            <>
+              <S.LoadingImage src={images.loading} />
+              <S.AnalysisTitle>{loadingText}</S.AnalysisTitle>
+            </>
+          ) : (
+            <></>
+          )}
         </S.AnalysisPaper>
       </S.AnalysisSection>
     </S.ScannerContainer>

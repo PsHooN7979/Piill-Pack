@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function useScan({
+export default function useScanEffect({
   isActive,
   nativeState,
   isCamera,
@@ -9,6 +9,8 @@ export default function useScan({
   takePhoto,
   OCR,
   setIsProcessing,
+  setMedicineList,
+  setIsActive,
 }) {
   React.useEffect(() => {
     async function getNativeData() {
@@ -21,13 +23,18 @@ export default function useScan({
       if (imageToBase64 === "error") {
         // navigate.goHome();
       } else {
-        OCR.mutateAsync(imageToBase64);
+        OCR.mutateAsync(imageToBase64).then((result) => {
+          setMedicineList(result.data.medicine_list);
+        });
+        setIsProcessing(false);
+        setIsActive(false);
       }
-      setIsProcessing(false);
     }
 
-    if (isActive) {
-      getNativeData();
-    }
+    getNativeData();
+
+    //테스트 종료 후 제거
+    setIsProcessing(false);
+    setIsActive(false);
   }, [isActive, nativeState, isCamera, isRead, navigate, takePhoto, OCR]);
 }

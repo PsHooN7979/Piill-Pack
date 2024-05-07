@@ -7,13 +7,13 @@ const phrases = [
   "필팩이 정리하는 중",
 ];
 
-export default function useText(isActive, intervalDelay = 500) {
+export default function useTextEffect(isActive, intervalDelay = 500) {
   const [index, setIndex] = React.useState(0);
   const [loadingText, setLoadingText] = React.useState(phrases[0] + ".");
 
   React.useEffect(() => {
     if (!isActive) {
-      setLoadingText(phrases[0]); // Reset to the first phrase when not active
+      setLoadingText(""); // Reset to the first phrase when not active
       return;
     }
 
