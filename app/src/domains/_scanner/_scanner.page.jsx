@@ -11,8 +11,9 @@ import useSelect from "./hooks/useSelect";
 import useMutate from "./hooks/useMutate";
 
 //Components
-import Progress from "./components/progress/progress";
-import Medicine from "./components/medicine/_medicine";
+import Progress from "./components/progress/_progress";
+import AppBar from "./components/appbar/_appbar";
+import Title from "./components/title/title";
 
 export default function Scanner() {
   const { OCR } = useMutate();
@@ -29,13 +30,30 @@ export default function Scanner() {
     async function getNativeData() {
       const imageToBase64 = await L().takePhoto();
       if (imageToBase64 === "error") {
-        // return N.goHome();
+        return N.goHome();
       }
       setIsProcessing(false);
-      OCR.mutateAsync(imageToBase64).then((result) => {});
+      OCR.mutateAsync(imageToBase64).then((result) => {
+        setMedicineList(result.data.medicine_list);
+      });
     }
-    getNativeData();
+    // getNativeData();
   }, []);
 
-  return isProcessing ? <Progress /> : <Medicine />;
+  if (isProcessing)
+    return (
+      <S.ScannerContainer>
+        <AppBar />
+        <Title />
+        <Progress />
+      </S.ScannerContainer>
+    );
+
+  return (
+    <S.ScannerContainer>
+      <AppBar />
+      <Title />
+      <S.AnalysisPaper elevation={3}>test</S.AnalysisPaper>
+    </S.ScannerContainer>
+  );
 }

@@ -1,6 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
 
-import S from "./progress.style";
+import S from "./style";
 
 export default function Progress() {
   return (

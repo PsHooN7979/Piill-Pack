@@ -5,7 +5,7 @@ const ProgressContainer = styled(Box)({
   justifyContent: "center",
   alignItems: "center",
   width: "100vw",
-  height: "100vh",
+  height: "60vh",
 });
 
 const S = {
