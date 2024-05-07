@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export default function TagList({ onItemsChange, placeholder }) {
+export default function TagList({ onItemsChange, placeholder, tagDatas }) {
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(tagDatas);
 
   const normalizeInput = (input) => {
     return input.replace(/\s+/g, " ").trim(); // 연속된 공백을 한 개의 공백으로 변환

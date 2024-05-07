@@ -7,7 +7,7 @@ function ProfileCard( {data, diseasesLimit} ) {
     const navigate = useNavigate();
 
     const handleEditProfile = () => {
-        navigate('/profile/edit');
+        navigate('/profile/edit', { state: { profileData: data } });
     };
 
     const diseasesString = data.diseaseList.map(disease => disease.name).join(", ");

@@ -2,18 +2,12 @@ import { useNavigate } from "react-router-dom";
 
 import uis from "../../../constants/ui.constant";
 
-export default function ProfileEditPageHeader({ title }) {
+export default function ProfileEditPageHeader({ title, btnHandler }) {
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
-
-  const doneHandler = () => {
-    // 수정 완료 로직
-    console.log("수정 완료");
-    navigate(-1);
-  }
 
   return (
     <div className="flex items-center justify-between p-2 shadow-md h-16">
@@ -24,10 +18,8 @@ export default function ProfileEditPageHeader({ title }) {
       </button>
       <div className="text-lg font-semibold">{title}</div>
       <div className="flex justify-center items-center">
-        <button onClick={doneHandler} className="font-bold text-white rounded-xl bg-warn02 px-2 py-[0.4rem] hover:bg-red-400">
-            <div className="">
-                완료
-            </div>
+        <button onClick={btnHandler} className="font-bold text-white rounded-xl bg-warn02 px-2 py-[0.4rem] hover:bg-red-400">
+            <div>완료</div>
         </button>
       </div>
     </div>
