@@ -18,7 +18,7 @@ export default function PrescriptionList() {
             name: '처방 1',
             pills: [
                 { name: '타이레놀8시간이알서방정(아세트아미노펜)', chart: '흰색의 장방형 서방성 필름코팅정제', image: images.logo, description: '해열.진통.소염제' },
-                { name: '타이레놀8시간이알서방정(아세트아미노펜)', chart: '흰색의 장방형 서방성 필름코팅정제', image: images.logo, description: '해열.진통.소염제' }
+                { name: '가스디알정50밀리그램(디메크로틴산마그네슘)', chart: '녹색의 원형 필름코팅정', image: images.logo, description: '기타의 소화기관용약' }
             ],
             
         },

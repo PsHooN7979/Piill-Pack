@@ -14,16 +14,18 @@ function Router() {
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
         <Route path="/scanner" element={<Pages.Scanner />} />
-        <Route
-          path="/prescription/edit"
-          element={<Pages.PrescriptionEditPage />}
-        />
+
+
+        {/* 처방 목록 */}
+        <Route path="/prescription/edit" element={<Pages.PrescriptionEditPage />} />
         <Route path="/prescription" element={<Pages.Prescription />} />
-        <Route
-          path="/prescription/detail"
-          element={<Pages.PrescriptionDetailPage />}
-        />
+        <Route path="/prescription/detail" element={<Pages.PrescriptionDetailPage />} />
+        <Route path="/prescription/add" element={<Pages.PrescriptionAddPage />} />
+
+        {/* 건강 상태 */}
         <Route path="/health" element={<Pages.HealthPage />} />
+
+        {/* 내 정보 */}
         <Route path="/profile" element={<Pages.MyPage />} />
         <Route path="/profile/guide" element={<Pages.GuidePage />} />
         <Route path="/profile/terms" element={<Pages.TermsPage />} />
