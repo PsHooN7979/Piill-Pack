@@ -10,7 +10,6 @@ export default function ProfileEditPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const { profileData } = location.state || {}; // 프로필 카드에서 navigate할때 state 옵션으로 전달한 데이터를 가져옴
-    console.log(profileData.diseaseList);
     const initialTags = profileData.diseaseList.map(disease => disease.name); // 받은 리스트 객체 데이터의 name을 가져와 리스트 형식으로 매핑
 
     const [nick, setNick] = useState(profileData.nick);
