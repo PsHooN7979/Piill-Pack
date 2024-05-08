@@ -9,17 +9,18 @@ const phrases = [
 
 export default function useTextEffect(isActive, intervalDelay = 500) {
   const [index, setIndex] = React.useState(0);
-  const [loadingText, setLoadingText] = React.useState(phrases[0] + ".");
+  const [loadingText, setLoadingText] = React.useState(phrases[0]);
 
   React.useEffect(() => {
     if (!isActive) {
-      setLoadingText(""); // Reset to the first phrase when not active
+      setLoadingText("");
+      setIndex(0);
       return;
     }
 
     const intervalId = setInterval(() => {
       setLoadingText((prevText) => {
-        const cleanText = phrases[index]; // Get the base text of the current index
+        const cleanText = phrases[index];
         const dotCount = prevText.length - cleanText.length;
         if (dotCount < 3) {
           return cleanText + ".".repeat(dotCount + 1);
@@ -32,7 +33,7 @@ export default function useTextEffect(isActive, intervalDelay = 500) {
     }, intervalDelay);
 
     return () => clearInterval(intervalId);
-  }, [isActive, index, phrases, intervalDelay]);
+  }, [isActive, index]);
 
   return loadingText;
 }

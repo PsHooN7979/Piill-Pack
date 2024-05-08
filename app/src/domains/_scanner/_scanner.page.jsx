@@ -68,7 +68,11 @@ export default function Scanner() {
               <S.AnalysisTitle>{loadingText}</S.AnalysisTitle>
             </>
           ) : (
-            <></>
+            <>
+              {medicineList.map((medicine, index) => (
+                <>test</>
+              ))}
+            </>
           )}
         </S.AnalysisPaper>
       </S.AnalysisSection>
