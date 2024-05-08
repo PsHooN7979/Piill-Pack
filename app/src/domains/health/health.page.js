@@ -11,6 +11,7 @@ export default function HealthPage() {
         profile_image: null,
         nick: "김범준",
         gender: "male",
+        age: 25,
         tall: "175",
         weight: "75",
         diseaseList: [
