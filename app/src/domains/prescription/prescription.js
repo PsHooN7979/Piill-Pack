@@ -1,4 +1,4 @@
-import PrescHeader from "./components/prescHeader"
+import PrescHeader from "./components/prescHeader";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import PrescSelect from "./components/presc.select";
 import images from "../../constants/image.constant"
@@ -17,22 +17,26 @@ export default function PrescriptionList() {
         {
             name: '처방 1',
             pills: [
-                { name: '타이레놀', description: '두통에 효과적인 진통제', image: images.logo },
-            ]
+                { name: '타이레놀8시간이알서방정(아세트아미노펜)', chart: '흰색의 장방형 서방성 필름코팅정제', image: images.logo, description: '해열.진통.소염제' },
+                { name: '타이레놀8시간이알서방정(아세트아미노펜)', chart: '흰색의 장방형 서방성 필름코팅정제', image: images.logo, description: '해열.진통.소염제' }
+            ],
+            
         },
         {
             name: '처방 2',
             pills: [
-                { name: '어린이용 부루펜', description: '어린이 발열 감소용', image: images.logo },
+                { name: "부루펜정200밀리그램(이부프로펜)", chart: '흰색의 장방형 필름코팅 정제', image: images.logo, description: '해열.진통.소염제' },
             ]
         },
         {
             name: '처방 3',
             pills: [
-                { name: '가스모틴', description: '소화불량 개선 제', image: images.logo }
+                { name: '가스모틴정5밀리그램(모사프리드시트르산염수화물)', chart: '이약은 분할선을 가진 흰색의 장방형 필름코팅정제이다', image: images.logo, description: '기타의 소화기관용약' }
             ]
         }
     ]
+
+    
 
     // 약 목록 더미 데이터
 

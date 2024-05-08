@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescEditHeader from "./components/presc.edit.header";
+import PrescEdit from "./components/presc.edit";
 
 export default function PrescEditPage() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function PrescEditPage() {
       <PrescEditHeader title="처방 정보 수정" />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
-          
+          <PrescEdit />
         </div>
       </div>
 
