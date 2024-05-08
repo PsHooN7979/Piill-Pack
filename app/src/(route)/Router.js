@@ -10,7 +10,7 @@ function Router() {
      */
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Pages.Home />} />
+        <Route path="/auth" element={<Pages.Auth />} />
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
         <Route path="/scanner" element={<Pages.Scanner />} />
@@ -29,7 +29,8 @@ function Router() {
         <Route path="/profile/terms" element={<Pages.TermsPage />} />
         <Route path="/profile/privacy" element={<Pages.PrivacyPage />} />
         <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
-        shed changes
+
+        <Route path="/" element={<Pages.Home />} />
       </Routes>
     </HashRouter>
   );
