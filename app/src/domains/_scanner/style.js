@@ -1,6 +1,10 @@
 import { Box, Paper, styled } from "@mui/material";
 import images from "../../constants/image.constant";
 
+const ProcessBlack = styled(Box)({
+  height: "100vh",
+  background: "black",
+});
 const ScannerContainer = styled(Box)({
   backgroundImage: `url(${images.wave})`,
   height: "100vh",
@@ -41,5 +45,6 @@ const S = {
   AnalysisSection,
   AnalysisTitle,
   LoadingImage,
+  ProcessBlack,
 };
 export default S;

@@ -1,9 +1,9 @@
 import S from "./style";
 
-export default function Title({ isActive }) {
+export default function Title({ isPending }) {
   return (
     <S.TitleContainer>
-      {isActive ? (
+      {isPending ? (
         <S.Text variant="body1">
           필팩이 처방전을&nbsp;
           <S.StrongText component="span" variant="h6" color="#E8A1A0">
