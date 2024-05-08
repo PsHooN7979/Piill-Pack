@@ -52,7 +52,7 @@ export default function PrescSelect({ presc }) {
                             <img
                                 src={pill.image}
                                 alt={`${pill.name} 로고`}
-                                className="flex-none  overflow-hidden w-20 h-25 bg-white border-2 border-gray-300"
+                                className="w-16 m-2"
                             />
                         </div>
                         {/* 텍스트 컨테이너 */}

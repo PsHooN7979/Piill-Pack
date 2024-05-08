@@ -60,7 +60,7 @@ export default function MyPage() {
             <div className="font-semibold text-sm mb-2">이용 안내</div>
             <div className="text-xs text-gray-500 mb-2">
               <button
-                onClick={() => navigateTo("/guide")}
+                onClick={() => navigateTo("/profile/guide")}
                 className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40 hover:"
               >
                 이용 안내
@@ -70,13 +70,13 @@ export default function MyPage() {
             <div className="font-semibold text-sm mb-2 mt-4">기타</div>
             <div className="text-xs text-gray-500 mb-2">
               <button
-                onClick={() => navigateTo("/terms")}
+                onClick={() => navigateTo("/profile/terms")}
                 className="w-full text-left p-2 no-underline hover:underline hover:text-mint03 hover:bg-gray-100 hover:opacity-40"
               >
                 서비스 이용약관
               </button>
               <button
-                onClick={() => navigateTo("/privacy")}
+                onClick={() => navigateTo("/profile/privacy")}
                 className="w-full text-left no-underline hover:underline hover:text-mint03 p-2 hover:bg-gray-100 hover:opacity-40"
               >
                 개인정보 처리 방침
