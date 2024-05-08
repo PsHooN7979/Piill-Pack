@@ -10,7 +10,8 @@ import PrescriptionDetailPage from "./prescription/pill.detail.page";
 import GuidePage from "./myPage/guide.page";
 import TermsPage from "./myPage/term.page";
 import PrivacyPage from "./myPage/privacy.page";
+import HealthPage from "./health/health.page";
 
-const Pages = { Auth, FistLogin, Home, Scanner, MyPage, ProfileEditPage, GuidePage, TermsPage, PrivacyPage, Prescription, PrescriptionEditPage, PrescriptionDetailPage };
+const Pages = { Auth, FistLogin, Home, Scanner, HealthPage, MyPage, ProfileEditPage, GuidePage, TermsPage, PrivacyPage, Prescription, PrescriptionEditPage, PrescriptionDetailPage };
 
 export default Pages;
