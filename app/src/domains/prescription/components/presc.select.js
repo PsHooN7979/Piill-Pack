@@ -14,11 +14,12 @@ export default function PrescSelect({ presc }) {
     }
 
     const handleEditPresc = () => {
-        navigate("/prescription/edit");
+        const selectPresc = presc[activeTab];
+        navigate("/prescription/edit" , { state: { selectPresc } });
     }
 
-    const handleDetailPresc = () => {
-        navigate("/prescription/detail");
+    const handleDetailPresc = (pill) => {
+        navigate("/prescription/detail", { state: { pill } });
     }
 
     return (
@@ -34,44 +35,46 @@ export default function PrescSelect({ presc }) {
                         <option key={index} value={presc.name} >
                             {presc.name}
                         </option>
-                        
+
                     ))}
                 </select>
             </div>
-            <p className="mt-2">복용 기간: xxxxxxx </p>
-                    
+            <p className="mt-2 text-sm">복용 기간: xxxxxxx </p>
+
 
 
             {/*  약 목록 컨테이너 */}
 
             {activeTab >= 0 && presc[activeTab].pills.map((pill, index) => (
-                <div key={index} className="flex flex-col justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2">
+                <div key={index} className="flex flex-col justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
                     <div className="flex items-center w-full p-3">
                         {/* 이미지 컨테이너 */}
-                        <div>
+                        <div className='w-10 h-15'>
                             <img
                                 src={pill.image}
                                 alt={`${pill.name} 로고`}
-                                className="w-16 m-2"
+                                className="flex-none  overflow-hidden w-full h-full bg-white object-cover"
                             />
                         </div>
                         {/* 텍스트 컨테이너 */}
                         <div className="flex-grow ml-4">
-                            <div className="text-sm font-semibold">
+                            <div className="text-lg font-semibold w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
                                 {pill.name}
                             </div>
-                            <div className="text-xs">
+                            <div className="text-xs overflow-hidden">
                                 {pill.description}
+                            </div>
+                            <div className="text-xs overflow-hidden">
+                                {pill.chart}
                             </div>
                         </div>
                     </div>
                     <div className="w-full">
                         <button
-                            className="relative flex justify-between items-center w-full py-2 bg-white rounded-b-lg hover:bg-mint01 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                        onClick={handleDetailPresc}
+                            className="relative flex justify-between items-center w-full py-2 bg-mint02 rounded-b-lg hover:bg-mint01 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                            onClick={() => handleDetailPresc(pill)}
                         >
-                            <span className="absolute top-0 left-1/2 transform -translate-x-1/2 w-5/6 h-[0.1rem] rounded-lg bg-gray-300"></span>
-                            <div className='flex items-center text-sm text-mint03 font-semibold pl-4'>
+                            <div className='flex items-center text-sm text-black font-semibold pl-4'>
                                 <span className='ml-1'>약 상세 정보</span>
                             </div>
                             <img src={uis.next} alt="next" className='h-3 pr-4' />

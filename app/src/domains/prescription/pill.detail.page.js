@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PillDetailHeader from "./components/presc.detail.header";
+import PillDetail from "./components/pill.detail";
 
 export default function PillDetailPage() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function PillDetailPage() {
       <PillDetailHeader title="약 상세 정보" />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
-          
+          <PillDetail />
         </div>
       </div>
 
