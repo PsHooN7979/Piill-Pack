@@ -11,6 +11,7 @@ import useCustomNavigate from "../../common/hooks/useCustomNavigate";
 
 //Constant
 import images from "../../constants/image.constant";
+import constant from "../../constants/constant";
 
 //Repository
 import scannerRepo from "./repositories/scanner.repository";
@@ -19,19 +20,16 @@ import scannerRepo from "./repositories/scanner.repository";
 import AppBar from "./components/appbar/_appbar";
 import Title from "./components/title/title";
 
-const phrases = [
-  "필팩이 사진 분석 중",
-  "필팩이 처방전 읽는 중",
-  "필팩이 식약처 방문 중",
-  "필팩이 정리하는 중",
-];
-
 export default function Scanner() {
   const navigate = useCustomNavigate();
 
   const [medicineList, setMedicineList] = React.useState([]);
-  const [nativeState, setNativeState] = React.useState(true);
-  const [content, setContent] = React.useState(phrases[0]);
+  const [content, setContent] = React.useState({
+    text: constant.Phrases[0],
+    count: 0,
+  });
+  const [isNative, setIsNative] = React.useState(true);
+  const [title, setTitle] = React.useState(constant.Title.loading);
 
   const mutateOCR = useMutation({
     mutationFn: scannerRepo.ocr,
@@ -43,42 +41,64 @@ export default function Scanner() {
 
       // if (imageToBase64 === "error") return navigate.goHome();
 
-      setNativeState(false);
+      setIsNative(false);
 
       await mutateOCR
         .mutateAsync(imageToBase64)
         .then((result) => {
           setMedicineList(result.data.medicine_list);
+          setTitle(constant.Title.find);
         })
         .catch((error) => {
-          // return navigate.goHome();
+          setTimeout(async () => {
+            return navigate.goHome();
+          }, 2100);
         });
     }
-
     asyncData();
-
-    if (!nativeState) {
-    }
   }, []);
 
-  if (nativeState) return <S.ProcessBlack />;
-  else
+  React.useEffect(() => {
+    let intervalId;
+
+    if (!isNative) {
+      intervalId = setInterval(() => {
+        setContent((prevText) => {
+          const cleanText = constant.Phrases[content.count];
+          const dotCount = prevText.text.length - cleanText.length;
+          if (dotCount < 3) {
+            const text = cleanText + ".".repeat(dotCount + 1);
+            return { text: text, count: content.count };
+          } else {
+            const nextIndex = (content.count + 1) % constant.Phrases.length;
+            return { text: constant.Phrases[nextIndex], count: nextIndex };
+          }
+        });
+      }, 550);
+    } else {
+      clearInterval(intervalId);
+    }
+
+    return () => clearInterval(intervalId);
+  }, [isNative, content.count]);
+
+  if (!isNative)
     return (
       <S.ScannerContainer>
         <AppBar />
-        <Title isPending={!mutateOCR.isPending} />
+        <Title text={title} />
         <S.AnalysisSection>
-          <S.AnalysisPaper elevation={3}>
-            {!mutateOCR.isPending ? (
-              <>
-                <S.LoadingImage src={images.loading} />
-                <S.AnalysisTitle>{content}</S.AnalysisTitle>
-              </>
-            ) : (
-              medicineList.map((medicine, index) => <>test</>)
-            )}
-          </S.AnalysisPaper>
+          {medicineList.length === 0 ? (
+            <S.AnalysisPaper elevation={3}>
+              <S.LoadingImage src={images.loading} />
+              <S.AnalysisTitle>{content.text}</S.AnalysisTitle>
+            </S.AnalysisPaper>
+          ) : (
+            <S.AnalysisPaper elevation={3}></S.AnalysisPaper>
+          )}
         </S.AnalysisSection>
       </S.ScannerContainer>
     );
+
+  return <S.ProcessBlack />;
 }
