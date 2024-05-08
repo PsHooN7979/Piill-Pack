@@ -7,6 +7,8 @@ export default function BMIVisualBox( {data} ) {
 
     const bmiValue = calculateBMI(data.weight, data.tall);
     const resultState = currentState(bmiValue);
+    const basalMetabolismValue = calculateMetabolism(data.gender, data.weight, data.tall, data.age);
+
 
     useEffect(() => {
         // 첫 번째 애니메이션 활성화
@@ -25,6 +27,17 @@ export default function BMIVisualBox( {data} ) {
     function calculateBMI(weight, height) {
         const heightInMeters = height / 100;
         return (weight / (heightInMeters * heightInMeters)).toFixed(1);
+    }
+
+    // 기초대사량 계산 함수
+    function calculateMetabolism(gender, weight, height, age) {
+        let metabolismValue = 0;
+        if (gender === "male") {
+            metabolismValue = 66.47 + (13.75 * weight) + (5 * height) - (6.76 * age);
+        } else {
+            metabolismValue = 65.51 + (9.56 * weight) + (1.85 * height) - (4.68 * age);
+        }
+        return metabolismValue.toFixed(0);
     }
 
     // 현재상태 결과
@@ -82,6 +95,10 @@ export default function BMIVisualBox( {data} ) {
                 <div className="flex justify-center items-center w-fit">
                     <div className={`px-3 font-semibold text-sm ${textColorForState(resultState)}`}>{resultState}</div>
                 </div>
+            </div>
+
+            <div>
+                {basalMetabolismValue}
             </div>
         </div>
     )
