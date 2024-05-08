@@ -80,7 +80,7 @@ export default function PrescSelect({ presc }) {
                             <img src={uis.next} alt="next" className='h-3 pr-4' />
                         </button>
                         <div className="fixed inset-x-0 bottom-20 mx-auto w-full px-4 flex justify-center">
-                            <button className="bg-warn01 rounded-lg text-white p-2 mx-auto hover:bg-warn02" onClick={handleEditPresc}> 처방 정보 수정</button>
+                            <button className="bg-warn01 rounded-lg text-white p-2 mx-auto hover:bg-warn02" onClick={handleEditPresc}> <strong>처방 정보 수정</strong></button>
                         </div>
                     </div>
                 </div>

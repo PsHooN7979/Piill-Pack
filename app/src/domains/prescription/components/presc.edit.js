@@ -9,12 +9,14 @@ export default function PrescEdit() {
 
 
 
-    const pill = selectPresc.pills;
+    const [pills, setPills] = useState(selectPresc.pills);
     
 
-    const handleRemove = () => {
-        
-    }
+    const handleRemove = (index) => {
+        // filter 메소드를 사용해 해당 인덱스를 제외한 나머지 약 목록을 설정합니다.
+        const newPills = pills.filter((_, idx) => idx !== index);
+        setPills(newPills);
+    };
 
 
 
@@ -27,7 +29,7 @@ export default function PrescEdit() {
             </div>
             <p className="mt-2 text-sm">복용 기간: xxxxxxx </p>
 
-            {pill.map((pill, index) => (
+            {pills.map((pill, index) => (
 
 
                 <div key={index}>
@@ -59,7 +61,7 @@ export default function PrescEdit() {
                         </div>
                         <div className="pr-3">
                             <button className=" text-xl ml-2 hover:text-red-600 text-warn02 p-1 inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                                onClick={handleRemove}>
+                                onClick={() => handleRemove(index)}>
                                 x
                             </button>
                         </div>

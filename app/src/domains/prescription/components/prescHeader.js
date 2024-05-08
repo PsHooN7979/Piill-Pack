@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import images from "../../../constants/image.constant";
-import AddPrescButton from "./addPrescButton";
 
-export default function prescHeader () {
+export default function PrescHeader () {
+    const navigate = useNavigate();
+
+    const addPresc = () => {
+        navigate("/prescription/add");
+    }
     return (
         <div className="flex items-center justify-between p-2 h-16">
             <div className="flex items-center text-lg">
@@ -17,7 +22,11 @@ export default function prescHeader () {
                     </div>
                 </div>
             </div>
-                <AddPrescButton />
+            <div className="flex border border-slate-300 rounded-xl overflow-hidden">
+            <button 
+            onClick={addPresc}
+            className="bg-mint03 px-3   text-white font-bold hover:bg-mint04"   > 처방 목록 추가 </button>
+        </div>
         </div>
     )
 }
