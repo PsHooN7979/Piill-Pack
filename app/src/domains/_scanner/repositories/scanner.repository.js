@@ -1,7 +1,9 @@
 import axios from "axios";
 
-export async function ocrRepo(imageToBase64) {
-  return await axios.post("/ocr", {
-    imageToBase64: imageToBase64,
-  });
-}
+const scannerRepo = {
+  ocr: async (imageToBase64) => {
+    return await axios.post("/ocr");
+  },
+};
+
+export default scannerRepo;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import images from "../../constants/image.constant";
@@ -8,10 +8,15 @@ import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
 
 export default function Auth() {
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    M.onBack(function (e) {
+      return navigate.goHome();
+    });
+  }, []);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
-
-  const navigate = useNavigate();
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);

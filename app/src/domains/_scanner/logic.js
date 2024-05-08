@@ -56,13 +56,13 @@ export default function useLogic() {
   async function takePhoto() {
     const fullPath = await AsyncUseCamera();
     if (fullPath.status === "error") {
-      return fullPath.status;
+      return "fullPath";
     }
     const path = getNativePath(fullPath);
 
     const photo = await AsyncUseRead(path);
     if (photo.status === "error") {
-      return photo.status;
+      return "photo";
     }
 
     return photo;
