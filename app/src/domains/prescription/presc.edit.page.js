@@ -6,8 +6,6 @@ import PrescEditHeader from "./components/presc.edit.header";
 import PrescEdit from "./components/presc.edit";
 
 export default function PrescEditPage() {
-  const navigate = useNavigate();
-
   return (
     <div className="relative">
       <PrescEditHeader title="처방 정보 수정" />
