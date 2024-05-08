@@ -12,12 +12,14 @@ const Native = {
 
 const Title = {
   loading: {
+    state: 1,
     before: "필팩이 처방전을",
     middle: "정리",
     after: "하고있어요!",
   },
   find: {
-    before: "필팩이",
+    state: 2,
+    before: "필팩이 처방된",
     middle: "의약품",
     after: "을 찾았어요!",
   },

@@ -10,9 +10,9 @@ export default function AppBar() {
           className="w-6 mx-2 drop-shadow-custom2"
         />
         <div className="ml-1">
-          <div className="text-xs mb-[-0.2rem]">나만의 작은 건강 비서</div>
-          <div className="text-sm font-semibold text-shadow-custom03">
-            필 팩
+          <div className="text-xs mb-[-0.2rem] mt-1">나만의 작은 건강 비서</div>
+          <div className="text-sm font-semibold text-shadow-custom03 my-1">
+            필팩
           </div>
         </div>
       </div>
