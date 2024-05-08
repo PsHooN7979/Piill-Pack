@@ -1,8 +1,25 @@
+import React, { useEffect, useState } from 'react';
+import './BMIVisualBox.css'
 
 export default function BMIVisualBox( {data} ) {
+    const [showBMIAnimation, setShowBMIAnimation] = useState(false);
+    const [showStateAnimation, setShowStateAnimation] = useState(false);
 
     const bmiValue = calculateBMI(data.weight, data.tall);
     const resultState = currentState(bmiValue);
+
+    useEffect(() => {
+        // 첫 번째 애니메이션 활성화
+        setShowBMIAnimation(true);
+
+        // 0.3초 후 두 번째 애니메이션 활성화
+        const timer = setTimeout(() => {
+        setShowStateAnimation(true);
+        }, 300);
+
+        // 컴포넌트 언마운트 시 타이머 클리어
+        return () => clearTimeout(timer);
+    }, []);
 
     // BMI 계산 함수
     function calculateBMI(weight, height) {
@@ -48,7 +65,7 @@ export default function BMIVisualBox( {data} ) {
     return(
         <div>
             {/* 체질량 지수 박스 */}
-            <div className="flex flex-row items-center w-fit border border-gray-400 rounded-xl shadow-custom01">
+            <div className={`flex flex-row items-center opacity-0 w-fit border border-gray-400 rounded-xl shadow-custom01 ${showBMIAnimation ? 'animate-slideAndBounce' : ''}`}>
                 <div className="flex justify-center items-center bg-mint02 rounded-xl">
                     <div className="py-2 px-3 font-semibold text-sm">체질량지수</div>
                 </div>
@@ -58,7 +75,7 @@ export default function BMIVisualBox( {data} ) {
             </div>
 
             {/* 현재 상태 박스 */}
-            <div className="flex flex-row items-center w-fit mt-3 border border-gray-400 rounded-xl shadow-custom01">
+            <div className={`flex flex-row items-center opacity-0 w-fit mt-3 border border-gray-400 rounded-xl shadow-custom01 ${showStateAnimation ? 'animate-slideAndBounce' : ''}`}>
                 <div className="flex justify-center items-center bg-warn02 rounded-xl">
                     <div className="py-2 px-3 font-semibold text-sm">현재 상태</div>
                 </div>
