@@ -17,4 +17,29 @@
   .animate-slideAndBounce {
     animation: slideAndBounce 1s ease forwards;
   }
+
+@keyframes bounceEffect {
+  0%, 100% {
+    transform: scale(0); /* 애니메이션 시작과 끝에서 크기 0 */
+    opacity: 0; /* 시작과 끝에서 투명도 0 */
+  }
+  50% {
+    transform: scale(1.1); /* 중간에 원래 크기보다 10% 더 큼 */
+    opacity: 1; /* 완전 불투명 */
+  }
+  80% {
+    transform: scale(0.95); /* 줄어듦 */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1); /* 최종적으로 원래 크기 */
+    opacity: 1;
+  }
+}
+
+/* 애니메이션을 적용할 요소 스타일 */
+.bounce {
+  display: inline-block;
+  animation: bounceEffect 2s ease-in-out forwards; /* 애니메이션 적용 */
+}
   
