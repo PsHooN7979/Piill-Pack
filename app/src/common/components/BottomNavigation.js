@@ -55,7 +55,7 @@ function BottomNavigation({ active }) {
         <img
           src={active === "3" ? uis.heart_active : uis.heart}
           alt="Health"
-          className={active === "3" ? "w-5 h-5 drop-shadow-custom2" : "w-5 h-5"}
+          className={active === "3" ? "w-5 drop-shadow-custom2" : "w-5"}
         />
         <div
           className={

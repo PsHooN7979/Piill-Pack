@@ -4,6 +4,7 @@ import './BMIVisualBox.css'
 export default function BMIVisualBox( {data} ) {
     const [showBMIAnimation, setShowBMIAnimation] = useState(false);
     const [showStateAnimation, setShowStateAnimation] = useState(false);
+    const [showMetabolismAnimation, setShowMetabolismAnimation] = useState(false);
 
     const bmiValue = calculateBMI(data.weight, data.tall);
     const resultState = currentState(bmiValue);
@@ -15,12 +16,19 @@ export default function BMIVisualBox( {data} ) {
         setShowBMIAnimation(true);
 
         // 0.3초 후 두 번째 애니메이션 활성화
-        const timer = setTimeout(() => {
-        setShowStateAnimation(true);
-        }, 300);
+        const timer1 = setTimeout(() => {
+            setShowStateAnimation(true);
+        }, 200);
 
-        // 컴포넌트 언마운트 시 타이머 클리어
-        return () => clearTimeout(timer);
+        const timer2 = setTimeout(() => {
+            setShowMetabolismAnimation(true);
+        }, 400);
+
+        // 컴포넌트 언마운트 시 모든 타이머 클리어
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        };
     }, []);
 
     // BMI 계산 함수
@@ -97,8 +105,9 @@ export default function BMIVisualBox( {data} ) {
                 </div>
             </div>
 
-            <div>
-                {basalMetabolismValue}
+            {/* 기초 대사량 박스 */}
+            <div className={`text-sm mt-2 opacity-0 ${showMetabolismAnimation ? 'bounce' : ''}`}>
+                당신의 기초대사량은 <strong className='text-lg text-warn02'>{basalMetabolismValue}Kcal</strong> 입니다.
             </div>
         </div>
     )
