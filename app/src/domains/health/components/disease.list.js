@@ -1,9 +1,15 @@
 import uis from "../../../constants/ui.constant";
+import { useNavigate } from "react-router-dom";
 
-export default function DiseaseList( { data, onAddBtnClick } ) {
+export default function DiseaseList( { data } ) {
+    const navigate = useNavigate();
 
     const handleDiseaseDetail = () => {
         // 질병 상세 정보 보기 로직
+    }
+
+    const handleAddBtn = () => {
+        navigate('/health/add', { state: { profileData: data } });
     }
 
     return(
@@ -25,7 +31,7 @@ export default function DiseaseList( { data, onAddBtnClick } ) {
             <div className="w-full">
                 <button 
                     className="relative flex justify-end items-center w-full py-2 bg-mint01 rounded-b-lg hover:bg-mint02 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                    onClick={onAddBtnClick}
+                    onClick={handleAddBtn}
                 >
                     <div className='flex items-center text-sm text-gray-600 pl-4'>
                         <span className='mr-2'>질병 추가</span>
