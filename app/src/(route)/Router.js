@@ -24,6 +24,7 @@ function Router() {
 
         {/* 건강 상태 */}
         <Route path="/health" element={<Pages.HealthPage />} />
+        <Route path="/health/add" element={<Pages.DiseaseAddPage />} />
 
         {/* 내 정보 */}
         <Route path="/profile" element={<Pages.MyPage />} />

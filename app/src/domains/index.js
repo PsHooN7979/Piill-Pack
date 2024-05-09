@@ -12,13 +12,15 @@ import GuidePage from "./myPage/guide.page";
 import TermsPage from "./myPage/term.page";
 import PrivacyPage from "./myPage/privacy.page";
 import HealthPage from "./health/health.page";
+import DiseaseAddPage from "./health/disease.add";
 
 
 const Pages = { 
     Auth, 
     FistLogin, Home, 
     Scanner, 
-    HealthPage, 
+    HealthPage,
+    DiseaseAddPage,
     MyPage, 
     ProfileEditPage, 
     GuidePage, 
@@ -26,7 +28,7 @@ const Pages = {
     PrivacyPage, 
     Prescription, 
     PrescriptionEditPage, 
-    PrescriptionDetailPage, 
+    PrescriptionDetailPage,
     PrescriptionAddPage };
 
 export default Pages;
