@@ -13,6 +13,9 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
         slidesToScroll: 1,
         cssEase: "linear",
         centerMode: true,
+        autoplay: true,  // 자동 넘김 활성화
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };

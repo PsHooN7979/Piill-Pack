@@ -3,6 +3,7 @@ import images from "../../constants/image.constant";
 import BMIVisualBox from "./components/bmi.visual.box";
 import DiseaseList from "./components/disease.list";
 import HealthPageHeader from "./components/health.page.header";
+import WarningBox from "./components/warning.box";
 
 export default function HealthPage() {
 
@@ -30,6 +31,15 @@ export default function HealthPage() {
         ],
     };
     
+    // 주의 질병 리스트 더미데이터
+    const diseaseListData = [
+        { name: "당뇨", icon: null, desc: "설명..." },
+        { name: "심장병", icon: null, desc: "설명..." },
+        { name: "고혈압", icon: null, desc: "설명..." },
+        { name: "암", icon: null, desc: "설명..." },
+        { name: "천식", icon: null, desc: "설명..." }
+    ]
+
     return (
         <div className="relative">
             <HealthPageHeader />
@@ -37,9 +47,12 @@ export default function HealthPage() {
                 <div className="bg-opacity-100 w-[85%] min-h-screen">
                     <div className="font-semibold text-sm my-2">질병 목록</div>
                     <DiseaseList data={profileData} />
-                    <div className="font-semibold text-sm mt-8">현재 BMI(체질량 지수)</div>
-                    <div className=" font-semibold text-[0.7rem] text-gray-300 mb-2">BMI가 높으면 심혈관계 질환을 포함한 각종 성인병을 유발 할 수 있음</div>
+                    <div className="font-semibold text-sm mt-10">현재 BMI(체질량 지수)</div>
+                    <div className=" font-semibold text-[0.7rem] text-gray-300 mb-4">BMI가 높으면 심혈관계 질환을 포함한 각종 성인병을 유발 할 수 있음</div>
                     <BMIVisualBox data={profileData} />
+                    <div className="font-semibold text-sm mt-10 mb-4">다음과 같은 질병에 조심하세요!</div>
+                    <WarningBox diseaseData={diseaseListData} />
+                    <div className="mb-20"></div>
                 </div>
             </div>
 
