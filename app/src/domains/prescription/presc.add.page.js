@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
+import PrescAdd from "./components/presc.add"
 
 
 export default function PrescAddPage() {
@@ -12,6 +13,7 @@ export default function PrescAddPage() {
       <PrescAddHeader title="처방 목록 추가" />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
+          <PrescAdd />
         </div>
       </div>
 

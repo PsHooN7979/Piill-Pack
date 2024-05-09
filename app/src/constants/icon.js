@@ -4,6 +4,7 @@ import {MdDeleteOutline, MdOutlineDeleteForever, MdDelete, MdDeleteForever} from
 import {LuMenu} from 'react-icons/lu';
 import {IoIosSearch} from 'react-icons/io';
 import {RiEditLine, RiEditFill} from 'react-icons/ri';
+import {BsCapsulePill} from 'react-icons/bs';
 
 const baseStyle = {
     display: 'inline-flex',
@@ -35,6 +36,8 @@ const iconTypes = {
     // edit 아이콘
     editActiveIcon: RiEditFill,
     // edit 아이콘(액티브)
+    pillIcon: BsCapsulePill
+    // 알약 아이콘
 };
 const iconSizes = {
     lg: {
