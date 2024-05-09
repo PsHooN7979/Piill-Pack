@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './BMIVisualBox.css'
+import './Animation.css'
 
 export default function BMIVisualBox( {data} ) {
     const [showBMIAnimation, setShowBMIAnimation] = useState(false);
