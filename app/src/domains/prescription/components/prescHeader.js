@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import images from "../../../constants/image.constant";
+import icons from "../../../constants/icon";
 
 export default function PrescHeader () {
     const navigate = useNavigate();
@@ -25,7 +26,9 @@ export default function PrescHeader () {
             <div className="flex border border-slate-300 rounded-xl overflow-hidden">
             <button 
             onClick={addPresc}
-            className="bg-mint03 px-3   text-white font-bold hover:bg-mint04"   > 처방 목록 추가 </button>
+            className="bg-mint03 px-3   text-white font-bold hover:bg-mint04"   > 
+            <icons.iconTypes.editIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
+            처방 목록 추가 </button>
         </div>
         </div>
     )

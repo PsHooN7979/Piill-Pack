@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import uis from "../../../constants/ui.constant";
+import icons from "../../../constants/icon";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,11 +16,24 @@ export default function PrescSelect({ presc }) {
 
     const handleEditPresc = () => {
         const selectPresc = presc[activeTab];
-        navigate("/prescription/edit" , { state: { selectPresc } });
+        navigate("/prescription/edit", { state: { selectPresc } });
     }
 
     const handleDetailPresc = (pill) => {
         navigate("/prescription/detail", { state: { pill } });
+    }
+
+    const handleDeletePresc = () => {
+        if (activeTab >= 0) {
+
+            const updatedPresc = presc.filter((_, index) => index !== activeTab);
+
+            
+            console.log("Deleted: ", presc[activeTab].name);  // 로그 확인
+            // 상태를 초기화하거나, 적절한 처리
+            setActiveTab(-1);
+            setPrescList('');  // 선택 초기화
+        }
     }
 
     return (
@@ -40,7 +54,7 @@ export default function PrescSelect({ presc }) {
                 </select>
             </div>
             <p className="mt-2 text-sm">복용 기간: xxxxxxx </p>
-
+            {/* 처방전 목록 컨테이너 종료 */}
 
 
             {/*  약 목록 컨테이너 */}
@@ -78,14 +92,19 @@ export default function PrescSelect({ presc }) {
                                 <span className='ml-1'>약 상세 정보</span>
                             </div>
                             <img src={uis.next} alt="next" className='h-3 pr-4' />
+
                         </button>
-                        <div className="fixed inset-x-0 bottom-20 mx-auto w-full px-4 flex justify-center">
-                            <button className="bg-warn01 rounded-lg text-white p-2 mx-auto hover:bg-warn02" onClick={handleEditPresc}> <strong>처방 정보 수정</strong></button>
-                        </div>
+
                     </div>
+                    <div className="fixed inset-x-0 bottom-20 mx-auto w-full px-10 flex justify-center ">
+                        <button className="bg-warn01 rounded-lg text-white p-1 mx-auto hover:bg-warn02 px-2" onClick={handleEditPresc}>
+                            <icons.iconTypes.editIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
+                            <strong>처방 정보 수정</strong>
+                        </button>
+                    </div>
+
                 </div>
             ))}
-
 
         </div>
     )
