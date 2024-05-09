@@ -5,7 +5,13 @@ import DiseaseList from "./components/disease.list";
 import HealthPageHeader from "./components/health.page.header";
 import WarningBox from "./components/warning.box";
 
+import { useEffect } from 'react';
+
 export default function HealthPage() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     // 테스트용 프로필 정보 더미 데이터
     const profileData = {
