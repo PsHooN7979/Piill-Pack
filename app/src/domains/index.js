@@ -13,6 +13,7 @@ import TermsPage from "./myPage/term.page";
 import PrivacyPage from "./myPage/privacy.page";
 import HealthPage from "./health/health.page";
 import DiseaseAddPage from "./health/disease.add";
+import DiseaseDetailPage from "./health/disease.detail";
 
 
 const Pages = { 
@@ -21,6 +22,7 @@ const Pages = {
     Scanner, 
     HealthPage,
     DiseaseAddPage,
+    DiseaseDetailPage,
     MyPage, 
     ProfileEditPage, 
     GuidePage, 

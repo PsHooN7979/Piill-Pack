@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function DiseaseList( { data } ) {
     const navigate = useNavigate();
 
-    const handleDiseaseDetail = () => {
-        // 질병 상세 정보 보기 로직
+    const handleDiseaseDetail = (disease) => {
+        navigate('/health/detail', { state: { diseaseData: disease } });
     }
 
     const handleAddBtn = () => {
@@ -20,7 +20,7 @@ export default function DiseaseList( { data } ) {
                         <div className="text-sm text-gray-700">{disease.name}</div>
                         <button 
                             className="text-gray-400 hover:text-mint03 text-xs"
-                            onClick={handleDiseaseDetail}
+                            onClick={() => handleDiseaseDetail(disease)}
                         >
                             자세히 보기
                         </button>

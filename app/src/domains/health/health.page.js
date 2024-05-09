@@ -24,15 +24,23 @@ export default function HealthPage() {
         diseaseList: [
         {
             name: "병 이름1",
+            icon: null,
+            desc: "설명..."
         },
         {
             name: "병 이름2",
+            icon: null,
+            desc: "설명..."
         },
         {
             name: "병 이름3",
+            icon: null,
+            desc: "설명..."
         },
         {
             name: "병 이름4",
+            icon: null,
+            desc: "설명..."
         },
         ],
     };
