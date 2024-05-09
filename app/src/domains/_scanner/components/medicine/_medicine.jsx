@@ -4,6 +4,9 @@ import S from "./style";
 export default function Medicine({ medicineList }) {
   return (
     <S.MedicineContainer>
+      <S.BlinkingContainer>
+        <S.TooltipBox>click!</S.TooltipBox>
+      </S.BlinkingContainer>
       {medicineList.map((medicine, index) => (
         <S.EfficacySection key={index}>
           <S.TitleSection>

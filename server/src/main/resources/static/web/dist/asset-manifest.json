@@ -1,24 +1,37 @@
 {
   "files": {
-    "main.css": "/web/static/css/main.84a5f9a9.css",
-    "main.js": "/web/static/js/main.d179fcc8.js",
+    "main.css": "/web/static/css/main.d691b1f8.css",
+    "main.js": "/web/static/js/main.7e6de41e.js",
     "static/js/453.5565870f.chunk.js": "/web/static/js/453.5565870f.chunk.js",
     "static/media/loading.gif": "/web/static/media/loading.d410f641f4a53c279d45.gif",
     "static/media/logo.png": "/web/static/media/logo.ae2bd5ac1e1a3182bafd.png",
     "static/media/no_img.png": "/web/static/media/no_img.1d91ff71769b90918575.png",
+    "static/media/histamine.png": "/web/static/media/histamine.e59d34f561eba1b58078.png",
+    "static/media/medicine.png": "/web/static/media/medicine.fd869ee23104a8c18dc9.png",
+    "static/media/hypertensive.png": "/web/static/media/hypertensive.ccf736bb68de67e289aa.png",
+    "static/media/depressant.png": "/web/static/media/depressant.02f4eaede004225bbbb4.png",
+    "static/media/diabetic.png": "/web/static/media/diabetic.fb4c796e77d3d155de5d.png",
+    "static/media/biotics.png": "/web/static/media/biotics.0800d0614274f5ece964.png",
+    "static/media/convulsant.png": "/web/static/media/convulsant.8eebe0b0c17309363e38.png",
+    "static/media/fever.png": "/web/static/media/fever.0831dc53c180c0acfe6a.png",
+    "static/media/painkiller.png": "/web/static/media/painkiller.1b052e8e0d9cfc5020c2.png",
+    "static/media/asthmatic .png": "/web/static/media/asthmatic .aafcf5332d9a97e8cba5.png",
+    "static/media/antacids.png": "/web/static/media/antacids.22281cc14b1602a91328.png",
+    "static/media/inflammatory.png": "/web/static/media/inflammatory.2faf30ab1ace405b534b.png",
     "static/media/heart.png": "/web/static/media/heart.051cc6472c6d925bcbb8.png",
+    "static/media/prescription.png": "/web/static/media/prescription.42a77698987a2be24d61.png",
     "static/media/wave.png": "/web/static/media/wave.5ae033f5893e2101b39e.png",
     "static/media/slick.svg": "/web/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/web/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/web/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/web/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/web/index.html",
-    "main.84a5f9a9.css.map": "/web/static/css/main.84a5f9a9.css.map",
-    "main.d179fcc8.js.map": "/web/static/js/main.d179fcc8.js.map",
+    "main.d691b1f8.css.map": "/web/static/css/main.d691b1f8.css.map",
+    "main.7e6de41e.js.map": "/web/static/js/main.7e6de41e.js.map",
     "453.5565870f.chunk.js.map": "/web/static/js/453.5565870f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84a5f9a9.css",
-    "static/js/main.d179fcc8.js"
+    "static/css/main.d691b1f8.css",
+    "static/js/main.7e6de41e.js"
   ]
 }

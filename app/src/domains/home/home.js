@@ -1,11 +1,14 @@
+import { useEffect } from "react";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import AdSlider from "./components/ad.slider";
 
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   // 탭 테스트 데이터
   const tabData = [
     {
@@ -56,7 +59,7 @@ export default function Home() {
           label: "페라트라정2.5밀리그램(레트로졸)",
           image: null,
         },
-        { label: "약 아이템1", image: null }
+        { label: "약 아이템1", image: null },
       ],
     },
     {
@@ -78,19 +81,25 @@ export default function Home() {
     {
       name: "상품 이름1",
       image: null,
-      desc: "설명"
+      desc: "설명",
     },
     {
       name: "상품 이름2",
       image: null,
-      desc: "설명"
+      desc: "설명",
     },
     {
       name: "상품 이름 길이 테스트 상품 이름 길이 테스트",
       image: null,
-      desc: "상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트"
-    }
+      desc: "상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트",
+    },
   ];
+
+  useEffect(() => {
+    M.onBack(function (e) {
+      return navigate("/home");
+    });
+  });
 
   return (
     <div className="relative">

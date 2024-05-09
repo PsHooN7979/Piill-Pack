@@ -165,13 +165,13 @@ export default function Scanner() {
               <S.ShowSection>
                 <S.TitleSection>
                   <S.MedicineImage src={images.prescription} />
-                  <S.SequentialText text="내가 받은 처방전은.." />
+                  <S.SequentialText text="내가 받은 처방전은?" />
                 </S.TitleSection>
                 <Medicine medicineList={medicineList} />
               </S.ShowSection>
               <S.SelectSection>
                 <S.SaveButton>필팩에 등록하기</S.SaveButton>
-                <S.DetailButton>수정하기</S.DetailButton>
+                <S.DetailButton>다시 촬영</S.DetailButton>
               </S.SelectSection>
             </S.MedicinePaper>
           )}

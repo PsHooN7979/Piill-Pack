@@ -53,7 +53,7 @@ const ShowSection = styled(Box)({
 });
 const TitleSection = styled(Box)({
   display: "flex",
-  marginBottom: "15px",
+  marginBottom: "5px",
 });
 const MedicineImage = styled("img")({
   display: "flex",
@@ -112,7 +112,7 @@ const SaveButton = styled(Button)({
   display: "flex",
   width: "65%",
   color: "white",
-  background: "lightblue",
+  background: "#7FDAD7",
   fontSize: "17px",
   fontWeight: "bold",
   padding: "17px 10px",
@@ -121,7 +121,7 @@ const SaveButton = styled(Button)({
 const DetailButton = styled(Button)({
   display: "flex",
   color: "white",
-  background: "pink",
+  background: "#E8A1A0",
   fontSize: "17px",
   fontWeight: "bold",
   padding: "17px 10px",
