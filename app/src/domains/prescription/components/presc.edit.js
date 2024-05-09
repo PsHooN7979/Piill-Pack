@@ -18,8 +18,10 @@ export default function PrescEdit() {
     };
 
     const handleDeletePresc = () => {
+
+        
         // api를 통해 삭제 처리 요청
-        console.log("처방전 삭제: ", selectPresc);
+        console.log("처방전 삭제: ", selectPresc); 
 
         navigate('/prescription');
     }
