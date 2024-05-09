@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import AdSlider from "./components/ad.slider";
-
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
-import { useNavigate } from "react-router-dom";
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -96,6 +96,8 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     M.onBack(function (e) {
       return navigate("/home");
     });

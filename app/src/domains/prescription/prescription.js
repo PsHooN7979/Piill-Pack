@@ -2,9 +2,14 @@ import PrescHeader from "./components/prescHeader";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import PrescSelect from "./components/presc.select";
 import images from "../../constants/image.constant";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 export default function PrescriptionList() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // 처방전 더미 데이터
   const prescData = [
     {
