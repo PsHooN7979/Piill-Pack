@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function PrescSelect({ presc }) {
     const [prescList, setPrescList] = useState('');
-    const [activeTab, setActiveTab] = useState(-1);
+    const [activeTab, setActiveTab] = useState(0);
     const navigate = useNavigate();
 
     const selectList = (e) => {
@@ -28,7 +28,7 @@ export default function PrescSelect({ presc }) {
 
             const updatedPresc = presc.filter((_, index) => index !== activeTab);
 
-            
+
             console.log("Deleted: ", presc[activeTab].name);  // 로그 확인
             // 상태를 초기화하거나, 적절한 처리
             setActiveTab(-1);
@@ -53,7 +53,13 @@ export default function PrescSelect({ presc }) {
                     ))}
                 </select>
             </div>
-            <p className="mt-2 text-sm">복용 기간: xxxxxxx </p>
+            <p className="mt-2 text-sm pb-2"><strong>복용 기간</strong>: xxxxxxx </p>
+            
+            <div className="border border-gray-300 w-full rounded-lg px-4 py-2 mb-3 text-gray-500 flex justify-between items-center">
+                <strong>{presc[activeTab].name}</strong>
+                <button className="flex items-center hover:text-black">
+                </button>
+            </div>
             {/* 처방전 목록 컨테이너 종료 */}
 
 

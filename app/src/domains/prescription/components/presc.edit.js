@@ -6,7 +6,6 @@ import icons from '../../../constants/icon';
 export default function PrescEdit() {
     const location = useLocation();
     const { selectPresc } = location.state;
-    console.log(selectPresc);
     const [pills, setPills] = useState(selectPresc.pills);
     const navigate = useNavigate();
 
@@ -19,9 +18,9 @@ export default function PrescEdit() {
 
     const handleDeletePresc = () => {
 
-        
+
         // api를 통해 삭제 처리 요청
-        console.log("처방전 삭제: ", selectPresc); 
+        console.log("처방전 삭제: ", selectPresc);
 
         navigate('/prescription');
     }
@@ -67,32 +66,33 @@ export default function PrescEdit() {
 
 
                         {/* 약 정보 컨테이너 시작 */}
-                        <div className="flex items-center w-full p-3">
+                        <div className="flex items-center w-full p-3 overflow-hidden">
                             {/* 이미지 컨테이너 */}
-                            <div className='w-10 h-15'>
+                            <div className='flex-none w-10 h-15'>
                                 <img
                                     src={pill.image}
                                     alt={`${pill.name} 로고`}
-                                    className="flex-none  overflow-hidden w-full h-full bg-white object-cover"
+                                    className="w-full h-full bg-white object-cover"
                                 />
                                 {/* 약 이미지 */}
                             </div>
                             {/* 텍스트 컨테이너 */}
-                            <div className="flex-grow ml-4">
-                                <div className="text-lg font-semibold w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
+                            <div className="flex-grow min-w-0 mx-4">
+                                <div className="text-lg font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis">
                                     {pill.name}
                                     {/* 약 이름 */}
                                 </div>
-                                <div className="text-xs overflow-hidden">
+                                <div className="text-xs overflow-hidden whitespace-nowrap overflow-ellipsis">
                                     {pill.description}
                                     {/* 약 효과 */}
                                 </div>
-                                <div className="text-xs overflow-hidden">
+                                <div className="text-xs overflow-hidden whitespace-nowrap overflow-ellipsis">
                                     {pill.chart}
                                     {/* 약 생김새 */}
                                 </div>
                             </div>
                         </div>
+
                         {/* 약 정보 컨테이너 종료 */}
                         {/* 약 삭제 컨테이너 시작 */}
                         <div className="pr-3">

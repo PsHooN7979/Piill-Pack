@@ -86,15 +86,15 @@ export default function PrescAdd() {
       {/* 약 이름 검색 컨테이너 종료 */}
 
       {/* 등록한 약 목록 컨테이너 */}
-      <div className="flex  justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
+      <div className="flex  justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-auto">
         <div className="flex items-center w-full p-3">
           {/* 이미지 컨테이너 */}
-          <div className='w-10 h-15 '>
+          <div className='w-10 h-15 flex-shrink-0 px-3'>
             <icons.iconTypes.pillIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           </div>
           {/* 텍스트 컨테이너 */}
           <div className="flex-grow ml-4">
-            <div className="text-lg font-semibold w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
+            <div className="text-lg font-semibold w-auto md:w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
               직접 추가한 약 이름
             </div>
             <div className="text-xs overflow-hidden">
@@ -107,7 +107,7 @@ export default function PrescAdd() {
             </div>
           </div>
         </div>
-        <button className=" text-xl ml-2 hover:text-red-600 text-warn02 p-1 inline-flex items-center justify-center focus:outline-none  "
+        <button className=" text-xl ml-2 px-3  hover:text-red-600 text-warn02 p-1 inline-flex items-center justify-center focus:outline-none  "
           onClick={() => handleRemove(pills)}>
           <icons.iconTypes.deleteIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
         </button>
