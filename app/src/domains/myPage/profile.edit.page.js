@@ -13,6 +13,7 @@ export default function ProfileEditPage() {
     const initialTags = profileData.diseaseList.map(disease => disease.name); // 받은 리스트 객체 데이터의 name을 가져와 리스트 형식으로 매핑
 
     const [nick, setNick] = useState(profileData.nick);
+    const [age, setAge] = useState(profileData.age);
     const [tall, setTall] = useState(profileData.tall);
     const [weight, setWeight] = useState(profileData.weight);
     const [selectedGender, setSelectedGender] = useState(profileData.gender);
@@ -20,6 +21,10 @@ export default function ProfileEditPage() {
   
     const handleNickChange = (event) => {
       setNick(event.target.value);
+    };
+
+    const handleAgeChange = (event) => {
+      setAge(event.target.value);
     };
   
     const handleTallChange = (event) => {
@@ -47,8 +52,10 @@ export default function ProfileEditPage() {
         if (
           !nick ||
           !selectedGender ||
+          !age ||
           !tall ||
           !weight ||
+          isNaN(Number(age)) ||
           isNaN(Number(tall)) ||
           isNaN(Number(weight))
         ) {
@@ -60,6 +67,8 @@ export default function ProfileEditPage() {
         console.log(
           "닉네임: " +
             nick +
+            ", 나이: " +
+            age +
             ", 키: " +
             tall +
             ", 몸무게: " +
@@ -92,6 +101,14 @@ export default function ProfileEditPage() {
                     placeholder="별명을 입력하세요"
                     value={nick}
                     onChange={handleNickChange}
+                    className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
+                    />
+                    <div className="text-sm mb-1 ml-1">나이</div>
+                    <input
+                    type="number"
+                    placeholder="나이를 입력하세요"
+                    value={age}
+                    onChange={handleAgeChange}
                     className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
                     />
                     <div className="text-sm mb-1 ml-1">키</div>
