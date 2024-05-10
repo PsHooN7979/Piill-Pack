@@ -77,5 +77,5 @@ export default function Scanner() {
 
   const scannerDataSet = { isNative, title, content, images, medicineList };
 
-  return <ScannerTemplate scannerDataSet={scannerDataSet} />;
+  return <ScannerTemplate data={scannerDataSet} />;
 }

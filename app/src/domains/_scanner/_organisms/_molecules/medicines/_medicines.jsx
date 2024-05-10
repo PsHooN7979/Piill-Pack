@@ -1,4 +1,4 @@
-import images from "../../../../constants/image.constant";
+import images from "../../../../../constants/image.constant";
 import S from "./style";
 
 export default function Medicines({ medicine, count }) {
