@@ -31,7 +31,7 @@ const Title = {
     middle: "질병",
     after: "을 예방중이에요.",
   },
-  presciption: {
+  prescription: {
     before: "필팩에 등록된",
     middle: "처방전",
     after: "정보에요.",
