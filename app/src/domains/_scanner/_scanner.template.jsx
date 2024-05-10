@@ -1,7 +1,7 @@
 //Style
 import S from "./style";
 //Organism
-import O from "./organism/organism.index";
+import O from "./_organisms/organism.index";
 
 export default function ScannerTemplate({ scannerDataSet }) {
   const { isNative, title, content, images, medicineList } = scannerDataSet;

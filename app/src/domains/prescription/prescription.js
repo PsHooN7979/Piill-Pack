@@ -3,7 +3,7 @@ import BottomNavigation from "../../common/components/BottomNavigation";
 import PrescSelect from "./components/presc.select";
 import images from "../../constants/image.constant";
 import { useEffect } from "react";
-import PageTitle from "../_scanner/organism/pageTitle/_pageTitle";
+import Title from "../_scanner/_organisms/title/_title";
 import constant from "../../constants/constant";
 
 export default function PrescriptionList() {
@@ -59,7 +59,7 @@ export default function PrescriptionList() {
   return (
     <div className="relative">
       <PrescHeader />
-      <PageTitle title={constant.Title.prescription} />
+      <Title title={constant.Title.prescription} />
       <div className="flex flex-col justify-center items-center">
         <div className=" flex-col bg-opacity-100 mt-6 w-[85%] min-h-screen ">
           {/* 처방전 데이터                    */}

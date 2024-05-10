@@ -1,9 +1,8 @@
 //Library
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
-//Logic
-import L from "./logic";
 //Hooks
+import L from "./logic";
 import useCustomNavigate from "../../common/hooks/useCustomNavigate";
 //Constant
 import constant from "../../constants/constant";
@@ -11,6 +10,7 @@ import testSet from "../../constants/json.server";
 import images from "../../constants/image.constant";
 //Repository
 import scannerRepo from "./repositories/scanner.repository";
+//TestSet
 import ScannerTemplate from "./_scanner.template";
 
 export default function Scanner() {

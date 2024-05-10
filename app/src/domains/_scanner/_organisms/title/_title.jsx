@@ -1,7 +1,7 @@
 import React from "react";
 import S from "./style";
 
-export default function PageTitle({ title }) {
+export default function Title({ title }) {
   const [before, setBefore] = React.useState({});
   const [middle, setMiddle] = React.useState({});
   const [after, setAfter] = React.useState({});

@@ -7,7 +7,7 @@ import WarningBox from "./components/warning.box";
 
 import { useEffect } from "react";
 import constant from "../../constants/constant";
-import PageTitle from "../_scanner/organism/pageTitle/_pageTitle";
+import Title from "../_scanner/_organisms/title/_title";
 
 export default function HealthPage() {
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function HealthPage() {
   return (
     <div className="relative">
       <HealthPageHeader />
-      <PageTitle title={constant.Title.health} />
+      <Title title={constant.Title.health} />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
           <div className="font-semibold text-sm my-2">질병 목록</div>

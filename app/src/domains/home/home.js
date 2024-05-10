@@ -6,7 +6,7 @@ import AdSlider from "./components/ad.slider";
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
 import constant from "../../constants/constant";
-import PageTitle from "../_scanner/organism/pageTitle/_pageTitle";
+import Title from "../_scanner/_organisms/title/_title";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -109,7 +109,7 @@ export default function Home() {
       <HomeHeader />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[95%] min-h-screen">
-          <PageTitle title={constant.Title.home} />
+          <Title title={constant.Title.home} />
           <PillScroll tabs={tabData} wordLimit={10} />
           <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>
