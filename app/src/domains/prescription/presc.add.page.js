@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
@@ -7,6 +6,9 @@ import PrescAdd from "./components/presc.add"
 
 
 export default function PrescAddPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="relative">

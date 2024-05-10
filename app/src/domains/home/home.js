@@ -107,9 +107,9 @@ export default function Home() {
   return (
     <div className="relative">
       <HomeHeader />
+      <Title title={constant.Title.home} />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[95%] min-h-screen">
-          <Title title={constant.Title.home} />
           <PillScroll tabs={tabData} wordLimit={10} />
           <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>

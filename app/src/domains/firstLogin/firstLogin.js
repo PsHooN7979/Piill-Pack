@@ -9,6 +9,7 @@ import TagList from "../../common/components/tagList";
 
 export default function FistLogin() {
   const [nick, setNick] = useState("");
+  const [age, setAge] = useState("");
   const [tall, setTall] = useState("");
   const [weight, setWeight] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -18,6 +19,10 @@ export default function FistLogin() {
 
   const handleNickChange = (event) => {
     setNick(event.target.value);
+  };
+
+  const handleAgeChange = (event) => {
+    setAge(event.target.value);
   };
 
   const handleTallChange = (event) => {
@@ -45,8 +50,10 @@ export default function FistLogin() {
     if (
       !nick ||
       !selectedGender ||
+      !age ||
       !tall ||
       !weight ||
+      isNaN(Number(age)) ||
       isNaN(Number(tall)) ||
       isNaN(Number(weight))
     ) {
@@ -58,6 +65,8 @@ export default function FistLogin() {
     console.log(
       "닉네임: " +
         nick +
+        ", 나이: " +
+        age +
         ", 키: " +
         tall +
         ", 몸무게: " +
@@ -82,6 +91,14 @@ export default function FistLogin() {
               placeholder="별명을 입력하세요"
               onChange={handleNickChange}
               className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
+            />
+            <div className="text-sm mb-1 ml-1">나이</div>
+            <input
+            type="number"
+            placeholder="나이를 입력하세요"
+            value={age}
+            onChange={handleAgeChange}
+            className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
             />
             <div className="text-sm mb-1 ml-1">키</div>
             <input
