@@ -20,6 +20,7 @@ export default function MyPage() {
         // base64 이미지 스트링
         profile_image: base64String,
         nick: "닉네임",
+        age: 26,
         gender: "male",
         tall: "175",
         weight: "65",
