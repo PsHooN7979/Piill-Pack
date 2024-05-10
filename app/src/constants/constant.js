@@ -26,6 +26,16 @@ const Title = {
     middle: "약",
     after: "이에요.",
   },
+  health: {
+    before: "필팩AI가",
+    middle: "질병",
+    after: "을 예방중이에요.",
+  },
+  presciption: {
+    before: "필팩에 등록된",
+    middle: "처방전",
+    after: "정보에요.",
+  },
 };
 
 const Phrases = [
