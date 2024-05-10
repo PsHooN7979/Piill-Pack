@@ -14,15 +14,15 @@ const StrongText = styled(Typography)({
   fontWeight: "bold",
 });
 
-const MedicineText = styled("span")(({ delay, variant, color }) => ({
-  fontSize: variant === "h6" ? "22px" : "16px",
+const MedicineText = styled("span")(({ set }) => ({
+  fontSize: set.isMiddle ? "22px" : "16px",
   fontWeight: "bold",
-  color: color || "black",
+  color: set.color,
   opacity: 0,
   display: "inline-block",
   transform: "translateY(20px)",
   whiteSpace: "pre-wrap",
-  animation: `fadeInUp 0.5s ${delay}s forwards`,
+  animation: `fadeInUp 0.5s ${set.initialDelay}s forwards`,
   "@keyframes fadeInUp": {
     "0%": {
       opacity: 0,
@@ -35,19 +35,15 @@ const MedicineText = styled("span")(({ delay, variant, color }) => ({
   },
 }));
 
-function SequentialText({ text, initialDelay = 0, variant, color }) {
-  const letters = text.split("").map((char, index) => (
-    <MedicineText
-      key={index}
-      delay={initialDelay + index * 0.02}
-      variant={variant}
-      color={color}
-    >
+function SequentialText({ set }) {
+  if (!set || !set.text) return;
+  const letters = set.text.split("").map((char, index) => (
+    <MedicineText key={index} set={set}>
       {char === " " ? "\u00A0" : char}
     </MedicineText>
   ));
 
-  return <div>{letters}</div>;
+  return <>{letters}</>;
 }
 
 const S = { TitleContainer, Text, StrongText, SequentialText };

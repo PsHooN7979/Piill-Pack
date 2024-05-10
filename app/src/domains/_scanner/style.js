@@ -1,7 +1,7 @@
 import { Box, Button, Paper, styled } from "@mui/material";
 import images from "../../constants/image.constant";
 
-const ProcessBlack = styled(Box)({
+const Process = styled(Box)({
   height: "100vh",
   background: "black",
 });
@@ -20,32 +20,24 @@ const AnalysisSection = styled(Box)({
   alignItems: "center",
   marginTop: "5px",
 });
-const AnalysisPaper = styled(Paper)({
-  display: "flex",
+const AnalysisPaper = styled(({ state, loading, ...otherProps }) => (
+  <Paper {...otherProps} />
+))(({ state, loading }) => ({
+  display: state ? "flex" : "none",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: loading ? "center" : "space-between",
+  alignItems: loading ? "center" : "",
   width: "90%",
   height: "100%",
   borderRadius: "15px",
-  padding: "15px",
-});
-const MedicinePaper = styled(Paper)({
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  width: "90%",
-  height: "100%",
-  borderRadius: "15px",
-  padding: "10px",
-  paddingTop: "20px",
-  overflow: "scroll",
-  scrollbarWidth: "none",
-  msOverflowStyle: "none",
+  padding: loading ? "15px" : "10px",
+  overflow: loading ? "" : "scroll",
+  scrollbarWidth: loading ? "" : "none",
+  msOverflowStyle: loading ? "" : "none",
   "&::-webkit-scrollbar": {
-    display: "none",
+    display: loading ? "" : "none",
   },
-});
+}));
 const ShowSection = styled(Box)({
   display: "flex",
   flexDirection: "column",
@@ -141,8 +133,7 @@ const S = {
   AnalysisSection,
   AnalysisTitle,
   LoadingImage,
-  ProcessBlack,
-  MedicinePaper,
+  Process,
   SequentialText,
   MedicineImage,
   TitleSection,
