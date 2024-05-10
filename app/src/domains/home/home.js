@@ -5,7 +5,8 @@ import images from "../../constants/image.constant";
 import AdSlider from "./components/ad.slider";
 import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
-
+import constant from "../../constants/constant";
+import PageTitle from "../_scanner/organism/pageTitle/_pageTitle";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -108,10 +109,7 @@ export default function Home() {
       <HomeHeader />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[95%] min-h-screen">
-          <div className="font-semibold my-2">
-            지금 복용중인 <strong className="text-xl text-warn02">약</strong>
-            이에요
-          </div>
+          <PageTitle title={constant.Title.home} />
           <PillScroll tabs={tabData} wordLimit={10} />
           <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>

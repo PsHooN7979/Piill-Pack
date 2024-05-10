@@ -15,13 +15,16 @@ const Title = {
     before: "필팩AI가 처방전을",
     middle: "분석",
     after: "하고있어요!",
-    sequential: false,
   },
   find: {
     before: "필팩AI가 처방된",
     middle: "의약품",
     after: "을 찾았어요!",
-    sequential: true,
+  },
+  home: {
+    before: "지금 복용중인",
+    middle: "약",
+    after: "이에요.",
   },
 };
 

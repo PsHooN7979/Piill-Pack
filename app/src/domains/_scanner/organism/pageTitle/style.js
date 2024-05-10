@@ -37,11 +37,14 @@ const MedicineText = styled("span")(({ set }) => ({
 
 function SequentialText({ set }) {
   if (!set || !set.text) return;
-  const letters = set.text.split("").map((char, index) => (
-    <MedicineText key={index} set={set}>
-      {char === " " ? "\u00A0" : char}
-    </MedicineText>
-  ));
+  const letters = set.text.split("").map((char, index) => {
+    const charDelay = set.initialDelay + index * 0.05; // 각 글자마다 0.05초씩 지연을 추가
+    return (
+      <MedicineText key={index} set={{ ...set, initialDelay: charDelay }}>
+        {char === " " ? "\u00A0" : char}
+      </MedicineText>
+    );
+  });
 
   return <>{letters}</>;
 }

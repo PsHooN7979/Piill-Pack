@@ -9,7 +9,7 @@ export default function PageTitle({ title }) {
   React.useEffect(() => {
     console.log(title);
     const middleDelay = title.before.length * 0.03;
-    const afterDelay = middleDelay + middle.length * 0.03;
+    const afterDelay = middleDelay + title.middle.length * 0.03;
 
     setBefore({
       text: title.before,
@@ -32,8 +32,9 @@ export default function PageTitle({ title }) {
   }, [title]);
 
   return (
-    <S.TitleContainer>
+    <S.TitleContainer key={title.before + title.middle + title.after}>
       <S.SequentialText set={before} />
+      &nbsp;
       <S.SequentialText set={middle} />
       <S.SequentialText set={after} />
     </S.TitleContainer>
