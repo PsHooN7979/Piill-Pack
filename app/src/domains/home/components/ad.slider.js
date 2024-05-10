@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Slider from 'react-slick';
 import images from "../../../constants/image.constant";
 import uis from "../../../constants/ui.constant";
@@ -6,6 +6,17 @@ import "./ad.slider.css"
 
 const AdSlider = ({ products, nameLimit, descLimit }) => {
     const [paused, setPaused] = useState(false); // 슬라이더 자동 넘김 상태
+    const sliderRef = useRef(null); // 슬라이더 참조
+
+    useEffect(() => {
+        if (sliderRef.current) {
+            if (paused) {
+                sliderRef.current.slickPause();
+            } else {
+                sliderRef.current.slickPlay();
+            }
+        }
+    }, [paused]);
 
     const settings = {
         dots: true,
@@ -15,8 +26,8 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
         slidesToScroll: 1,
         cssEase: "linear",
         centerMode: true,
-        autoplay: !paused,  // 자동 넘김 활성화
-        autoplaySpeed: 5000,
+        autoplay: true,  // 자동 넘김 항상 활성화
+        autoplaySpeed: 1000,
         pauseOnHover: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
@@ -35,7 +46,7 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
     return (
         <div className="slider-container mt-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             <h2 className="text-center text-sm font-semibold mb-4">오늘은 이거다!</h2>
-            <Slider {...settings}>
+            <Slider ref={sliderRef} {...settings}>
                 {products.map((product, index) => (
                     <div key={index} className="p-4 text-center">
                         <div className="flex flex-col items-center">
