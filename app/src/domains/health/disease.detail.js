@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import DiseaseDetailHeader from "./components/disease.detail.header";
@@ -7,6 +8,10 @@ export default function DiseaseDetailPage() {
     const location = useLocation();
     const diseaseData = location.state.diseaseData;
     console.log(diseaseData);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });
 
     return (
         <div className="relative">

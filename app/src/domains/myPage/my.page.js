@@ -58,7 +58,7 @@ export default function MyPage() {
         <div className="relative">
             <MyPageHeader />
             <div className="flex justify-center items-center">
-                <div className="bg-opacity-100 w-[85%] min-h-screen">
+                <div className="bg-opacity-100 w-[85%] min-h-[80vh]">
                     <div className="font-semibold text-sm  my-2">내 프로필</div>
                     <ProfileCard data={profileData} diseasesLimit={25} />
 
