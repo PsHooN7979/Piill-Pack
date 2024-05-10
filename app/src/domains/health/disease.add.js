@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
@@ -12,6 +12,10 @@ export default function DiseaseAddPage() {
     const initialTags = profileData.diseaseList.map(disease => disease.name);
 
     const [diseaseList, setDiseaseList] = useState(initialTags);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });
   
     const handleInputsChange = (newInputs) => {
       setDiseaseList(newInputs);

@@ -1,11 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescEditHeader from "./components/presc.edit.header";
 import PrescEdit from "./components/presc.edit";
 
 export default function PrescEditPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <div className="relative">
       <PrescEditHeader title="처방 정보 수정" />

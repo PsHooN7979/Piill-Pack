@@ -1,12 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PillDetailHeader from "./components/presc.detail.header";
 import PillDetail from "./components/pill.detail";
 
 export default function PillDetailPage() {
-  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   return (
     <div className="relative">
