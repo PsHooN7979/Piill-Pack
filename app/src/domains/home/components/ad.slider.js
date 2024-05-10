@@ -33,7 +33,7 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
     };
 
     return (
-        <div className="slider-container mt-6">
+        <div className="slider-container mt-6" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
             <h2 className="text-center text-sm font-semibold mb-4">오늘은 이거다!</h2>
             <Slider {...settings}>
                 {products.map((product, index) => (
