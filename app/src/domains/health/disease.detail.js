@@ -13,11 +13,26 @@ export default function DiseaseDetailPage() {
             <DiseaseDetailHeader title="질병 상세 정보" />
             <div className="flex justify-center items-center">
                 <div className="bg-opacity-100 w-[95%] min-h-screen">
+                    <div className='my-4 mx-2 rounded-lg shadow-custom01'>
 
-                    <div className="mt-5 px-6">
-                        {diseaseData.name}
+                        <div className=' flex flex-col justify-center items-center p-4 bg-mint02 rounded-t-lg'>
+                            <div className="flex flex-col items-center justify-center py-3 px-5 bg-red-200 rounded-lg shadow-custom01">
+                                <div className="image-container w-12 h-12 overflow-hidden">
+                                    <img src={diseaseData.icon || images.no_img} alt={diseaseData.name} className="w-full h-full object-contain" />
+                                </div>
+                                <div className="mt-2 text-sm">{diseaseData.name}</div>
+                            </div>
+                            <div className=' font-bold text-shadow-custom02 mt-2 '>
+                                {diseaseData.name}
+                            </div>
+                        </div>
+
+                        <div className='p-2 text-sm rounded-b-lg bg-white min-h-[50vh]'>
+                            <strong>질병 정보: </strong>
+                            <div dangerouslySetInnerHTML={{ __html: diseaseData.desc.replace(/\n/g, '<br />') }} />
+                        </div>
+
                     </div>
-
                 </div>
             </div>
 
