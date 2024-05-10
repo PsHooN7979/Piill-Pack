@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import images from "../../../constants/image.constant";
 import uis from "../../../constants/ui.constant";
 import "./ad.slider.css"
 
 const AdSlider = ({ products, nameLimit, descLimit }) => {
+    const [paused, setPaused] = useState(false); // 슬라이더 자동 넘김 상태
+
     const settings = {
         dots: true,
         infinite: true,
@@ -13,11 +15,21 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
         slidesToScroll: 1,
         cssEase: "linear",
         centerMode: true,
-        autoplay: true,  // 자동 넘김 활성화
+        autoplay: !paused,  // 자동 넘김 활성화
         autoplaySpeed: 5000,
         pauseOnHover: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
+    };
+
+    // 터치 시작 시 자동 넘김 정지
+    const handleTouchStart = () => {
+        setPaused(true);
+    };
+
+    // 터치 종료 시 자동 넘김 시작
+    const handleTouchEnd = () => {
+        setPaused(false);
     };
 
     return (
