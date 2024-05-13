@@ -2,7 +2,11 @@ import { useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import icons from "../../../constants/icon";
 import { Autocomplete, TextField } from '@mui/material';
-
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePicker';
+import dayjs from 'dayjs';
 
 
 export default function PrescAdd({ pill }) {
@@ -64,17 +68,22 @@ export default function PrescAdd({ pill }) {
         <span className="font-bold text-gray-700 shrink-0">
           복용 기간:
         </span>
-        <input
-          onChange={handleInputStartDate}
-          type="date"
-          className="border border-gray-300 rounded-lg px-4 py-1 text-gray-700 focus:outline-none focus:border-blue-500 transition duration-150 ease-in-out min-w-0 flex-1"
-        />
-        <span className="font-bold text-gray-700 shrink-0">~</span>
-        <input
-          onChange={handleInputEndDate}
-          type="date"
-          className="border border-gray-300 rounded-lg px-4 py-1 text-gray-700 focus:outline-none focus:border-blue-500 transition duration-150 ease-in-out min-w-0 flex-1"
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer
+            components={[
+              'MobileDateRangePicker'
+            ]}
+          >
+
+            <DemoItem  component="MobileDateRangePicker">
+              <MobileDateRangePicker
+                defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
+              />
+            </DemoItem>
+
+
+          </DemoContainer>
+        </LocalizationProvider>
       </div>
 
 
@@ -84,7 +93,6 @@ export default function PrescAdd({ pill }) {
       {/* 약 이름 검색 컨테이너 */}
 
       <div className="flex items-center bg-warn01 rounded-full p-2 mb-3 w-full max-w-md mx-auto shadow-custom01">
-
         <button className="px-2">
           {/* <AiOutlineMenu className="text-gray-600 text-xl" /> */}
           <icons.iconTypes.searchIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
@@ -111,7 +119,6 @@ export default function PrescAdd({ pill }) {
               option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
             );
           }}
-
           style={{ width: '100%' }}
         />
         <button onClick={handleRegisterPills} className="px-2">
