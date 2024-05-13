@@ -25,7 +25,8 @@ const BlinkingContainer = styled(Box)({
   },
   animation: "blink-effect 1s 1.5s forwards step-end infinite",
 });
-const TooltipBox = styled(Box)(({ theme }) => ({
+const TooltipBox = styled(Box)(({ theme, state }) => ({
+  opacity: state === "" ? 1 : 0,
   position: "relative",
   display: "inline-block",
   border: "1px solid #ccc",

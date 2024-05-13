@@ -2,27 +2,35 @@ const mutateOCRSet = [
   {
     efficacy: "painkiller",
     title: "개의 진통제를 찾았어요!",
-    nameList: ["아세트아미노펜", "이부프로펜"],
+    nameList: [
+      { name: "아세트아미노펜", description: "" },
+      { name: "이부프로펜", description: "" },
+    ],
+    ko: "아픔을 억제해요.",
   },
   {
     efficacy: "fever",
     title: "개의 해열제를 찾았어요!",
     nameList: ["파라세타몰", "나프록센", "히히 나 해열제"],
+    ko: "열을 낮춰줘요.",
   },
   {
     efficacy: "biotics",
     title: "개의 항생제를 찾았어요!",
     nameList: ["아목시실린", "클라리스로마이신"],
+    ko: "병균을 제거해요.",
   },
   {
     efficacy: "inflammatory",
     title: "개의 소염제를 찾았어요!",
     nameList: ["디클로페낙", "케토프로펜"],
+    ko: "염증을 제거해요",
   },
   {
     efficacy: "asthmatic",
     title: "개의 천식 치료제를 찾았어요!",
     nameList: ["살부타몰", "플루티카손"],
+    ko: "천식을 치료해요.",
   },
   // {
   //   efficacy: "hypertensive",
@@ -58,6 +66,12 @@ const mutateOCRSet = [
     efficacy: "medicine",
     title: "개의 미분류 의약품이 있어요.",
     nameList: ["몰네필린", "티크로리누스"],
+    ko: "전문의약품이에요.",
+  },
+  {
+    efficacy: "add",
+    title: "직접 의약품 등록",
+    ko: "의약품 정보를 입력해주세요.",
   },
 ];
 

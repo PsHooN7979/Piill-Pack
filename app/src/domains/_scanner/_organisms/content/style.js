@@ -36,12 +36,11 @@ const TitleSection = styled(Box)({
   marginBottom: "5px",
 });
 const MedicineImage = styled("img")({
-  display: "flex",
   width: "10%",
   opacity: 0,
   display: "inline-block",
   transform: "translateY(20px)",
-  animation: `fadeInUp 0.5s 1s forwards`,
+  animation: `fadeInUp 0.5s 0s forwards`,
   "@keyframes fadeInUp": {
     "0%": {
       opacity: 0,
@@ -73,7 +72,7 @@ const MedicineText = styled("span")(({ delay }) => ({
 }));
 function SequentialText({ text }) {
   const letters = text.split("").map((char, index) => (
-    <MedicineText key={index} delay={1.1 + index * 0.02}>
+    <MedicineText key={index} delay={index * 0.02}>
       {char === " " ? "\u00A0" : char}
     </MedicineText>
   ));

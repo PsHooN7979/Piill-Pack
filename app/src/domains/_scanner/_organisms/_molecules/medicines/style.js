@@ -6,13 +6,15 @@ const EfficacySection = styled(Box)({
   padding: "10px 15px",
   paddingRight: "5px",
 });
-const TitleSection = styled(Box)({
+const TitleSection = styled(Box)(({ state }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: state === "" ? "flex-end" : "space-between",
+  flexDirection: state === "" ? "row" : "column",
   marginBottom: "5px",
-});
-const EfficacyImage = styled("img")(({ delay }) => ({
+}));
+const EfficacyImage = styled("img")(({ delay, state, name }) => ({
+  display: state === "" || state === name ? "inline-block" : "none",
   width: "8%",
   marginLeft: "7px",
   border: "2px solid pink",
@@ -20,9 +22,8 @@ const EfficacyImage = styled("img")(({ delay }) => ({
   padding: "7px",
   boxSizing: "content-box",
   opacity: 0,
-  display: "inline-block",
   transform: "translateY(20px)",
-  animation: `fadeInUp 0.5s ${delay / 3 + 1.5}s forwards`,
+  animation: `fadeInUp 0.5s ${delay / 10}s forwards`,
   "@keyframes fadeInUp": {
     "0%": {
       opacity: 0,
@@ -34,13 +35,32 @@ const EfficacyImage = styled("img")(({ delay }) => ({
     },
   },
 }));
-const TitleText = styled(Box)(({ delay }) => ({
+const TitleText = styled(Box)(({ delay, state }) => ({
+  display: state === "" ? "inline-block" : "none",
   fontWeight: "bold",
   fontSize: "15px",
   opacity: 0,
-  display: "inline-block",
   transform: "translateY(20px)",
-  animation: `fadeInUp 0.5s ${delay / 3 + 1.5}s forwards`,
+  animation: `fadeInUp 0.5s ${delay / 10}s forwards`,
+  "@keyframes fadeInUp": {
+    "0%": {
+      opacity: 0,
+      transform: "translateY(20px)",
+    },
+    "100%": {
+      opacity: 1,
+      transform: "translateY(0)",
+    },
+  },
+}));
+const EfficacyText = styled(Box)(({ delay, state, name }) => ({
+  display: state === name ? "inline-block" : "none",
+  fontWeight: "bold",
+  fontSize: "15px",
+  marginTop: "7px",
+  opacity: 0,
+  transform: "translateY(20px)",
+  animation: `fadeInUp 0.5s ${delay / 3}s forwards`,
   "@keyframes fadeInUp": {
     "0%": {
       opacity: 0,
@@ -62,5 +82,6 @@ const S = {
   NameSection,
   EfficacyImage,
   TitleText,
+  EfficacyText,
 };
 export default S;

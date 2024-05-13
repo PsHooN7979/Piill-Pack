@@ -1,14 +1,26 @@
 import images from "../../../../../constants/image.constant";
 import S from "./style";
 
-export default function Medicines({ medicine, count }) {
+import TestStep from "../testStep/testStep";
+
+export default function Medicines({ medicine, handler, state, count }) {
   return (
     <S.EfficacySection key={count}>
-      <S.TitleSection>
-        <S.TitleText delay={count}>
-          {medicine.nameList.length + medicine.title}
+      <S.TitleSection state={state}>
+        <S.TitleText delay={count} state={state}>
+          {medicine.nameList && medicine.nameList.length} {medicine.title}
         </S.TitleText>
-        <S.EfficacyImage delay={count} src={images[medicine.efficacy]} />
+        <S.EfficacyImage
+          onClick={() => handler(medicine.efficacy, count)}
+          delay={count}
+          state={state}
+          name={medicine.efficacy}
+          src={images[medicine.efficacy]}
+        />
+        <S.EfficacyText delay={count} state={state} name={medicine.efficacy}>
+          {medicine.nameList && "이 약은"} {medicine.ko}
+          <TestStep />
+        </S.EfficacyText>
       </S.TitleSection>
       <S.NameSection>
         {/* {medicine.nameList.map((name, key) => (

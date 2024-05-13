@@ -31,6 +31,7 @@ const images = {
   antacids: require("../assets/images/efficacy/antacids.png"),
   convulsant: require("../assets/images/efficacy/convulsant.png"),
   medicine: require("../assets/images/efficacy/medicine.png"),
+  add: require("../assets/images/efficacy/add.png"),
 };
 
 export default images;
