@@ -5,12 +5,15 @@ import { Autocomplete, TextField } from '@mui/material';
 
 
 
-export default function PrescAdd({pill}) {
-  const location = useLocation();
-  const [name, setName] = useState();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [pills, setPills] = useState();
+export default function PrescAdd({ pill }) {
+  const location = useLocation('');
+  const [name, setName] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [pills, setPills] = useState('');
+  const [selectedPills, setSelectedPills] = useState([]);
+
+  const items = pill[0].body.items;
 
   const handleInputName = (e) => {
     setName(e.target.value);
@@ -23,10 +26,18 @@ export default function PrescAdd({pill}) {
   const handleInputEndDate = (e) => {
     setEndDate(e.target.value);
   }
-  const handleInputPills = (e) => {
-    setPills(e.target.value);
+  const handleInputPills = (e, newInputValue) => {
+    setPills(newInputValue);
     console.log(pills);
   }
+
+  const handleRegisterPills = (event, newValue) => {
+    setSelectedPills(prevPills => [...prevPills, newValue]);
+
+    console.log(selectedPills);
+    setPills(''); // Clear input after selection
+  };
+
   const handleRemove = (pills) => {
     // filter 메소드를 사용해 해당 인덱스를 제외한 나머지 약 목록을 설정합니다.
     const newPills = pills.filter((_, idx) => idx !== pills);
@@ -79,24 +90,24 @@ export default function PrescAdd({pill}) {
           {/* 검색 아이콘 */}
         </button>
         <Autocomplete
-                freeSolo
-                id="autocomplete-search-bar"
-                options={pill[0].body.items}  // Assuming pillData[0] is where your items are located
-                getOptionLabel={(option) => option.ITEM_NAME || "No Name"}  // Display the name
-                onInputChange={handleInputPills}
-                inputValue={pills}
-                renderInput={(params) => (
-                  <TextField {...params} label="약 이름으로 검색하기" variant="outlined" />
-                )}
-                filterOptions={(options, state) => {
-                  // Custom filtering logic, ensure all string manipulations are on valid strings
-                  return options.filter(option =>
-                    option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
-                  );
-                }}
-                style={{ width: '100%' ,backgroundColor: 'transparent', color: 'white' }}
-            />
-        <button>
+          freeSolo
+          id="autocomplete-search-bar"
+          options={items}  // Assuming pillData[0] is where your items are located
+          getOptionLabel={(option) => option.ITEM_NAME || "No Name"}  // Display the name
+          onInputChange={handleInputPills}
+          inputValue={pills}
+          renderInput={(params) => (
+            <TextField {...params} label="약 이름으로 검색하기" variant="outlined" size="small" />
+          )}
+          filterOptions={(options, state) => {
+            // Custom filtering logic, ensure all string manipulations are on valid strings
+            return options.filter(option =>
+              option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
+            );
+          }}
+          style={{ width: '100%'}}
+        />
+        <button onClick={handleRegisterPills}>
           <icons.iconTypes.smCheckIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           {/* 등록 아이콘 */}
         </button>
