@@ -6,6 +6,8 @@ export default function Efficacies({ medicineList }) {
   const [medicines, setMedicines] = React.useState([]);
 
   const stateHandler = (efficacy, index) => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+
     if (efficacy === "medicine") {
       setMedicines((prev) => {
         const newMedicines = [...prev];
@@ -42,12 +44,38 @@ export default function Efficacies({ medicineList }) {
     }
   };
 
+  const handleDelete = (medicineIndex, nameIndex) => {
+    setMedicines((prevMedicines) => {
+      const updatedMedicines = prevMedicines.map((medicine, idx) => {
+        if (idx === medicineIndex) {
+          if (medicine.efficacy !== "add") {
+            if (medicine.nameList && medicine.nameList.length > 0) {
+              const updatedNameList = medicine.nameList.filter(
+                (_, ni) => ni !== nameIndex
+              );
+              return { ...medicine, nameList: updatedNameList };
+            }
+          }
+        }
+        return medicine;
+      });
+
+      return updatedMedicines.filter(
+        (medicine) =>
+          (medicine.nameList && medicine.nameList.length > 0) ||
+          medicine.efficacy === "add"
+      );
+    });
+  };
+
   React.useEffect(() => {
     setMedicines(medicineList);
   }, [medicineList]);
 
+  const scrollRef = React.useRef(null);
+
   return (
-    <S.MedicineContainer>
+    <S.MedicineContainer ref={scrollRef}>
       <S.BlinkingContainer>
         <S.TooltipBox state={state}>click!</S.TooltipBox>
       </S.BlinkingContainer>
@@ -56,6 +84,7 @@ export default function Efficacies({ medicineList }) {
           key={index}
           medicine={medicine}
           handler={stateHandler}
+          remove={handleDelete}
           state={state}
           count={index}
         />

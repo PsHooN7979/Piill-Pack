@@ -2,13 +2,15 @@ import images from "../../../../../constants/image.constant";
 import S from "./style";
 
 import TestStep from "../testStep/testStep";
+import React from "react";
 
-export default function Medicines({ medicine, handler, state, count }) {
+export default function Medicines({ medicine, handler, remove, state, count }) {
   return (
     <S.EfficacySection key={count}>
       <S.TitleSection state={state}>
         <S.TitleText delay={count} state={state}>
-          {medicine.nameList && medicine.nameList.length} {medicine.title}
+          {medicine.nameList && medicine.nameList.length}
+          {medicine.title}
         </S.TitleText>
         <S.EfficacyImage
           onClick={() => handler(medicine.efficacy, count)}
@@ -19,24 +21,20 @@ export default function Medicines({ medicine, handler, state, count }) {
         />
         <S.EfficacyText delay={count} state={state} name={medicine.efficacy}>
           {medicine.nameList && "이 약은"} {medicine.ko}
-          <TestStep />
         </S.EfficacyText>
       </S.TitleSection>
-      <S.NameSection>
-        {/* {medicine.nameList.map((name, key) => (
-              <div
-                key={key}
-                style={{
-                  display: "flex",
-                  border: "1px solid black",
-                  padding: "6px 9px",
-                  margin: "6px",
-                  borderRadius: "7px",
-                }}
-              >
-                {name}
-              </div>
-            ))} */}
+      <S.NameSection name={medicine.efficacy} state={state}>
+        {medicine.nameList && (
+          <TestStep
+            key={medicine.efficacy}
+            list={medicine.nameList}
+            efficacy={medicine.name}
+            handler={handler}
+            remove={remove}
+            count={count}
+            name={medicine.efficacy}
+          />
+        )}
       </S.NameSection>
     </S.EfficacySection>
   );

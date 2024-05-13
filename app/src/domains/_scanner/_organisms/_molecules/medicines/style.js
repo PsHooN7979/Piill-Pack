@@ -72,9 +72,9 @@ const EfficacyText = styled(Box)(({ delay, state, name }) => ({
     },
   },
 }));
-const NameSection = styled(Box)({
-  display: "flex",
-});
+const NameSection = styled(Box)(({ name, state }) => ({
+  display: state === name ? "flex" : "none",
+}));
 
 const S = {
   EfficacySection,
