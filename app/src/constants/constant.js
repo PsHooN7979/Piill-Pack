@@ -36,6 +36,11 @@ const Title = {
     middle: "처방전",
     after: "정보에요.",
   },
+  mypage: {
+    before: "나의",
+    middle: "프로필",
+    after: "정보에요.",
+  },
 };
 
 const Phrases = [

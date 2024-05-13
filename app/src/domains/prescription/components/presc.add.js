@@ -1,13 +1,16 @@
 import { useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import icons from "../../../constants/icon";
+import { Autocomplete, TextField } from '@mui/material';
 
-export default function PrescAdd() {
+
+
+export default function PrescAdd({pill}) {
   const location = useLocation();
   const [name, setName] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const [pills, setPills] = useState([]);
+  const [pills, setPills] = useState();
 
   const handleInputName = (e) => {
     setName(e.target.value);
@@ -22,12 +25,14 @@ export default function PrescAdd() {
   }
   const handleInputPills = (e) => {
     setPills(e.target.value);
+    console.log(pills);
   }
   const handleRemove = (pills) => {
     // filter 메소드를 사용해 해당 인덱스를 제외한 나머지 약 목록을 설정합니다.
     const newPills = pills.filter((_, idx) => idx !== pills);
     setPills(newPills);
   };
+
 
 
   return (
@@ -64,23 +69,36 @@ export default function PrescAdd() {
 
       {/* 약 복용 기간 컨테이너 종료 */}
 
+
       {/* 약 이름 검색 컨테이너 */}
 
       <div className="flex items-center bg-warn01 rounded-full p-2 mb-3 w-full max-w-md mx-auto shadow-custom01">
         <button>
           {/* <AiOutlineMenu className="text-gray-600 text-xl" /> */}
-          <icons.iconTypes.menuIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
-          {/* 메뉴 아이콘 */}
-        </button>
-        <input
-          className="flex-grow ml-2 mr-2 bg-transparent outline-none placeholder-gray-600"
-          type="text"
-          placeholder="약 이름으로 검색하기"
-          onChange={handleInputPills}
-        />
-        <button>
           <icons.iconTypes.searchIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           {/* 검색 아이콘 */}
+        </button>
+        <Autocomplete
+                freeSolo
+                id="autocomplete-search-bar"
+                options={pill[0].body.items}  // Assuming pillData[0] is where your items are located
+                getOptionLabel={(option) => option.ITEM_NAME || "No Name"}  // Display the name
+                onInputChange={handleInputPills}
+                inputValue={pills}
+                renderInput={(params) => (
+                  <TextField {...params} label="약 이름으로 검색하기" variant="outlined" />
+                )}
+                filterOptions={(options, state) => {
+                  // Custom filtering logic, ensure all string manipulations are on valid strings
+                  return options.filter(option =>
+                    option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
+                  );
+                }}
+                style={{ width: '100%' ,backgroundColor: 'transparent', color: 'white' }}
+            />
+        <button>
+          <icons.iconTypes.smCheckIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
+          {/* 등록 아이콘 */}
         </button>
       </div>
       {/* 약 이름 검색 컨테이너 종료 */}
