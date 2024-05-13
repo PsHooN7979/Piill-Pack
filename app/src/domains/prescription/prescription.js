@@ -63,7 +63,7 @@ export default function PrescriptionList() {
       <div className="flex flex-col justify-center items-center">
         <div className=" flex-col bg-opacity-100 mt-6 w-[85%] min-h-screen ">
           {/* 처방전 데이터                    */}
-          <PrescSelect presc={prescData} />
+          <PrescSelect presc={prescData} nameLimit={12} />
         </div>
       </div>
       <BottomNavigation active="2" />{" "}

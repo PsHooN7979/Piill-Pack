@@ -7,7 +7,44 @@ import { useNavigate } from 'react-router-dom';
 export default function PrescSelect({ presc }) {
     const [prescList, setPrescList] = useState('');
     const [activeTab, setActiveTab] = useState(0);
+    const [nameLimit, setNameLimit] = useState(getNameLimit());
+    
     const navigate = useNavigate();
+
+    // 뷰포트의 너비에 따라 nameLimit 값을 결정하는 함수
+    function getNameLimit() {
+        const width = window.innerWidth;
+
+        if (width <= 280) {
+            return 5;
+        } else if (width <= 320) {
+            return 8;
+        } else if (width <= 420) {
+            return 10;
+        } else if (width <= 450) {
+            return 12;
+        } else if (width <= 500) {
+            return 15;
+        } else if (width <= 550) {
+            return 18;
+        } else {
+            return 100;
+        }
+    }
+
+    // 뷰포트의 너비가 변경될 때마다 nameLimit 값을 업데이트
+    useEffect(() => {
+        function handleResize() {
+            setNameLimit(getNameLimit());
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const selectList = (e) => {
         setPrescList(e.target.value);
@@ -66,20 +103,22 @@ export default function PrescSelect({ presc }) {
             {/*  약 목록 컨테이너 */}
 
             {activeTab >= 0 && presc[activeTab].pills.map((pill, index) => (
-                <div key={index} className="flex flex-col justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
-                    <div className="flex items-center w-full p-3">
+                <div key={index} className="flex flex-col justify-start items-start border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
+                    <div className="flex justify-start items-start m-2">
                         {/* 이미지 컨테이너 */}
-                        <div className='w-10 h-15'>
+                        <div className='w-10'>
                             <img
                                 src={pill.image}
                                 alt={`${pill.name} 로고`}
-                                className="flex-none  overflow-hidden w-full h-full bg-white object-cover"
+                                className="flex-none overflow-hidden w-full h-full bg-white object-cover"
                             />
                         </div>
                         {/* 텍스트 컨테이너 */}
                         <div className="flex-grow ml-4">
-                            <div className="text-lg font-semibold w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
-                                {pill.name}
+                            <div className="text-lg font-semibold">
+                                {pill.name && pill.name.length > nameLimit
+                                ? `${pill.name.substring(0, nameLimit)}...`
+                                : pill.name}
                             </div>
                             <div className="text-xs overflow-hidden">
                                 {pill.description}
