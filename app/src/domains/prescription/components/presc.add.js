@@ -84,7 +84,7 @@ export default function PrescAdd({ pill }) {
       {/* 약 이름 검색 컨테이너 */}
 
       <div className="flex items-center bg-warn01 rounded-full p-2 mb-3 w-full max-w-md mx-auto shadow-custom01">
-        <button>
+        <button className="mx-2">
           {/* <AiOutlineMenu className="text-gray-600 text-xl" /> */}
           <icons.iconTypes.searchIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           {/* 검색 아이콘 */}
@@ -105,9 +105,9 @@ export default function PrescAdd({ pill }) {
               option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
             );
           }}
-          style={{ width: '100%'}}
+          style={{ width: '80%'}}
         />
-        <button onClick={handleRegisterPills}>
+        <button onClick={handleRegisterPills} className="mx-2">
           <icons.iconTypes.smCheckIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           {/* 등록 아이콘 */}
         </button>
