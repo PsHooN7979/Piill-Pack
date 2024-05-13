@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/web/static/css/main.da7fc19d.css",
-    "main.js": "/web/static/js/main.5d014adb.js",
+    "main.css": "/web/static/css/main.6c5e0cb6.css",
+    "main.js": "/web/static/js/main.45514314.js",
     "static/js/453.5565870f.chunk.js": "/web/static/js/453.5565870f.chunk.js",
     "static/media/loading.gif": "/web/static/media/loading.d410f641f4a53c279d45.gif",
     "static/media/logo.png": "/web/static/media/logo.ae2bd5ac1e1a3182bafd.png",
@@ -18,7 +18,6 @@
     "static/media/asthmatic .png": "/web/static/media/asthmatic .aafcf5332d9a97e8cba5.png",
     "static/media/antacids.png": "/web/static/media/antacids.22281cc14b1602a91328.png",
     "static/media/inflammatory.png": "/web/static/media/inflammatory.2faf30ab1ace405b534b.png",
-    "static/media/heart.png": "/web/static/media/heart.051cc6472c6d925bcbb8.png",
     "static/media/prescription.png": "/web/static/media/prescription.42a77698987a2be24d61.png",
     "static/media/wave.png": "/web/static/media/wave.5ae033f5893e2101b39e.png",
     "static/media/slick.svg": "/web/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -26,12 +25,12 @@
     "static/media/slick.ttf": "/web/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/web/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/web/index.html",
-    "main.da7fc19d.css.map": "/web/static/css/main.da7fc19d.css.map",
-    "main.5d014adb.js.map": "/web/static/js/main.5d014adb.js.map",
+    "main.6c5e0cb6.css.map": "/web/static/css/main.6c5e0cb6.css.map",
+    "main.45514314.js.map": "/web/static/js/main.45514314.js.map",
     "453.5565870f.chunk.js.map": "/web/static/js/453.5565870f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.da7fc19d.css",
-    "static/js/main.5d014adb.js"
+    "static/css/main.6c5e0cb6.css",
+    "static/js/main.45514314.js"
   ]
 }

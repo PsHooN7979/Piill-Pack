@@ -102,7 +102,7 @@ export default function Home() {
     M.onBack(function (e) {
       return navigate("/home");
     });
-  });
+  }, []);
 
   return (
     <div className="relative">
