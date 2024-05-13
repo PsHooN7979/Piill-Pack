@@ -5,6 +5,8 @@ import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import MyPageHeader from "./compoents/mypage.header";
 import ProfileCard from "./compoents/profile.card";
+import Title from "../_scanner/_organisms/title/_title";
+import constant from "../../constants/constant";
 
 import base64String from "./image.sample"; // base64 이미지 문자열 샘플
 
@@ -57,9 +59,10 @@ export default function MyPage() {
     return (
         <div className="relative">
             <MyPageHeader />
+            <Title title={constant.Title.mypage} />
             <div className="flex justify-center items-center">
                 <div className="bg-opacity-100 w-[85%] min-h-[80vh]">
-                    <div className="font-semibold text-sm  my-2">내 프로필</div>
+                    {/* <div className="font-semibold text-sm  my-2">내 프로필</div> */}
                     <ProfileCard data={profileData} diseasesLimit={25} />
 
                     <div className="mt-6">

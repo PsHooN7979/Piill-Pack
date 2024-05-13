@@ -5,6 +5,7 @@ import {LuMenu} from 'react-icons/lu';
 import {IoIosSearch} from 'react-icons/io';
 import {RiEditLine, RiEditFill} from 'react-icons/ri';
 import {BsCapsulePill} from 'react-icons/bs';
+import { IoCheckmarkOutline } from "react-icons/io5";
 
 const baseStyle = {
     display: 'inline-flex',
@@ -36,8 +37,10 @@ const iconTypes = {
     // edit 아이콘
     editActiveIcon: RiEditFill,
     // edit 아이콘(액티브)
-    pillIcon: BsCapsulePill
+    pillIcon: BsCapsulePill,
     // 알약 아이콘
+    smCheckIcon: IoCheckmarkOutline
+    // 작은 체크 아이콘
 };
 const iconSizes = {
     lg: {

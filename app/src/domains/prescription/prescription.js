@@ -54,7 +54,9 @@ export default function PrescriptionList() {
     },
   ];
 
-  // 약 목록 더미 데이터
+
+
+
 
   return (
     <div className="relative">
