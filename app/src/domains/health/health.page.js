@@ -62,7 +62,7 @@ export default function HealthPage() {
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
           <div className="font-semibold text-sm my-2">질병 목록</div>
-          <DiseaseList data={profileData} />
+          <DiseaseList data={profileData} nameLimit={20} />
           <div className="font-semibold text-sm mt-10">
             현재 BMI(체질량 지수)
           </div>

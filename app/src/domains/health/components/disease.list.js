@@ -1,7 +1,7 @@
 import uis from "../../../constants/ui.constant";
 import { useNavigate } from "react-router-dom";
 
-export default function DiseaseList( { data } ) {
+export default function DiseaseList( { data, nameLimit } ) {
     const navigate = useNavigate();
 
     const handleDiseaseDetail = (disease) => {
@@ -17,7 +17,11 @@ export default function DiseaseList( { data } ) {
             <div className="w-full">
                 {data.diseaseList.map((disease, index) => (
                     <div key={index} className="flex justify-between items-center w-full px-4 py-2 border-b border-gray-200">
-                        <div className="text-sm text-gray-700">{disease.name}</div>
+                        <div className="text-sm text-gray-700">
+                            {disease.name && disease.name.length > nameLimit
+                            ? `${disease.name.substring(0, nameLimit)}...`
+                            : disease.name}
+                        </div>
                         <button 
                             className="text-gray-400 hover:text-mint03 text-xs"
                             onClick={() => handleDiseaseDetail(disease)}
