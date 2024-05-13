@@ -2,6 +2,9 @@ package com.podo.server.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,10 +29,7 @@ public class DiseaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private String information;
-
-    @Column(nullable = false)
-    private String treatment;
+    private String symptoms;
 
     @Column(nullable = false)
     private String prevention;
@@ -44,9 +44,7 @@ public class DiseaseEntity {
     @Column(nullable = false)
     private LocalDateTime updated;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "patient_uuid")
-    private PatientEntity patient_uuid;
+
 
 
 }
