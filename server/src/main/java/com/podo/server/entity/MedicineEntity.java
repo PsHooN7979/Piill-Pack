@@ -34,7 +34,5 @@ public class MedicineEntity {
     @Column(nullable = false)
     private LocalDateTime updated;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "prescription_uuid")
-    private PrescriptionEntity prescription_uuid;
+
 }

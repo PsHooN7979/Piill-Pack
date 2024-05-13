@@ -2,6 +2,7 @@ package com.podo.server.service;
 
 import com.podo.server.dto.PatientDto;
 import com.podo.server.dto.UserDto;
+import com.podo.server.entity.DiseaseEntity;
 import com.podo.server.entity.PatientEntity;
 import com.podo.server.exception.BusinessLogicException;
 import com.podo.server.jwt.JWTUtil;
@@ -11,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +74,22 @@ public class PatientService {
         // Save back to the database
         patientRepository.save(patient);
     }
+
+
+    //최초 로그인 -> 회원정보 입력
+    public void setPatientInfo( String email, String nickname, Integer age, Integer weight, Integer height, boolean gender) {
+
+        PatientEntity patient = patientRepository.findByEmail(email);
+
+        patient.setNickname(nickname);
+        patient.setAge(age);
+        patient.setWeight(weight);
+        patient.setHeight(height);
+        patient.setGender(gender);
+
+        patientRepository.save(patient);
+    }
+
+
 
 }

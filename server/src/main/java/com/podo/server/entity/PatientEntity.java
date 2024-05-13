@@ -60,15 +60,6 @@ public class PatientEntity {
     @Column(nullable = false)
     private LocalDateTime updated;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
-    @Builder.Default
-    private List<DiseaseEntity> patient_disease = new ArrayList<>();
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
-    @Builder.Default
-    private List<PrescriptionEntity> patient_prescription = new ArrayList<>();
 
 
 }
