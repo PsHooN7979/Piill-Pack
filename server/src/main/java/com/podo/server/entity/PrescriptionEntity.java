@@ -32,6 +32,11 @@ public class PrescriptionEntity {
     @Column(nullable = false)
     private LocalDateTime updated;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "prescription_uuid", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<PrescriptionMedicineBridgeEntity> prescription_uuid = new ArrayList<>();
+
 
     // UUID만 받는 생성자
     public PrescriptionEntity(UUID id) {
