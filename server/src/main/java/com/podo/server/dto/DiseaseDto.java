@@ -1,26 +1,24 @@
 package com.podo.server.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PatientDto {
+public class DiseaseDto {
 
-
-    private Integer age;
-    private Boolean gender;
-    private Integer weight;
-    private Integer height;
-    private String nickname;
-    private Boolean is_fist;
+    private String name;
+    private String symptoms;
+    private String prevention;
+    private String cause;
+    private LocalDateTime created;
     private LocalDateTime updated;
 
 }

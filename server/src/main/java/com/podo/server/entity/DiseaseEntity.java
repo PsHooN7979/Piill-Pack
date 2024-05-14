@@ -39,6 +39,7 @@ public class  DiseaseEntity {
     private String cause;
 
 
+
     @Column(nullable = false)
     private LocalDateTime created;
 

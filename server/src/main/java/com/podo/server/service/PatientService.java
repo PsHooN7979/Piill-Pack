@@ -50,19 +50,11 @@ public class PatientService {
         patientRepository.save(patientEntity);
     }
 
+    //최초 로그인 -> 회원정보 입력
     public void registerInfo(PatientDto dto, String email) {
-        PatientEntity patient = patientRepository.findByEmail(email);  // Retrieve the patient by email
+        PatientEntity patient = patientRepository.findByEmail(email);  // 유저 이메일을 이용해 유저 정보 가져옴
 
-        if (patient == null) {
-            // Create a new patient if not found
-            patient = PatientEntity.builder()
-                    .email(email)
-                    .password(passwordEncoder.encode(dto.getPassword()))  // If the password is present in the dto
-                    .created(LocalDateTime.now())
-                    .build();
-        }
-
-        // Update existing fields
+        // 유저 정보 수정
         patient.setAge(dto.getAge());
         patient.setGender(dto.getGender());
         patient.setWeight(dto.getWeight());
@@ -71,12 +63,11 @@ public class PatientService {
         patient.setIs_fist(false);
         patient.setUpdated(LocalDateTime.now());
 
-        // Save back to the database
+        // db에 저장
         patientRepository.save(patient);
     }
 
 
-    //최초 로그인 -> 회원정보 입력
     public void setPatientInfo( String email, String nickname, Integer age, Integer weight, Integer height, boolean gender) {
 
         PatientEntity patient = patientRepository.findByEmail(email);
@@ -86,6 +77,7 @@ public class PatientService {
         patient.setWeight(weight);
         patient.setHeight(height);
         patient.setGender(gender);
+        patient.setIs_fist(false);
 
         patientRepository.save(patient);
     }
