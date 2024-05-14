@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +18,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "disease")
-public class DiseaseEntity {
+@Builder
+public class  DiseaseEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -43,6 +44,12 @@ public class DiseaseEntity {
 
     @Column(nullable = false)
     private LocalDateTime updated;
+
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "disease_uuid", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<PatientDiseaseBridgeEntity> disease_uuid = new ArrayList<>();
 
 
 

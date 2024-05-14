@@ -31,9 +31,9 @@ public class GPTController {
                 model,prompt,1,4096,1,2,2);
 
         GPTResponse gptResponse = restTemplate.postForObject(
-                apiUrl
-                , request
-                , GPTResponse.class
+                apiUrl,
+                request,
+                GPTResponse.class
         );
 
 
