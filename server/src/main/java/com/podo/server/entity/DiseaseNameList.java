@@ -21,4 +21,6 @@ public class DiseaseNameList {
 
     private String name;
 
+
+    private UUID disease_name;
 }
