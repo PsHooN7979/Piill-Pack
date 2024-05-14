@@ -3,11 +3,11 @@ import uis from "../../../constants/ui.constant";
 import icons from "../../../constants/icon";
 import { useNavigate } from 'react-router-dom';
 
-
 export default function PrescSelect({ presc }) {
     const [prescList, setPrescList] = useState('');
     const [activeTab, setActiveTab] = useState(0);
     const [nameLimit, setNameLimit] = useState(getNameLimit());
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     
     const navigate = useNavigate();
 
@@ -46,9 +46,10 @@ export default function PrescSelect({ presc }) {
         };
     }, []);
 
-    const selectList = (e) => {
-        setPrescList(e.target.value);
-        setActiveTab(e.target.selectedIndex - 1);
+    const selectList = (name, index) => {
+        setPrescList(name);
+        setActiveTab(index);
+        setDropdownOpen(false);
     }
 
     const handleEditPresc = () => {
@@ -77,18 +78,27 @@ export default function PrescSelect({ presc }) {
 
         <div>
             {/* 처방전 목록 컨테이너 */}
-            <div className="border border-gray-300 w-full rounded-lg">
-                <select id="prescList" value={prescList} onChange={selectList}
-                    className="w-full border-none rounded-lg py-2"
+            <div className="relative border border-gray-300 w-full rounded-lg">
+                <button 
+                    onClick={() => setDropdownOpen(!dropdownOpen)} 
+                    className=" flex flex-row justify-between w-full px-3 text-sm border-none rounded-lg py-2 text-left"
                 >
-                    <option value="" disabled>--처방 목록을 선택해 주세요--</option>
-                    {presc.map((presc, index) => (
-                        <option key={index} value={presc.name} >
-                            {presc.name}
-                        </option>
-
-                    ))}
-                </select>
+                    {prescList || "--처방 목록을 선택해 주세요--"}
+                    <div className={`text-gray-500 transform transition-transform duration-250 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}>▼</div>
+                </button>
+                {dropdownOpen && (
+                    <div className="absolute w-full shadow-custom01 bg-white border border-gray-300 rounded-lg z-10 max-h-60 overflow-y-auto">
+                        {presc.map((presc, index) => (
+                            <button 
+                                key={index} 
+                                onClick={() => selectList(presc.name, index)} 
+                                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                            >
+                                {presc.name}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
             <p className="mt-2 text-sm pb-2"><strong>복용 기간</strong>: xxxxxxx </p>
             
