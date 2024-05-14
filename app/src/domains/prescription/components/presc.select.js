@@ -79,27 +79,28 @@ export default function PrescSelect({ presc }) {
         <div>
             {/* 처방전 목록 컨테이너 */}
             <div className="relative border border-gray-300 w-full rounded-lg">
-                <button 
-                    onClick={() => setDropdownOpen(!dropdownOpen)} 
-                    className=" flex flex-row justify-between w-full px-3 text-sm border-none rounded-lg py-2 text-left"
+                <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex flex-row justify-between w-full px-3 text-sm border-none rounded-lg py-2 z-10 text-left"
                 >
                     {prescList || "--처방 목록을 선택해 주세요--"}
-                    <div className={`text-gray-500 transform transition-transform duration-250 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}>▼</div>
+                    <div className={`text-gray-500 transform transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`}>▼</div>
                 </button>
-                {dropdownOpen && (
-                    <div className="absolute w-full shadow-custom01 bg-white border border-gray-300 rounded-lg z-10 max-h-60 overflow-y-auto">
-                        {presc.map((presc, index) => (
-                            <button 
-                                key={index} 
-                                onClick={() => selectList(presc.name, index)} 
-                                className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                            >
-                                {presc.name}
-                            </button>
-                        ))}
-                    </div>
-                )}
+                <div className={`absolute top-full left-0 w-full shadow-custom01 bg-white border border-gray-300 rounded-lg z-0 overflow-y-auto transition-all duration-500 ease-in-out transform ${dropdownOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}>
+                    {dropdownOpen && (
+                    presc.map((presc, index) => (
+                        <button
+                        key={index}
+                        onClick={() => selectList(presc.name, index)}
+                        className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                        >
+                        {presc.name}
+                        </button>
+                    ))
+                    )}
+                </div>
             </div>
+
             <p className="mt-2 text-sm pb-2"><strong>복용 기간</strong>: xxxxxxx </p>
             
             <div className="border border-gray-300 w-full rounded-lg px-4 py-2 mb-3 text-gray-500 flex justify-between items-center">

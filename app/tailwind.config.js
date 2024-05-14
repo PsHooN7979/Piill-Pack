@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const { keyframes } = require('@emotion/react');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
@@ -34,6 +35,7 @@ module.exports = {
         custom: "1px 2px 4px rgba(0, 0, 0, 0.40)",
         custom2: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
+
     },
   },
   variants: {
