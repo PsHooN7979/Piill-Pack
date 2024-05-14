@@ -9,7 +9,7 @@ import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePi
 import dayjs from 'dayjs';
 
 
-export default function PrescAdd({ pill }) {
+export default function PrescAdd({ pill, prescName }) {
   const location = useLocation('');
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -58,6 +58,7 @@ export default function PrescAdd({ pill }) {
           onChange={handleInputName}
           type="text"
           placeholder="처방전 이름"
+          value={prescName}
           className="border border-gray-300 w-full rounded-lg px-4 py-2  text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 transition duration-150 ease-in-out"
         />
       </div>
