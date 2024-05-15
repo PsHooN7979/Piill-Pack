@@ -6,7 +6,7 @@ import {
   setNativeState,
   setCameraState,
   setReadState,
-} from "../../../../common/feature/slices/native.slice";
+} from "../../../_scanner/features/slices/native.slice";
 import Native from "../../../../constants/constant";
 
 export default function Scan() {

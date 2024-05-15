@@ -14,10 +14,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "&.Mui-completed": {
-            color: "#7FDAD7", // 완료된 스탭의 색상
+            color: "#7FDAD7",
           },
           "&.Mui-active": {
-            color: "#E8A1A0", // 현재 활성화된 스탭의 색상
+            color: "#E8A1A0",
           },
         },
       },

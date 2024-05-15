@@ -1,13 +1,13 @@
 //Library
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
+import { Box } from "@mui/material";
 //Hooks
 import L from "./logic";
 import useCustomNavigate from "../../common/hooks/useCustomNavigate";
 //Constant
 import constant from "../../constants/constant";
 import testSet from "../../constants/json.server";
-import images from "../../constants/image.constant";
 //Repository
 import scannerRepo from "./repositories/scanner.repository";
 //TestSet
@@ -16,13 +16,13 @@ import ScannerTemplate from "./_scanner.template";
 export default function Scanner() {
   const navigate = useCustomNavigate();
 
-  const [medicineList, setMedicineList] = React.useState([]);
+  const [state, setState] = React.useState(true);
+  const [title, setTitle] = React.useState(constant.Title.loading);
   const [content, setContent] = React.useState({
     text: constant.Phrases[0],
     count: 0,
   });
-  const [isNative, setIsNative] = React.useState(true);
-  const [title, setTitle] = React.useState(constant.Title.loading);
+  const [data, setData] = React.useState([]);
 
   const mutateOCR = useMutation({
     mutationFn: scannerRepo.ocr,
@@ -34,11 +34,11 @@ export default function Scanner() {
 
       // if (imageToBase64 === "error") return navigate.goHome();
 
-      setIsNative(false);
+      setState(false);
       await mutateOCR
         .mutateAsync(imageToBase64)
         .then((result) => {
-          setMedicineList(result.data.medicine_list);
+          setData(result.data.medicine_list);
           setTitle(constant.Title.find);
         })
         .catch((error) => {
@@ -46,7 +46,7 @@ export default function Scanner() {
             // return navigate.goHome();
 
             //test
-            setMedicineList(testSet.mutateOCRSet);
+            setData(testSet.mutateOCRSet);
             //test
             setTitle(constant.Title.find);
           }, 2100);
@@ -57,7 +57,7 @@ export default function Scanner() {
 
   React.useEffect(() => {
     let intervalId;
-    if (!isNative) {
+    if (!state) {
       intervalId = setInterval(() => {
         setContent((prevText) => {
           const cleanText = constant.Phrases[content.count];
@@ -73,9 +73,8 @@ export default function Scanner() {
       }, 550);
     } else clearInterval(intervalId);
     return () => clearInterval(intervalId);
-  }, [isNative, content.count]);
+  }, [state, content.count]);
 
-  const scannerDataSet = { isNative, title, content, images, medicineList };
-
-  return <ScannerTemplate data={scannerDataSet} />;
+  if (state) return <Box sx={{ height: "100vh", background: "black" }} />;
+  return <ScannerTemplate set={{ title, content, data }} />;
 }

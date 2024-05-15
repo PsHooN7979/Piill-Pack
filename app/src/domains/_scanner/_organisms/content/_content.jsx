@@ -1,8 +1,9 @@
 import S from "./style";
 import M from "../_molecules/molecule.index";
+import images from "../../../../constants/image.constant";
 
 export default function Content({ data }) {
-  const { medicineList, images, content } = data;
+  const { medicineList, content } = data;
 
   return (
     <S.AnalysisSection>

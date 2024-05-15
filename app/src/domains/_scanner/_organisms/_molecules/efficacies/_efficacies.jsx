@@ -47,15 +47,16 @@ export default function Efficacies({ medicineList }) {
   const handleDelete = (medicineIndex, nameIndex) => {
     setMedicines((prevMedicines) => {
       const updatedMedicines = prevMedicines.map((medicine, idx) => {
-        if (idx === medicineIndex) {
-          if (medicine.efficacy !== "add") {
-            if (medicine.nameList && medicine.nameList.length > 0) {
-              const updatedNameList = medicine.nameList.filter(
-                (_, ni) => ni !== nameIndex
-              );
-              return { ...medicine, nameList: updatedNameList };
-            }
-          }
+        if (
+          idx === medicineIndex &&
+          medicine.efficacy !== "add" &&
+          medicine.nameList &&
+          medicine.nameList.length > 0
+        ) {
+          const updatedNameList = medicine.nameList.filter(
+            (_, ni) => ni !== nameIndex
+          );
+          return { ...medicine, nameList: updatedNameList };
         }
         return medicine;
       });
