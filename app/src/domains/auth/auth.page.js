@@ -43,11 +43,10 @@ export default function Auth() {
     );
     try {
       await tryLogin(email, password);
+      navigate("/first");
     } catch (error) {
         console.error('로그인 중 에러 발생', error);
     }
-
-    navigate("/first");
   };
 
   const handleJoin = async (email, password, isAgree) => {
