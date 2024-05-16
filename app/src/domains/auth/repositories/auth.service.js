@@ -12,3 +12,15 @@ export const createUser = async (email, password) => {
         throw error;
     }
 }
+ export const tryLogin = async (email, password) => {
+    try {
+        const response = await axios.post('http://localhost:8443/login', { 
+            email, password
+        });
+        console.error(''); 
+        return response.data;
+    } catch (error) {
+        console.error('로그인 중 에러 발생', error);
+        throw error;
+    }
+ }

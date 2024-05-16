@@ -6,7 +6,7 @@ import images from "../../constants/image.constant";
 import AuthButton from "./components/auth.button";
 import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
-import { createUser } from "./repositories/auth.service";
+import { createUser, tryLogin } from "./repositories/auth.service";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Auth() {
   };
   const closeJoinModal = () => setIsJoinModalOpen(false);
 
-  const handleLogin = (email, password, isKeepLogin) => {
+  const handleLogin = async (email, password, isKeepLogin) => {
     // 로그인 핸들러
     console.log(
       "아이디: " +
@@ -41,6 +41,11 @@ export default function Auth() {
         ", 로그인 상태 유지 여부: " +
         isKeepLogin
     );
+    try {
+      await tryLogin(email, password);
+    } catch (error) {
+        console.error('로그인 중 에러 발생', error);
+    }
 
     navigate("/first");
   };
@@ -59,7 +64,7 @@ export default function Auth() {
         await createUser(email, password);
         openLoginModal();
     } catch (error) {
-        console.error('공지사항 저장 중 에러 발생', error);
+        console.error('회원가입 중 에러 발생', error);
     }
   };
 
