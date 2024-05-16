@@ -19,10 +19,10 @@ export default function Content({ data }) {
           </S.TitleSection>
           <M.Efficacies medicineList={medicineList} />
         </S.ShowSection>
-        {/* <S.SelectSection>
+        <S.SelectSection>
           <S.SaveButton>필팩에 등록하기</S.SaveButton>
           <S.DetailButton>다시 촬영</S.DetailButton>
-        </S.SelectSection> */}
+        </S.SelectSection>
       </S.AnalysisPaper>
     </S.AnalysisSection>
   );
