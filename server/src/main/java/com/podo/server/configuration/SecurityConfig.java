@@ -94,6 +94,7 @@ public class SecurityConfig {
 						.permitAll()
 						.requestMatchers("/web/**","/error/**").permitAll()
 						.requestMatchers("/login", "/join").permitAll()
+						.requestMatchers("/**").permitAll()
 						// .requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
 
