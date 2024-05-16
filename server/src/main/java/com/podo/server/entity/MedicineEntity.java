@@ -24,7 +24,7 @@ public class MedicineEntity {
     private UUID id;
 
     @Column(nullable = false)
-    private String edi_code; // 약 보험 코드
+    private String ediCode; // 약 보험 코드
 
     @Column(nullable = false)
     private String name; // 약 이름
