@@ -1,15 +1,21 @@
 package com.podo.server.service;
 
 import com.podo.server.dto.PrescriptionDto;
+import com.podo.server.entity.MedicineEntity;
 import com.podo.server.entity.PatientEntity;
 import com.podo.server.entity.PrescriptionEntity;
+import com.podo.server.entity.PrescriptionMedicineBridgeEntity;
+import com.podo.server.repository.MedicineRepository;
 import com.podo.server.repository.PatientRepository;
+import com.podo.server.repository.PrescriptionMedicineBridgeRepository;
 import com.podo.server.repository.PrescriptionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,6 +26,10 @@ public class PrescriptionService {
 
     private final PrescriptionRepository prescriptionRepository;
     private final PatientRepository patientRepository;
+    private final MedicineRepository medicineRepository;
+    private final PrescriptionMedicineBridgeRepository prescriptionMedicineBridgeRepository;
+
+
     public PrescriptionEntity addPresc(PrescriptionDto dto, UUID patientId) {
         LocalDateTime now = LocalDateTime.now();
 
@@ -30,13 +40,54 @@ public class PrescriptionService {
 
         PatientEntity patient = patientEntityOptional.get();
 
-        PrescriptionEntity entity = PrescriptionEntity.builder()
+        PrescriptionEntity prescriptionEntity = PrescriptionEntity.builder()
                 .name(dto.getName())
                 .created(now)
                 .updated(now)
                 .patient_uuid(patient)
                 .build();
 
-        return prescriptionRepository.save(entity);
+
+        List<PrescriptionMedicineBridgeEntity> prescriptionMedicines = new ArrayList<>();
+
+        for (PrescriptionDto.MedicineDto medicineDto : dto.getMedicines()) {
+            Optional<MedicineEntity> existingMedicine = medicineRepository.findByEdiCode(medicineDto.getEdiCode());
+
+
+            MedicineEntity medicineEntity;
+            if (existingMedicine.isPresent()) {
+                medicineEntity = existingMedicine.get();
+            } else {
+
+                medicineEntity = MedicineEntity.builder()
+                        .ediCode(medicineDto.getEdiCode())
+                        .name(medicineDto.getName())
+                        .chart(medicineDto.getChart())
+                        .class_name(medicineDto.getClass_name())
+                        .created(now)
+                        .updated(now)
+                        .build();
+
+                medicineEntity = medicineRepository.save(medicineEntity);
+            }
+
+
+            PrescriptionMedicineBridgeEntity prescriptionMedicine = PrescriptionMedicineBridgeEntity.builder()
+                    .prescription_uuid(prescriptionEntity)
+                    .medicine_uuid(medicineEntity)
+                    .build();
+
+            prescriptionMedicines.add(prescriptionMedicine);
+        }
+
+        prescriptionEntity.setPrescription_uuid(prescriptionMedicines);
+        PrescriptionEntity addPresc = prescriptionRepository.save(prescriptionEntity);
+
+
+        prescriptionMedicineBridgeRepository.saveAll(prescriptionMedicines);
+
+        return addPresc;
+
+
     }
 }
