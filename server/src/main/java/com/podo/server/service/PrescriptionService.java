@@ -25,7 +25,7 @@ public class PrescriptionService {
 
         Optional<PatientEntity> patientEntityOptional = patientRepository.findById(patientId);
         if (patientEntityOptional.isEmpty()) {
-            throw new IllegalArgumentException("환자 아이디를 찾을 수 없습니다: " + patientId);
+            throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다: " + patientId);
         }
 
         PatientEntity patient = patientEntityOptional.get();
