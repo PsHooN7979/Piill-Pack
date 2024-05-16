@@ -5,6 +5,7 @@ const EfficacySection = styled(Box)({
   flexDirection: "column",
   padding: "10px 15px",
   paddingRight: "5px",
+  height: "100%",
 });
 const TitleSection = styled(Box)(({ state }) => ({
   display: "flex",
@@ -74,6 +75,8 @@ const EfficacyText = styled(Box)(({ delay, state, name }) => ({
 }));
 const NameSection = styled(Box)(({ name, state }) => ({
   display: state === name ? "flex" : "none",
+  justifyContent: "center",
+  height: "100%",
 }));
 
 const S = {

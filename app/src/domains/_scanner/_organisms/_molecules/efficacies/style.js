@@ -3,6 +3,7 @@ import { Box, styled } from "@mui/material";
 const MedicineContainer = styled(Box)({
   display: "flex",
   flexDirection: "column",
+  height: "100%",
   overflowY: "scroll",
   scrollbarWidth: "none",
   msOverflowStyle: "none",

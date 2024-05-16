@@ -1,9 +1,12 @@
 import S from "./style";
 import M from "../_molecules/molecule.index";
 import images from "../../../../constants/image.constant";
+import React from "react";
 
 export default function Content({ data }) {
   const { medicineList, content } = data;
+
+  const [isDetail, setIsDetail] = React.useState(false);
 
   return (
     <S.AnalysisSection>
@@ -17,9 +20,9 @@ export default function Content({ data }) {
             <S.MedicineImage src={images.prescription} />
             <S.SequentialText text="내가 받은 처방전은?" />
           </S.TitleSection>
-          <M.Efficacies medicineList={medicineList} />
+          <M.Efficacies medicineList={medicineList} set={setIsDetail} />
         </S.ShowSection>
-        <S.SelectSection>
+        <S.SelectSection isDetail={isDetail}>
           <S.SaveButton>필팩에 등록하기</S.SaveButton>
           <S.DetailButton>다시 촬영</S.DetailButton>
         </S.SelectSection>
