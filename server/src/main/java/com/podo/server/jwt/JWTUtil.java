@@ -1,5 +1,6 @@
 package com.podo.server.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,8 +27,14 @@ public class JWTUtil {
     }
 
     public UUID getId(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
-        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("id", UUID.class);
+        String idString = claims.get("id", String.class);
+        return UUID.fromString(idString);
     }
 
     public Boolean isExpired(String token) {

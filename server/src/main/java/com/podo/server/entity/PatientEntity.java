@@ -65,5 +65,10 @@ public class PatientEntity {
     @Builder.Default
     private List<PatientDiseaseBridgeEntity> patient_uuid = new ArrayList<>();
 
+    @ToString.Exclude
+    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    private List<PrescriptionEntity> prescriptions = new ArrayList<>();
+
 
 }
