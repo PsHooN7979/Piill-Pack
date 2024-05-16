@@ -27,7 +27,7 @@ public class PrescriptionController {
     public ResponseEntity<String> addPresc(@RequestBody PrescriptionDto dto,
                                                        @RequestHeader("Authorization") String token) {
         try {
-            UUID id = jwtUtil.getId(token.substring(7));
+            UUID id = jwtUtil.getId(token.substring(7)); // 토큰에 저장된 사용자 id(UUID 형식) 가져옴
 
             prescriptionService.addPresc(dto, id);
 

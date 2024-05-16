@@ -90,9 +90,10 @@ public class SecurityConfig {
 						/*
 						 * June. error routing permit all && client web routing permit all
 						 */
-						.requestMatchers("/web/**", "/error/**").permitAll()
+						.requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api/**", "/api-docs/**", "/v3/api-docs/**")
+						.permitAll()
+						.requestMatchers("/web/**","/error/**").permitAll()
 						.requestMatchers("/login", "/join").permitAll()
-//						.requestMatchers("/**").permitAll()
 						// .requestMatchers("/admin/**").hasRole("ADMIN")
 						.anyRequest().authenticated());
 
