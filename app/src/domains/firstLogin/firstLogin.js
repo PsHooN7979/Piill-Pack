@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import images from "../../constants/image.constant";
 
@@ -14,6 +15,9 @@ export default function FistLogin() {
   const [weight, setWeight] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
   const [diseaseList, setDiseaseList] = useState([]);
+
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  console.log("로그인 후 인증 상태: ", isAuth);
 
   const navigate = useNavigate();
 

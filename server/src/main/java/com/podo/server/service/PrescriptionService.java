@@ -30,6 +30,8 @@ public class PrescriptionService {
     private final PrescriptionMedicineBridgeRepository prescriptionMedicineBridgeRepository;
 
 
+
+    // 처방전 추가
     public PrescriptionEntity addPresc(PrescriptionDto dto, UUID patientId) {
         LocalDateTime now = LocalDateTime.now();
 
@@ -49,7 +51,7 @@ public class PrescriptionService {
 
 
         List<PrescriptionMedicineBridgeEntity> prescriptionMedicines = new ArrayList<>();
-
+        // 약 정보도 추가함
         for (PrescriptionDto.MedicineDto medicineDto : dto.getMedicines()) {
             Optional<MedicineEntity> existingMedicine = medicineRepository.findByEdiCode(medicineDto.getEdiCode());
 

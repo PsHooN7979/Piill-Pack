@@ -5,7 +5,7 @@ export const createUser = async (email, password) => {
         const response = await axios.post('http://localhost:8443/join', { 
             email, password
         });
-        console.error(''); 
+        console.log('회원가입 응답 데이터', response.data); 
         return response.data;
     } catch (error) {
         console.error('회원가입 중 에러 발생', error);

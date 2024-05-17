@@ -1,15 +1,18 @@
 package com.podo.server.controller;
 
 
+import com.podo.server.dto.PatientDto;
 import com.podo.server.entity.DiseaseNameList;
+import com.podo.server.entity.PatientEntity;
+import com.podo.server.jwt.JWTUtil;
 import com.podo.server.repository.DiseaseNameRepository;
 import com.podo.server.repository.PatientRepository;
 import com.podo.server.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -22,6 +25,7 @@ public class PatientController {
 
     private final PatientService patientService;
     private final PatientRepository patientRepository;
+    private final JWTUtil jwtUtil;
 
 //      email인증 미구현 상태 나중에 해야함
 //    @GetMapping("/checkisemail")
@@ -42,7 +46,7 @@ public class PatientController {
         boolean gender = (boolean) map.get("gender");
         ArrayList<String> userSendDisease = (ArrayList<String>) map.get("userDiseaseList");
 
-        patientService.setPatientInfo(email, nickname, age , height,  weight, gender);
+        patientService.setPatientInfo(email, nickname, age, height, weight, gender);
 //        System.out.println(auth.getName());
 
         //디비에 존재하는 배열이름들 다 끌어와서 넣음 -> isDiseaseNameLists
@@ -56,10 +60,10 @@ public class PatientController {
         List<String> checkedDiseaseInDB = new ArrayList<>(); //유저가보낸 질병이름들 중에서 디비에 있는 질병이름들
         List<String> unCheckedDiseaseInDB = new ArrayList<>(); //유저가보낸 질병이름들 중에서 디비에 없는 질병이름들
 
-        for (int i = 0; i<userSendDisease.toArray().length; i++){
-            if(isDiseaseNameLists.contains(userSendDisease.toArray()[i])){ //디비에 유저가보낸 질병이 있는지 없는지 검사해서
+        for (int i = 0; i < userSendDisease.toArray().length; i++) {
+            if (isDiseaseNameLists.contains(userSendDisease.toArray()[i])) { //디비에 유저가보낸 질병이 있는지 없는지 검사해서
                 checkedDiseaseInDB.add(userSendDisease.toArray()[i].toString()); //있으면 checkedDiseaseInDB 에 담고
-            }else{
+            } else {
                 unCheckedDiseaseInDB.add(userSendDisease.toArray()[i].toString()); //없으면 unCheckedDiseaseInDB 에 담고
             }
         }
@@ -69,8 +73,24 @@ public class PatientController {
         //사용자한테 받아온 배여
 
 
-
         return "ok";
+    }
+
+    @GetMapping("patientInfo")
+    public ResponseEntity<PatientDto> getPatientInfo(@RequestHeader("Authorization") String token) {
+
+        UUID id = jwtUtil.getId(token.substring(7));  // 토큰에 저장된 유저id 정보 가져옴
+
+        Optional<PatientEntity> patientEntity = patientService.patientId(id);
+        if (patientEntity.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        PatientEntity patient = patientEntity.get();
+        PatientDto patientDto = patientService.getPatientInfo(patient);
+
+        return new ResponseEntity<>(patientDto, HttpStatus.OK);
+
     }
 
 
