@@ -23,10 +23,11 @@ public class MedicineService {
         MediBody mediBody = parsingJsonObject(json);
 
         // Extract the items list
-        List<MediBody.MediItem> items = mediBody.getItems();
+        List<MediBody.MediItem> items = mediBody.getBody().getItems();
 
         // Create a new JSON node to store the transformed response
-        JsonNode transformedNode = objectMapper.createObjectNode().set("items", objectMapper.valueToTree(items));
+        JsonNode transformedNode = objectMapper.valueToTree(items);
+
 
         // Convert the JSON node to a string
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(transformedNode);

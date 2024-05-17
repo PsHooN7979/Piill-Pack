@@ -8,7 +8,9 @@ import com.podo.server.jwt.JWTUtil;
 import com.podo.server.repository.DiseaseNameRepository;
 import com.podo.server.repository.PatientRepository;
 import com.podo.server.service.PatientService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,8 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
+@SecurityRequirement(name = "bearerAuth")
 public class PatientController {
 
 
