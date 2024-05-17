@@ -31,11 +31,11 @@ const Snackbar = ({ id, message, duration = 3000 }) => {
     return createPortal(
         <div className='fixed top-5 flex justify-center items-center z-50 w-full'>
             <div
-                className={`w-auto bg-warn01 px-4 py-2 rounded shadow-custom01 flex items-center space-x-2 ${
+                className={`w-auto bg-mint04 px-4 py-2 rounded shadow-custom01 flex items-center space-x-2 ${
                     closing ? 'animate-shrinkOut' : 'animate-slideIn'
                 }`}
             >
-                <span className="text-sm text-white">{message}</span>
+                <span className="text-xs text-white">{message}</span>
                 <button onClick={() => setClosing(true)} className="text-xl font-bold">
                     &times;
                 </button>
