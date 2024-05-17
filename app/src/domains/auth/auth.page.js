@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import images from "../../constants/image.constant";
 
@@ -7,17 +8,22 @@ import AuthButton from "./components/auth.button";
 import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
 import { createUser, tryLogin } from "./repositories/auth.service";
+import { setIsAuth } from "../../common/feature/slices/auth.slice";
 
 export default function Auth() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  console.log("현재 인증 상태: ", isAuth);
 
   React.useEffect(() => {
     M.onBack(function (e) {
       return navigate.goHome();
     });
   }, []);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -42,7 +48,9 @@ export default function Auth() {
         isKeepLogin
     );
     try {
+      console.log("로그인 전 인증 상태: ", isAuth);
       await tryLogin(email, password);
+      dispatch(setIsAuth(true)); // 로그인 성공 시 인증 상태를 true로 설정
       navigate("/first");
     } catch (error) {
         console.error('로그인 중 에러 발생', error);
