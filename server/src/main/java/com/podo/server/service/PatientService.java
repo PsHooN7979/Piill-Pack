@@ -12,10 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -80,6 +78,23 @@ public class PatientService {
         patient.setIsFist(false);
 
         patientRepository.save(patient);
+    }
+
+
+    public Optional<PatientEntity> patientId(UUID id) {
+        return patientRepository.findById(id);
+    }
+
+    public PatientDto getPatientInfo(PatientEntity entity) {
+        return PatientDto.builder()
+                .age(entity.getAge())
+                .gender(entity.getGender())
+                .nickname(entity.getNickname())
+                .height(entity.getHeight())
+                .weight(entity.getWeight())
+                .build();
+
+
     }
 
 
