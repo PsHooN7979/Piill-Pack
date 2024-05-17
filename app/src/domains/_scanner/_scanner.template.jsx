@@ -8,7 +8,15 @@ export default function ScannerTemplate({ set }) {
     <S.Container>
       <O.Header />
       <O.Title title={set.title} />
-      <O.Content data={{ content: set.content, medicineList: set.data }} />
+      <O.Content
+        data={{
+          content: set.content,
+          medicineList: set.data,
+          setPhrases: set.setPhrases,
+          setTitle: set.setTitle,
+          setContent: set.setContent,
+        }}
+      />
     </S.Container>
   );
 }

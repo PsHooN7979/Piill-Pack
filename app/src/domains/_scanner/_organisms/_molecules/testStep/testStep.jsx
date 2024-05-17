@@ -79,7 +79,7 @@ export default function TestStep({
                     </Button>
                     <Button
                       onClick={() => handleBack(index)}
-                      sx={{ mt: 1, mr: 1, color: "#bbb" }}
+                      sx={{ mt: 1, mr: 1, color: "#ff2b2b" }}
                     >
                       삭제하기
                     </Button>

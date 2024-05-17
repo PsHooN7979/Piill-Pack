@@ -16,10 +16,11 @@ import ScannerTemplate from "./_scanner.template";
 export default function Scanner() {
   const navigate = useCustomNavigate();
 
+  const [phrases, setPhrases] = React.useState(constant.Phrases);
   const [state, setState] = React.useState(true);
   const [title, setTitle] = React.useState(constant.Title.loading);
   const [content, setContent] = React.useState({
-    text: constant.Phrases[0],
+    text: phrases[0],
     count: 0,
   });
   const [data, setData] = React.useState([]);
@@ -60,14 +61,14 @@ export default function Scanner() {
     if (!state) {
       intervalId = setInterval(() => {
         setContent((prevText) => {
-          const cleanText = constant.Phrases[content.count];
+          const cleanText = phrases[content.count];
           const dotCount = prevText.text.length - cleanText.length;
           if (dotCount < 3) {
             const text = cleanText + ".".repeat(dotCount + 1);
             return { text: text, count: content.count };
           } else {
-            const nextIndex = (content.count + 1) % constant.Phrases.length;
-            return { text: constant.Phrases[nextIndex], count: nextIndex };
+            const nextIndex = (content.count + 1) % phrases.length;
+            return { text: phrases[nextIndex], count: nextIndex };
           }
         });
       }, 550);
@@ -76,5 +77,9 @@ export default function Scanner() {
   }, [state, content.count]);
 
   if (state) return <Box sx={{ height: "100vh", background: "black" }} />;
-  return <ScannerTemplate set={{ title, content, data }} />;
+  return (
+    <ScannerTemplate
+      set={{ title, content, data, setPhrases, setTitle, setContent }}
+    />
+  );
 }

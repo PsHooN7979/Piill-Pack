@@ -236,5 +236,12 @@ const mutateOCRSet = [
   },
 ];
 
-const testSet = { mutateOCRSet };
+const mutateAnalysisSet = {
+  diseaseList: ["감기", "독감", "천식", "인플루엔자"],
+  detailMedicineList: [],
+  warningList: [],
+  dangerList: [],
+};
+
+const testSet = { mutateOCRSet, mutateAnalysisSet };
 export default testSet;
