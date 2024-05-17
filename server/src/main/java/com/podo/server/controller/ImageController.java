@@ -1,11 +1,13 @@
 package com.podo.server.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,14 +16,13 @@ import java.util.Base64;
 import java.util.logging.Logger;
 
 
-
 @RestController
 public class ImageController {
 
     private static final Logger logger = Logger.getLogger(ImageController.class.getName());
 
     static class Base64Request {
-        public String base64String;
+        private String base64String;
 
         // Getter and Setter methods
         public String getBase64String() {
@@ -43,6 +44,7 @@ public class ImageController {
 
         logger.info("Received Base64 string: " + base64String.substring(0, Math.min(base64String.length(), 50)) + "...");
 
+        // base64 -> jpg 변환
         base64String = base64String.trim().replaceAll("[^A-Za-z0-9+/=]", "");
         logger.info("Cleaned Base64 string: " + base64String.substring(0, Math.min(base64String.length(), 50)) + "...");
 
@@ -69,7 +71,7 @@ public class ImageController {
             }
         }
 
-        String outputFile = outputDir + "/output.jpg";
+        String outputFile = outputDir + "/test.jpg";
         try (FileOutputStream fos = new FileOutputStream(outputFile)) {
             FileCopyUtils.copy(decodedBytes, fos);
             logger.info("Image successfully saved to: " + outputFile);
