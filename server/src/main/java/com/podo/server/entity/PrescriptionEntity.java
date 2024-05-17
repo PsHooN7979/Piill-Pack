@@ -1,5 +1,6 @@
 package com.podo.server.entity;
 
+import ch.qos.logback.classic.spi.LoggingEventVO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -37,7 +38,7 @@ public class PrescriptionEntity {
     private PatientEntity patientUuid;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "prescriptionUuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "prescriptionUuid", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @Builder.Default
     private List<PrescriptionMedicineBridgeEntity> prescriptionUuid = new ArrayList<>();
 
@@ -46,4 +47,6 @@ public class PrescriptionEntity {
     public PrescriptionEntity(UUID id) {
         this.id = id;
     }
+
+
 }

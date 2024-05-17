@@ -7,6 +7,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface MedicineRepository extends JpaRepository<MedicineEntity, UUID> {
-    Optional<MedicineEntity> findByEdiCode(String ediCode);
+    Optional<MedicineEntity> findByItemSeq(String itemSeq);
 
 }
