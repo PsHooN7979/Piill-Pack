@@ -7,6 +7,7 @@ import store from "./common/feature/store";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
+import SnackbarContainer from "./common/components/snackbar.container";
 
 function App() {
   /**
@@ -19,6 +20,7 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <Router />
+        <SnackbarContainer />
       </QueryClientProvider>
     </Provider>
   );

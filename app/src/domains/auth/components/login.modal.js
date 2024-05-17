@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { addSnackBar } from '../../../common/feature/slices/snackBar.slice';
 import uis from "../../../constants/ui.constant";
 
 export default function LoginModal({ onLogin, onClose, onJoinClick }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isKeepLogin, setIsKeepLogin] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -23,6 +27,11 @@ export default function LoginModal({ onLogin, onClose, onJoinClick }) {
   };
 
   const handleLoginClick = () => {
+    if (!email || !password) {
+      const id = new Date().getTime();
+      dispatch(addSnackBar({ id, message: '정보 입력 후 로그인 해주세요!' }));
+      return;
+    }
     onLogin(email, password, isKeepLogin);
     onClose(); // 로그인 후 모달 닫기
   };
