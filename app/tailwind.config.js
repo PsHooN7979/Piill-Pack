@@ -35,7 +35,27 @@ module.exports = {
         custom: "1px 2px 4px rgba(0, 0, 0, 0.40)",
         custom2: "1px 2px 4px rgba(0, 0, 0, 0.20)"
       },
-
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateY(-100%)' },
+          '60%': { transform: 'translateY(15%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        slideOut: {
+          '0%': { transform: 'translateY(0)', opacity: 1 },
+          '100%': { transform: 'translateY(-100%)', opacity: 0 },
+        },
+        shrinkOut: {
+          '0%': { transform: 'scale(1)', opacity: 1 },
+          '30%': { transform: 'scale(1.2)', opacity: 1 },
+          '100%': { transform: 'scale(0)', opacity: 0 },
+        },
+      },
+      animation: {
+        slideIn: 'slideIn 0.5s ease-out forwards',
+        slideOut: 'slideOut 0.5s ease-out forwards',
+        shrinkOut: 'shrinkOut 0.5s ease-out forwards',
+      },
     },
   },
   variants: {

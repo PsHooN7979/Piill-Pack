@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,12 +7,16 @@ import images from "../../constants/image.constant";
 import AuthButton from "./components/auth.button";
 import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
+import Snackbar from "../../common/components/snack.bar";
 import { createUser, tryLogin } from "./repositories/auth.service";
 import { setIsAuth } from "../../common/feature/slices/auth.slice";
 
 export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+
+  const [snackbars, setSnackbars] = useState([]);
+  const [num, setNum] = useState(0);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +28,18 @@ export default function Auth() {
       return navigate.goHome();
     });
   }, []);
+
+  const handleSnackbarClose = useCallback(
+    (id) => {
+      setSnackbars((prev) => prev.filter((snackbar) => snackbar.id !== id));
+    },
+    []
+  );
+
+  const showSnackbarWithMessage = (message) => {
+    const id = new Date().getTime(); // 유니크 ID 생성
+    setSnackbars((prev) => [...prev, { id, message }]);
+  };
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -69,9 +85,11 @@ export default function Auth() {
     );
     try {
         await createUser(email, password);
+        showSnackbarWithMessage("회원가입이 완료되었습니다.");
         openLoginModal();
     } catch (error) {
         console.error('회원가입 중 에러 발생', error);
+        showSnackbarWithMessage("회원가입 실패");
     }
   };
 
@@ -90,6 +108,11 @@ export default function Auth() {
               <div className="mb-2">필</div>
               <div>팩</div>
             </div>
+
+            <button onClick={() => {
+              showSnackbarWithMessage(num);
+              setNum(num+1);
+            }}>테스트</button>
           </div>
         </div>
 
@@ -126,6 +149,15 @@ export default function Auth() {
       {isJoinModalOpen && (
         <SignupModal onJoin={handleJoin} onClose={closeJoinModal} />
       )}
+      {/* 스낵바 표시 */}
+      {snackbars.map((snackbar) => (
+        <Snackbar
+          key={snackbar.id}
+          id={snackbar.id}
+          message={snackbar.message}
+          onClose={handleSnackbarClose}
+        />
+      ))}
     </div>
   );
 }
