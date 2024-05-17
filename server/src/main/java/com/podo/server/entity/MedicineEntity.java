@@ -24,6 +24,9 @@ public class MedicineEntity {
     private UUID id;
 
     @Column(nullable = false)
+    private String itemSeq; // 약 일련번호
+
+    @Column()
     private String ediCode; // 약 보험 코드
 
     @Column(nullable = false)
@@ -33,7 +36,7 @@ public class MedicineEntity {
     private String chart; // 약 생김새
 
     @Column(nullable = false)
-    private String class_name; // 약 효과
+    private String className; // 약 효과
 
 
     @Column(nullable = false)
@@ -43,8 +46,8 @@ public class MedicineEntity {
     private LocalDateTime updated;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "medicine_uuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "medicineUuid", cascade = CascadeType.PERSIST)
     @Builder.Default
-    private List<PrescriptionMedicineBridgeEntity> medicine_uuid = new ArrayList<>();
+    private List<PrescriptionMedicineBridgeEntity> medicineUuid = new ArrayList<>();
 
 }

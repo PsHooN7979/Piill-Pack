@@ -60,7 +60,7 @@ public class PatientService {
         patient.setWeight(dto.getWeight());
         patient.setHeight(dto.getHeight());
         patient.setNickname(dto.getNickname());
-        patient.setIs_fist(false);
+        patient.setIsFist(false);
         patient.setUpdated(LocalDateTime.now());
 
         // db에 저장
@@ -77,7 +77,7 @@ public class PatientService {
         patient.setWeight(weight);
         patient.setHeight(height);
         patient.setGender(gender);
-        patient.setIs_fist(false);
+        patient.setIsFist(false);
 
         patientRepository.save(patient);
     }
