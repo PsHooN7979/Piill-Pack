@@ -43,16 +43,19 @@ public class PrescriptionController {
         }
     }
 
-    @PutMapping("/modify/{id}")
-    public ResponseEntity<Void> modifyPrescription(@RequestBody ModifyPresDto modifyPresDto,
+    @PostMapping("/modify/{id}")
+    public ResponseEntity<String> modifyPrescription(@RequestBody PrescriptionDto dto,
                                                    @PathVariable("id") UUID id,
                                                    @RequestHeader("Authorization") String token) {
         try {
             UUID patientId = jwtUtil.getId(token.substring(7));  // Extract patient ID from the token
-            prescriptionService.modifyPresc(modifyPresDto, id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            prescriptionService.deletePresc(id); // 삭제
+            prescriptionService.addPresc(dto, patientId); // 생성
+            return new ResponseEntity<>("처방전 수정 성공!",HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

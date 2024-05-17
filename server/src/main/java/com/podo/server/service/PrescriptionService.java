@@ -68,7 +68,7 @@ public class PrescriptionService {
                         .itemSeq(medicineDto.getItemSeq())
                         .name(medicineDto.getName())
                         .chart(medicineDto.getChart())
-                        .className(medicineDto.getClass_name())
+                        .className(medicineDto.getClassName())
                         .created(now)
                         .updated(now)
                         .build();
@@ -97,80 +97,6 @@ public class PrescriptionService {
 
     }
 
-    // 처방전 정보 수정
-    @Transactional
-    public void modifyPresc(ModifyPresDto dto, UUID prescriptionId) {
-        LocalDateTime now = LocalDateTime.now();
-
-        // Fetch existing prescription
-        Optional<PrescriptionEntity> existingPrescriptionOptional = prescriptionRepository.findById(prescriptionId);
-        log.info("처음 처방전 정보: {}", existingPrescriptionOptional.get());
-        if (existingPrescriptionOptional.isEmpty()) {
-            throw new IllegalArgumentException("처방전 정보를 찾을 수 없습니다: " + prescriptionId);
-        }
-
-        PrescriptionEntity existingPrescription = existingPrescriptionOptional.get();
-        Hibernate.initialize(existingPrescription.getPrescriptionUuid()); // Explicitly initialize the collection
-
-        // Update prescription details
-        existingPrescription.setName(dto.getName());
-        existingPrescription.setUpdated(now);
-        log.info("입력받은 처방전 정보: {}", existingPrescription);
-
-        // Handle associated medicines
-        List<PrescriptionMedicineBridgeEntity> prescriptionMedicines = new ArrayList<>();
-
-        for (ModifyPresDto.MedicineDto medicineDto : dto.getMedicines()) {
-            Optional<MedicineEntity> existingMedicine = medicineRepository.findByItemSeq(medicineDto.getItemSeq());
-
-            log.info("약: {}", existingMedicine);
-            MedicineEntity medicineEntity;
-            if (existingMedicine.isPresent()) {
-                medicineEntity = existingMedicine.get();
-                log.info("Existing medicine found: {}", medicineEntity.getItemSeq());
-            } else {
-                log.info("Creating new medicine: {}", medicineDto.getItemSeq());
-                medicineEntity = MedicineEntity.builder()
-                        .ediCode(medicineDto.getEdiCode())
-                        .name(medicineDto.getName())
-                        .chart(medicineDto.getChart())
-                        .className(medicineDto.getClassName())
-                        .itemSeq(medicineDto.getItemSeq())
-                        .created(now)
-                        .updated(now)
-                        .build();
-
-                medicineEntity = medicineRepository.save(medicineEntity);
-                Optional<MedicineEntity> medicineOptional = medicineRepository.findByItemSeq(medicineDto.getItemSeq());
-                MedicineEntity medicineEntity1 = medicineOptional.get();
-                log.info("New medicine saved: {}", medicineEntity.getItemSeq());
-            }
-
-            // Ensure medicineEntity has a UUID
-            if (medicineEntity.getId() == null) {
-                log.error("Medicine entity ID is null after save: {}", medicineEntity);
-                throw new IllegalStateException("Medicine entity ID is null");
-            }
-            log.info("New medicine saved: {}", medicineEntity);
-
-            PrescriptionMedicineBridgeEntity prescriptionMedicine = PrescriptionMedicineBridgeEntity.builder()
-                    .prescriptionUuid(existingPrescription)
-                    .medicineUuid(medicineEntity)
-                    .build();
-
-
-            prescriptionMedicines.add(prescriptionMedicine);
-        }
-
-        // Update existing prescription's medicines
-        existingPrescription.setPrescriptionUuid(prescriptionMedicines);
-
-        // Save the updated prescription
-        prescriptionRepository.save(existingPrescription);
-
-        // Save the updated prescription-medicine bridges
-        prescriptionMedicineBridgeRepository.saveAll(prescriptionMedicines);
-    }
 
     // 처방전 삭제 로직
     @Transactional
