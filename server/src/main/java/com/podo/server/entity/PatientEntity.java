@@ -48,11 +48,11 @@ public class PatientEntity {
 
     @Column
     @Builder.Default
-    private Boolean is_email = false;
+    private Boolean isEmail = false;
 
     @Column
     @Builder.Default
-    private Boolean is_fist = true;
+    private Boolean isFist = true;
 
     @Column
     private LocalDateTime created;
@@ -61,12 +61,12 @@ public class PatientEntity {
     private LocalDateTime updated;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "patientUuid", cascade = CascadeType.PERSIST)
     @Builder.Default
-    private List<PatientDiseaseBridgeEntity> patient_uuid = new ArrayList<>();
+    private List<PatientDiseaseBridgeEntity> patientUuid = new ArrayList<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "patient_uuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "patientUuid", cascade = CascadeType.PERSIST)
     @Builder.Default
     private List<PrescriptionEntity> prescriptions = new ArrayList<>();
 

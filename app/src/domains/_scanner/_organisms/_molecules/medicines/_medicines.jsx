@@ -3,8 +3,16 @@ import S from "./style";
 
 import TestStep from "../testStep/testStep";
 import React from "react";
+import TestSelect from "../testSelect/testSelect";
 
-export default function Medicines({ medicine, handler, remove, state, count }) {
+export default function Medicines({
+  medicine,
+  handler,
+  remove,
+  state,
+  count,
+  onAddMedicine,
+}) {
   return (
     <S.EfficacySection key={count}>
       <S.TitleSection state={state}>
@@ -24,7 +32,7 @@ export default function Medicines({ medicine, handler, remove, state, count }) {
         </S.EfficacyText>
       </S.TitleSection>
       <S.NameSection name={medicine.efficacy} state={state}>
-        {medicine.nameList && (
+        {medicine.efficacy !== "add" ? (
           <TestStep
             key={medicine.efficacy}
             list={medicine.nameList}
@@ -34,6 +42,8 @@ export default function Medicines({ medicine, handler, remove, state, count }) {
             count={count}
             name={medicine.efficacy}
           />
+        ) : (
+          <TestSelect onAddMedicine={onAddMedicine} count={count} />
         )}
       </S.NameSection>
     </S.EfficacySection>

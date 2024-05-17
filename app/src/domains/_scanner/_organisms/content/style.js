@@ -6,7 +6,6 @@ const AnalysisSection = styled(Box)({
   height: "80%",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: "5px",
 });
 const AnalysisPaper = styled(({ state, loading, ...otherProps }) => (
   <Paper {...otherProps} />
@@ -18,7 +17,6 @@ const AnalysisPaper = styled(({ state, loading, ...otherProps }) => (
   width: "90%",
   height: "100%",
   borderRadius: "15px",
-  padding: loading ? "15px" : "10px",
   overflow: loading ? "" : "scroll",
   scrollbarWidth: loading ? "" : "none",
   msOverflowStyle: loading ? "" : "none",
@@ -33,10 +31,16 @@ const ShowSection = styled(Box)({
 });
 const TitleSection = styled(Box)({
   display: "flex",
+  height: "50px",
+  padding: "15px",
   marginBottom: "5px",
+  position: "sticky",
+  top: 0,
+  background: "white",
+  zIndex: 1,
 });
 const MedicineImage = styled("img")({
-  width: "10%",
+  height: "30px",
   opacity: 0,
   display: "inline-block",
   transform: "translateY(20px)",
@@ -79,14 +83,14 @@ function SequentialText({ text }) {
 
   return <div>{letters}</div>;
 }
-const SelectSection = styled(Box)({
-  display: "flex",
+const SelectSection = styled(Box)(({ isDetail }) => ({
+  display: isDetail ? "none" : "flex",
   justifyContent: "center",
   padding: "20px 0px",
   background: "white",
   position: "sticky",
   bottom: 0,
-});
+}));
 const SaveButton = styled(Button)({
   display: "flex",
   width: "65%",

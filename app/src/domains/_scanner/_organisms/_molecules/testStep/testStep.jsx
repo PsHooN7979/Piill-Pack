@@ -43,8 +43,8 @@ export default function TestStep({
   const handleBack = (index) => {
     if (index === list.length - 1)
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    if (list.length === 1) handler(name, count);
     remove(count, index);
+    if (list.length === 1) handler(name, count);
   };
 
   return (

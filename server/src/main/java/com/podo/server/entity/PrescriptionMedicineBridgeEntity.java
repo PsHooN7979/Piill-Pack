@@ -23,10 +23,10 @@ public class PrescriptionMedicineBridgeEntity {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "prescription_uuid")
-    private PrescriptionEntity prescription_uuid;
+    @JoinColumn(name = "prescriptionUuid")
+    private PrescriptionEntity prescriptionUuid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "medicine_uuid")
-    private MedicineEntity medicine_uuid;
+    @JoinColumn(name = "medicineUuid")
+    private MedicineEntity medicineUuid;
 }

@@ -231,7 +231,7 @@ const mutateOCRSet = [
   },
   {
     efficacy: "add",
-    title: "직접 의약품 등록",
+    title: "의약품 직접 저장하기",
     ko: "의약품 정보를 입력해주세요.",
   },
 ];
