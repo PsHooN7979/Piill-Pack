@@ -92,6 +92,8 @@ public class PatientService {
                 .nickname(entity.getNickname())
                 .height(entity.getHeight())
                 .weight(entity.getWeight())
+                .is_fist(entity.getIsFist())
+                .updated(entity.getUpdated())
                 .build();
 
 
