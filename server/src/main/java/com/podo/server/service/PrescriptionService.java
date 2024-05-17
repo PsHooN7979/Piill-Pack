@@ -44,7 +44,7 @@ public class PrescriptionService {
                 .name(dto.getName())
                 .created(now)
                 .updated(now)
-                .patient_uuid(patient)
+                .patientUuid(patient)
                 .build();
 
 
@@ -63,7 +63,7 @@ public class PrescriptionService {
                         .ediCode(medicineDto.getEdiCode())
                         .name(medicineDto.getName())
                         .chart(medicineDto.getChart())
-                        .class_name(medicineDto.getClass_name())
+                        .className(medicineDto.getClass_name())
                         .created(now)
                         .updated(now)
                         .build();
@@ -73,14 +73,14 @@ public class PrescriptionService {
 
 
             PrescriptionMedicineBridgeEntity prescriptionMedicine = PrescriptionMedicineBridgeEntity.builder()
-                    .prescription_uuid(prescriptionEntity)
-                    .medicine_uuid(medicineEntity)
+                    .prescriptionUuid(prescriptionEntity)
+                    .medicineUuid(medicineEntity)
                     .build();
 
             prescriptionMedicines.add(prescriptionMedicine);
         }
 
-        prescriptionEntity.setPrescription_uuid(prescriptionMedicines);
+        prescriptionEntity.setPrescriptionUuid(prescriptionMedicines);
         PrescriptionEntity addPresc = prescriptionRepository.save(prescriptionEntity);
 
 

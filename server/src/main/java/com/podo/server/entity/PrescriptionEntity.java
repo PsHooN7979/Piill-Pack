@@ -33,13 +33,13 @@ public class PrescriptionEntity {
     private LocalDateTime updated;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "patient_uuid")
-    private PatientEntity patient_uuid;
+    @JoinColumn(name = "patientUuid")
+    private PatientEntity patientUuid;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "prescription_uuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "prescriptionUuid", cascade = CascadeType.PERSIST)
     @Builder.Default
-    private List<PrescriptionMedicineBridgeEntity> prescription_uuid = new ArrayList<>();
+    private List<PrescriptionMedicineBridgeEntity> prescriptionUuid = new ArrayList<>();
 
 
     // UUID만 받는 생성자

@@ -48,9 +48,9 @@ public class  DiseaseEntity {
 
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "disease_uuid", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "diseaseUuid", cascade = CascadeType.PERSIST)
     @Builder.Default
-    private List<PatientDiseaseBridgeEntity> disease_uuid = new ArrayList<>();
+    private List<PatientDiseaseBridgeEntity> diseaseUuid = new ArrayList<>();
 
 
 
