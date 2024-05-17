@@ -28,8 +28,7 @@ export default function LoginModal({ onLogin, onClose, onJoinClick }) {
 
   const handleLoginClick = () => {
     if (!email || !password) {
-      const id = new Date().getTime();
-      dispatch(addSnackBar({ id, message: '정보 입력 후 로그인 해주세요!' }));
+      dispatch(addSnackBar({ id: Date.now(), message: '정보 입력 후 로그인 해주세요!' }));
       return;
     }
     onLogin(email, password, isKeepLogin);

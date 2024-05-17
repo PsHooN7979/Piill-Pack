@@ -15,8 +15,6 @@ export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
 
-  const [num, setNum] = useState(0);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -27,11 +25,6 @@ export default function Auth() {
       return navigate.goHome();
     });
   }, []);
-
-  const showSnackbarWithMessage = (message) => {
-    const id = new Date().getTime(); // 유니크 ID 생성
-    dispatch(addSnackBar({ id, message }));
-  };
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -61,27 +54,69 @@ export default function Auth() {
       dispatch(setIsAuth(true)); // 로그인 성공 시 인증 상태를 true로 설정
       navigate("/first");
     } catch (error) {
-        console.error('로그인 중 에러 발생', error);
+      console.error('로그인 중 에러 발생', error);
+
+      let errorMessage = '로그인 실패';
+      if (error.response) {
+        // 서버 응답이 있는 경우
+        const status = error.response.status;
+        switch (status) {
+          case 400:
+            errorMessage = '잘못된 요청입니다. 입력한 정보를 확인해주세요.';
+            break;
+          case 401:
+            errorMessage = '아이디 또는 비밀번호가 올바르지 않습니다.';
+            break;
+          case 500:
+            errorMessage = '서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            break;
+          default:
+            errorMessage = `로그인 실패: ${error.response.data.message || '알 수 없는 오류가 발생했습니다.'}`;
+        }
+      } else {
+        // 서버 응답이 없는 경우
+        errorMessage = '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.';
+      }
+
+      dispatch(addSnackBar({ id: Date.now(), message: errorMessage }));
     }
   };
 
   const handleJoin = async (email, password, isAgree) => {
     // 회원가입 핸들러
     console.log(
-      "아이디: " +
-        email +
-        ", 비밀번호: " +
-        password +
-        ", 이메일 수신 동의 여부: " +
-        isAgree
+      "아이디: " + email + ", 비밀번호: " + password + ", 이메일 수신 동의 여부: " + isAgree
     );
     try {
-        await createUser(email, password);
-        showSnackbarWithMessage("회원가입이 완료되었습니다.");
-        openLoginModal();
+      await createUser(email, password);
+      dispatch(addSnackBar({ id: Date.now(), message: '회원가입이 완료되었습니다' }));
+      openLoginModal();
     } catch (error) {
-        console.error('회원가입 중 에러 발생', error);
-        showSnackbarWithMessage("회원가입 실패");
+      console.error('회원가입 중 에러 발생', error);
+  
+      let errorMessage = '회원가입 실패';
+      if (error.response) {
+        // 서버 응답이 있는 경우
+        const status = error.response.status;
+        switch (status) {
+          case 400:
+            errorMessage = '잘못된 요청입니다. 입력한 정보를 확인해주세요.';
+            break;
+          case 409:
+            errorMessage = '이미 등록된 회원입니다.';
+            break;
+          case 500:
+            errorMessage = '서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            break;
+          default:
+            errorMessage = `회원가입 실패: ${error.response.data.message || '알 수 없는 오류가 발생했습니다.'}`;
+        }
+      } else {
+        // 서버 응답이 없는 경우
+        errorMessage = '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.';
+      }
+  
+      dispatch(addSnackBar({ id: Date.now(), message: errorMessage }));
     }
   };
 
@@ -100,11 +135,6 @@ export default function Auth() {
               <div className="mb-2">필</div>
               <div>팩</div>
             </div>
-
-            <button onClick={() => {
-              showSnackbarWithMessage(num);
-              setNum(num+1);
-            }}>테스트</button>
           </div>
         </div>
 
@@ -136,7 +166,6 @@ export default function Auth() {
           onLogin={handleLogin}
           onClose={closeLoginModal}
           onJoinClick={openJoinModal}
-          showSnackbarWithMessage={showSnackbarWithMessage}
         />
       )}
       {isJoinModalOpen && (
