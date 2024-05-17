@@ -26,7 +26,7 @@ public class PrescriptionDto {
         private String ediCode;
         private String name;
         private String chart;
-        private String class_name;
+        private String className;
         private String itemSeq;
     }
 }

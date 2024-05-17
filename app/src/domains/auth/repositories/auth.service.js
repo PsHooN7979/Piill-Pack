@@ -23,3 +23,13 @@ export const tryLogin = async (email, password) => {
         throw error;
     }
 }
+
+export const fetchUserInfo = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8443/patientInfo`);
+        return response.data;
+    } catch (error) {
+        console.error('유저 로딩 중 에러 발생', error);
+        throw error;
+    }
+};

@@ -1,6 +1,7 @@
 package com.podo.server.controller;
 
 import com.podo.server.service.NaverOcrApi;
+import com.podo.server.service.TextCleanerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,24 +20,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CheckController {
     private final NaverOcrApi naverApi;
+    private final TextCleanerService textCleanerService;
+
     @Value("${naver.service.secretKey}")
     private String secretKey;
 
     @GetMapping("/naverOcr")
-    public ResponseEntity ocr() throws IOException {
+    public ResponseEntity<String> ocr() throws IOException {
         String fileName = "test.jpg"; // 파일 이름
         File file = ResourceUtils.getFile("classpath:static/image/" + fileName);
 
         List<String> result = naverApi.callApi("POST", file.getPath(), "jpg");
         if (result != null) {
-//        if (!result.equals(null)) {
+            StringBuilder extractedText = new StringBuilder();
             for (String s : result) {
                 log.info(s);
+                extractedText.append(s).append(" ");
             }
+
+            // Clean the extracted text
+            String cleanedText = textCleanerService.cleanText(extractedText.toString());
+
+            return new ResponseEntity<>(cleanedText.trim(), HttpStatus.OK);
         } else {
             log.info("null");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
-        return new ResponseEntity(result, HttpStatus.OK);
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,8 +8,9 @@ import AuthButton from "./components/auth.button";
 import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
 import { addSnackBar } from '../../common/feature/slices/snackBar.slice';
-import { createUser, tryLogin } from "./repositories/auth.service";
+import { createUser, fetchUserInfo, tryLogin } from "./repositories/auth.service";
 import { setIsAuth } from "../../common/feature/slices/auth.slice";
+import { setUserInfo } from '../../common/feature/slices/user.slice';
 
 export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -50,9 +51,28 @@ export default function Auth() {
     );
     try {
       console.log("로그인 전 인증 상태: ", isAuth);
-      await tryLogin(email, password);
+      const loginResponse = await tryLogin(email, password);
       dispatch(setIsAuth(true)); // 로그인 성공 시 인증 상태를 true로 설정
-      navigate("/first");
+
+      //UserInfo 가져오기
+      const userInfo = await fetchUserInfo();
+      console.dir(fetchUserInfo);
+
+      const { age, gender, weight, height, nickname, isfirst } = userInfo;
+
+      // 유저 정보를 Redux store에 저장
+      dispatch(setUserInfo({ age, gender, weight, height, nickname }));
+
+      const isFirst = userInfo.is_first;
+
+      // isFirst 값에 따라 네비게이트
+      if (isFirst) {
+        navigate('/first');
+      } else {
+        navigate('/home');
+      }
+
+      navigate('/first');
     } catch (error) {
       console.error('로그인 중 에러 발생', error);
 
@@ -66,6 +86,12 @@ export default function Auth() {
             break;
           case 401:
             errorMessage = '아이디 또는 비밀번호가 올바르지 않습니다.';
+            break;
+          case 403:
+            errorMessage = '허가되지 않은 접근입니다.';
+            break;
+          case 418:
+            errorMessage = '나는 찻주전자 입니다.🫖';
             break;
           case 500:
             errorMessage = '서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.';
@@ -102,8 +128,14 @@ export default function Auth() {
           case 400:
             errorMessage = '잘못된 요청입니다. 입력한 정보를 확인해주세요.';
             break;
+          case 403:
+            errorMessage = '허가되지 않은 접근입니다.';
+            break;
           case 409:
             errorMessage = '이미 등록된 회원입니다.';
+            break;
+          case 418:
+            errorMessage = '나는 찻주전자 입니다.🫖';
             break;
           case 500:
             errorMessage = '서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.';
