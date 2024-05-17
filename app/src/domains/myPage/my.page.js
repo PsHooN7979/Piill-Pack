@@ -1,6 +1,9 @@
 import React from "react";
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsAuth } from "../../common/feature/slices/auth.slice";
+
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import MyPageHeader from "./compoents/mypage.header";
@@ -12,6 +15,8 @@ import base64String from "./image.sample"; // base64 이미지 문자열 샘플
 
 export default function MyPage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const isAuth = useSelector((state) => state.auth.isAuth);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -54,6 +59,8 @@ export default function MyPage() {
     const logOutHandler = () => {
         // 로그 아웃 로직
         console.log("로그아웃 버튼 누름");
+        dispatch(setIsAuth(false)); // 인증 상태를 false로 설정
+        navigate('/auth');
     };
 
     return (
