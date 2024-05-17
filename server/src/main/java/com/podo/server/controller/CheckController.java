@@ -24,10 +24,10 @@ public class CheckController {
 
     @GetMapping("/naverOcr")
     public ResponseEntity ocr() throws IOException {
-        String fileName = "test2.dng"; // 파일 이름
+        String fileName = "test.jpg"; // 파일 이름
         File file = ResourceUtils.getFile("classpath:static/image/" + fileName);
 
-        List<String> result = naverApi.callApi("POST", file.getPath(), "dng");
+        List<String> result = naverApi.callApi("POST", file.getPath(), "jpg");
         if (result != null) {
 //        if (!result.equals(null)) {
             for (String s : result) {
