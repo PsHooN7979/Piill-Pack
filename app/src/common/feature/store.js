@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { thunk } from 'redux-thunk';
 import nativeSlice from "../../domains/_scanner/features/slices/native.slice";
 import authSlice from "./slices/auth.slice";
 import snackBarSlice from "./slices/snackBar.slice";
@@ -11,6 +12,8 @@ const store = configureStore({
     snackBar: snackBarSlice,
     user: userSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(thunk),
 });
 
 export default store;
