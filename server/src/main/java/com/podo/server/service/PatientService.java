@@ -8,8 +8,10 @@ import com.podo.server.exception.BusinessLogicException;
 import com.podo.server.jwt.JWTUtil;
 import com.podo.server.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PatientService {
 
     private final PatientRepository patientRepository;
@@ -85,6 +88,7 @@ public class PatientService {
         return patientRepository.findById(id);
     }
 
+    // 회원정보 조회
     public PatientDto getPatientInfo(PatientEntity entity) {
         return PatientDto.builder()
                 .age(entity.getAge())
@@ -98,6 +102,22 @@ public class PatientService {
 
 
     }
+
+    // 회원 탈퇴
+//    @Transactional(readOnly = true)
+//    public void deletePatient(UUID id){
+//        try{
+//            Optional<PatientEntity> patientOptional = patientRepository.findById(id);
+//
+//            if(patientOptional.isEmpty()) {
+//                log.error("환자 정보 없음: {}", id);
+//                throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다: " + id);
+//            }
+//
+//            PatientEntity patientEntity = patientOptional.get();
+//
+//        }
+//    }
 
 
 
