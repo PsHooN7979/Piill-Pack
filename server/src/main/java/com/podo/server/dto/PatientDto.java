@@ -20,7 +20,7 @@ public class PatientDto {
     private Integer weight;
     private Integer height;
     private String nickname;
-    private Boolean is_fist;
+    private Boolean is_first;
     private LocalDateTime updated;
 
 }
