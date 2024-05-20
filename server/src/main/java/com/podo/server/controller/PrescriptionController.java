@@ -74,4 +74,19 @@ public class PrescriptionController {
             return new ResponseEntity<>("처방전을 삭제하는 동안 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/info")
+    public ResponseEntity<List<PrescriptionDto>> getPresc( @RequestHeader("Authorization") String token){
+        try{
+            UUID patiendId = jwtUtil.getId(token.substring(7));
+            List<PrescriptionDto> prescriptions = prescriptionService.getPresc(patiendId);
+            return new ResponseEntity<>(prescriptions, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            log.error("Error fetching prescriptions for user", e);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            log.error("Error occurred while fetching prescriptions", e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

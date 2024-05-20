@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -99,7 +100,8 @@ public class PrescriptionService {
 
 
     // 처방전 삭제 로직
-    @Transactional
+
+    @Transactional(readOnly = true)
     public void deletePresc(UUID id) {
         try {
             Optional<PrescriptionEntity> existingPrescriptionOptional = prescriptionRepository.findById(id);
@@ -126,4 +128,37 @@ public class PrescriptionService {
             throw e;
         }
     }
+
+    // 처방전 조회
+    @Transactional(readOnly = true)
+    public List<PrescriptionDto> getPresc(UUID patientId){
+        Optional<PatientEntity> patientEntityOptional = patientRepository.findById(patientId);
+
+        if (patientEntityOptional.isEmpty()){
+            throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다 : " + patientId);
+        }
+        PatientEntity patient = patientEntityOptional.get();
+        System.out.println("환자 정보" +patient);
+        List<PrescriptionEntity> prescriptions = prescriptionRepository.findByPatientUuid(patient);
+        return prescriptions.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private PrescriptionDto convertToDto(PrescriptionEntity entity) {
+        return PrescriptionDto.builder()
+                .name(entity.getName())
+                .created(entity.getCreated())
+                .updated(entity.getUpdated())
+                .medicines(entity.getPrescriptionUuid().stream().map(bridge ->
+                                PrescriptionDto.MedicineDto.builder()
+                                        .ediCode(bridge.getMedicineUuid().getEdiCode())
+                                        .name(bridge.getMedicineUuid().getName())
+                                        .chart(bridge.getMedicineUuid().getChart())
+                                        .className(bridge.getMedicineUuid().getClassName())
+                                        .itemSeq(bridge.getMedicineUuid().getItemSeq())
+                                        .build())
+                        .collect(Collectors.toList()))
+                .build();
+    }
 }
+
+

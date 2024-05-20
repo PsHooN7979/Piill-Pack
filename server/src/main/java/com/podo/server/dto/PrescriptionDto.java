@@ -21,6 +21,9 @@ public class PrescriptionDto {
     private LocalDateTime updated;
 
     @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class MedicineDto {
 
         private String ediCode;
