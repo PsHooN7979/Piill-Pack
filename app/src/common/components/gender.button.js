@@ -4,8 +4,9 @@ export default function GenderButton({ onGenderSelect, selectedGender }) {
   const [gender, setGender] = useState(selectedGender);
 
   const selectGender = (selectedGender) => {
+    const booleanGender = selectedGender === "male";
     setGender(selectedGender);
-    onGenderSelect(selectedGender);
+    onGenderSelect(booleanGender);
   };
 
   return (

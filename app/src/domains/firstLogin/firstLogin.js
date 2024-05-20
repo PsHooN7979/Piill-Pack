@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUserInfo } from './repositories/user.service';
 
 import images from "../../constants/image.constant";
 
@@ -13,10 +14,11 @@ export default function FistLogin() {
   const [age, setAge] = useState("");
   const [tall, setTall] = useState("");
   const [weight, setWeight] = useState("");
-  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedGender, setSelectedGender] = useState(null);
   const [diseaseList, setDiseaseList] = useState([]);
 
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
   console.log("로그인 후 인증 상태: ", isAuth);
 
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ export default function FistLogin() {
     navigate("/");
   };
 
-  const handleDone = () => {
+  const handleDone = async () => {
     // 모든 필드가 비어있지 않고, tall과 weight가 숫자인지 검사
     if (
       !nick ||
@@ -64,22 +66,28 @@ export default function FistLogin() {
       console.log("정보 입력 후 회원가입을 진행해 주세요");
       return;
     }
-    // 정보 입력 성공
-    console.log("회원 정보 입력이 완료되었습니다");
-    console.log(
-      "닉네임: " +
-        nick +
-        ", 나이: " +
-        age +
-        ", 키: " +
-        tall +
-        ", 몸무게: " +
-        weight +
-        ", 성별: " +
-        selectedGender
-    );
-    console.log("질환 목록 -> " + diseaseList);
-    navigate("/home");
+
+    console.log(selectedGender);
+
+    const userInfo = {
+      age: Number(age),
+      gender: selectedGender,
+      weight: Number(weight),
+      height: Number(tall),
+      nickname: nick,
+      is_first: true,
+      updated: new Date().toISOString(),
+    };
+
+    saveUserInfo(userInfo)
+      .then(() => {
+        console.log('회원 정보 입력이 완료되었습니다');
+        navigate('/home'); // 회원 정보 입력 완료 후 홈으로 이동
+      })
+      .catch((error) => {
+        console.error('회원 정보 저장 중 오류 발생:', error);
+      });
+
   };
 
   return (
