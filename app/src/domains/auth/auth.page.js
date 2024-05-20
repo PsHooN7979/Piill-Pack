@@ -9,7 +9,7 @@ import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
 import { addSnackBar } from '../../common/feature/slices/snackBar.slice';
 import { createUser, fetchUserInfo, tryLogin } from "./repositories/auth.service";
-import { setIsAuth } from "../../common/feature/slices/auth.slice";
+import { setIsAuth, clearAuth } from "../../common/feature/slices/auth.slice";
 import { setUserInfo } from '../../common/feature/slices/user.slice';
 
 export default function Auth() {
@@ -49,30 +49,26 @@ export default function Auth() {
         ", 로그인 상태 유지 여부: " +
         isKeepLogin
     );
+
     try {
       console.log("로그인 전 인증 상태: ", isAuth);
       const loginResponse = await tryLogin(email, password);
-      dispatch(setIsAuth(true)); // 로그인 성공 시 인증 상태를 true로 설정
 
       //UserInfo 가져오기
       const userInfo = await fetchUserInfo();
-      console.dir(fetchUserInfo);
+      console.dir(userInfo);
 
-      const { age, gender, weight, height, nickname, isfirst } = userInfo;
+      const { age, gender, height, is_first, nickname, weight } = userInfo;
 
       // 유저 정보를 Redux store에 저장
       dispatch(setUserInfo({ age, gender, weight, height, nickname }));
 
-      const isFirst = userInfo.is_first;
-
       // isFirst 값에 따라 네비게이트
-      if (isFirst) {
+      if (is_first) {
         navigate('/first');
       } else {
         navigate('/home');
       }
-
-      navigate('/first');
     } catch (error) {
       console.error('로그인 중 에러 발생', error);
 
