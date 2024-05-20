@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 public class CheckController {
     private final NaverOcrApi naverApi;
-    private final TextCleanerService textCleanerService;
 
     @Value("${naver.service.secretKey}")
     private String secretKey;
@@ -37,14 +38,22 @@ public class CheckController {
                 log.info(s);
                 extractedText.append(s).append(" ");
             }
-
-            // Clean the extracted text
-            String cleanedText = textCleanerService.cleanText(extractedText.toString());
-
-            return new ResponseEntity<>(cleanedText.trim(), HttpStatus.OK);
+            String fullText = extractedText.toString().trim();
+            String filteredText = filterNineDigitSequences(fullText);
+            return new ResponseEntity<>(filteredText, HttpStatus.OK);
         } else {
             log.info("null");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    private String filterNineDigitSequences(String text) {
+        Pattern pattern = Pattern.compile("\\b\\d{9}\\b");
+        Matcher matcher = pattern.matcher(text);
+        StringBuilder filteredText = new StringBuilder();
+        while (matcher.find()) {
+            filteredText.append(matcher.group()).append(" ");
+        }
+        return filteredText.toString().trim();
     }
 }

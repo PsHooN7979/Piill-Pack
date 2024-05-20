@@ -2,6 +2,8 @@ package com.podo.server.service;
 
 import org.springframework.stereotype.Service;
 
+
+//OCR 사용 시 제외할 단어 재외시켜주는 것
 @Service
 public class TextCleanerService {
 
