@@ -1,6 +1,7 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 
 import Pages from "../domains";
+import AuthWatcher from "../common/components/auth.watcher";
 
 function Router() {
   return (
@@ -9,6 +10,7 @@ function Router() {
      * + 개발용으로 바로 홈으로 가도록 임시 라우팅
      */
     <HashRouter>
+      <AuthWatcher />
       <Routes>
         <Route path="/auth" element={<Pages.Auth />} />
         <Route path="/first" element={<Pages.FistLogin />} />
