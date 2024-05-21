@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUserInfo } from './repositories/user.service';
+import { setUserInfo } from "../../common/feature/slices/user.slice";
 
 import images from "../../constants/image.constant";
 
@@ -9,7 +10,7 @@ import GenderButton from "../../common/components/gender.button";
 import FirstLoginHeader from "./components/fistLogin.header";
 import TagList from "../../common/components/tagList";
 
-export default function FistLogin() {
+export default function FirstLogin() {
   const [nick, setNick] = useState("");
   const [age, setAge] = useState("");
   const [tall, setTall] = useState("");
@@ -40,6 +41,7 @@ export default function FistLogin() {
   };
 
   const handleGenderSelect = (gender) => {
+    console.log("선택된 성별: ", gender);
     setSelectedGender(gender);
   };
 
@@ -55,7 +57,7 @@ export default function FistLogin() {
     // 모든 필드가 비어있지 않고, tall과 weight가 숫자인지 검사
     if (
       !nick ||
-      !selectedGender ||
+      !selectedGender == null ||
       !age ||
       !tall ||
       !weight ||
@@ -66,8 +68,6 @@ export default function FistLogin() {
       console.log("정보 입력 후 회원가입을 진행해 주세요");
       return;
     }
-
-    console.log(selectedGender);
 
     const userInfo = {
       age: Number(age),
@@ -82,6 +82,8 @@ export default function FistLogin() {
     saveUserInfo(userInfo)
       .then(() => {
         console.log('회원 정보 입력이 완료되었습니다');
+        // Redux store에 유저 정보 저장
+        dispatch(setUserInfo({ age: userInfo.age, gender: userInfo.gender, weight: userInfo.weight, height: userInfo.height, nickname: userInfo.nickname }));
         navigate('/home'); // 회원 정보 입력 완료 후 홈으로 이동
       })
       .catch((error) => {
