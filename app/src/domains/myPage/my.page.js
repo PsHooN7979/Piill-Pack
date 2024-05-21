@@ -60,7 +60,6 @@ export default function MyPage() {
         // 로그 아웃 로직
         console.log("로그아웃 버튼 누름");
         dispatch(setIsAuth(false)); // 인증 상태를 false로 설정
-        navigate('/auth');
     };
 
     return (
