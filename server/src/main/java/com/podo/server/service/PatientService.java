@@ -110,21 +110,6 @@ public class PatientService {
                 .build();
 
     }
-
-    // 회원 탈퇴
-    // @Transactional(readOnly = true)
-    // public void deletePatient(UUID id){
-    // try{
-    // Optional<PatientEntity> patientOptional = patientRepository.findById(id);
-    //
-    // if(patientOptional.isEmpty()) {
-    // log.error("환자 정보 없음: {}", id);
-    // throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다: " + id);
-    // }
-    //
-    // PatientEntity patientEntity = patientOptional.get();
-    //
-    // }
-    // }
+    
 
 }
