@@ -8,7 +8,7 @@ import AuthButton from "./components/auth.button";
 import LoginModal from "./components/login.modal";
 import SignupModal from "./components/signup.modal";
 import { addSnackBar } from '../../common/feature/slices/snackBar.slice';
-import { createUser, fetchUserInfo, tryLogin } from "./repositories/auth.service";
+import { createUser, fetchUserInfo, tryLogin } from "./repositories/auth.repository";
 import { setIsAuth, clearAuth } from "../../common/feature/slices/auth.slice";
 import { setUserInfo } from '../../common/feature/slices/user.slice';
 
