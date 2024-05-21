@@ -17,8 +17,11 @@ function ProfileCard( {data, diseasesLimit} ) {
             <div className="rounded-full overflow-hidden w-20 h-20 bg-white border-2 border-gray-300 mt-3 mb-2">
                 <img src={data.profile_image} alt="profile_image" className="w-full h-full object-cover" />
             </div>
-            <div className="text-sm font-semibold">
-                {data.nick} {data.gender === 'male' ? '♂️' : '♀️'}
+            <div className="flex flex-row text-sm font-semibold">
+                <div>{data.nick}</div>
+                <div className={`text-sm font-semibold ${data.gender === 'male' ? 'text-blue-500' : 'text-pink-500'}`}>
+                    {data.gender === 'male' ? '♂️' : '♀️'}
+                </div>
             </div>
             <div className="text-xs mb-1">
                 {data.tall}cm, {data.weight}kg
