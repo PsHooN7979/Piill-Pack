@@ -54,6 +54,7 @@ public class MedicineController {
             result = readStreamToString(stream);
 
             if (stream != null) stream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
