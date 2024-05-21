@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { saveUserInfo } from './repositories/user.service';
+import { saveUserInfo } from './repositories/user.repository';
 import { setUserInfo } from "../../common/feature/slices/user.slice";
 
 import images from "../../constants/image.constant";
