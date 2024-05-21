@@ -4,10 +4,12 @@ import images from "../../../../constants/image.constant";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import scannerRepo from "../../repositories/scanner.repository";
+import useCustomNavigate from "../../../../common/hooks/useCustomNavigate";
 
 import constant from "../../../../constants/constant";
 
 export default function Content({ data }) {
+  const navigate = useCustomNavigate();
   const { medicineList, content, setPhrases, setTitle, setContent } = data;
 
   const [isDetail, setIsDetail] = React.useState(false);
@@ -27,7 +29,11 @@ export default function Content({ data }) {
     await mutateAnalysis
       .mutateAsync(medicineList)
       .then((result) => {})
-      .catch((error) => {});
+      .catch((error) => {
+        setTimeout(async () => {
+          return navigate.goPrescription();
+        }, 2100);
+      });
   }
 
   return (

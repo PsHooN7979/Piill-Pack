@@ -33,7 +33,7 @@ export default function Scanner() {
     async function asyncData() {
       const imageToBase64 = await L().takePhoto();
 
-      // if (imageToBase64 === "error") return navigate.goHome();
+      // if (imageToBase64 === "error") return navigate.goPrescription();
 
       setState(false);
       await mutateOCR

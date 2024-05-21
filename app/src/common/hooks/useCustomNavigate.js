@@ -8,6 +8,7 @@ function useACustomNavigate() {
   const goHome = () => navigate("/home");
   const goScanner = () => navigate("/scanner");
   const goPrescription = () => navigate("/prescription");
+  const goPrescriptionEdit = () => navigate("/prescription/edit");
 
   const goBack = () => navigate(-1);
   const goToPage = (path) => navigate(path);
@@ -20,6 +21,7 @@ function useACustomNavigate() {
     goBack,
     goToPage,
     goScanner,
+    goPrescriptionEdit,
   };
 }
 
