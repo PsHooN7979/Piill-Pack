@@ -1,3 +1,6 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import BMIVisualBox from "./components/bmi.visual.box";
@@ -5,11 +8,13 @@ import DiseaseList from "./components/disease.list";
 import HealthPageHeader from "./components/health.page.header";
 import WarningBox from "./components/warning.box";
 
-import { useEffect } from "react";
 import constant from "../../constants/constant";
 import Title from "../_scanner/_organisms/title/_title";
 
 export default function HealthPage() {
+  // Redux 스토어에서 사용자 정보를 가져오기
+  const { age, gender, weight, height, nickname } = useSelector((state) => state.user);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -17,11 +22,11 @@ export default function HealthPage() {
   // 테스트용 프로필 정보 더미 데이터
   const profileData = {
     profile_image: null,
-    nick: "김범준",
-    gender: "male",
-    age: 25,
-    tall: "175",
-    weight: "75",
+    nick: nickname,
+    age: age,
+    gender: gender === true ? "male" : "female",
+    tall: height,
+    weight: weight,
     diseaseList: [
       {
         name: "당뇨병",
