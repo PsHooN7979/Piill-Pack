@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuth } from "../../common/feature/slices/auth.slice";
@@ -13,10 +12,13 @@ import constant from "../../constants/constant";
 
 import base64String from "./image.sample"; // base64 이미지 문자열 샘플
 
+
 export default function MyPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isAuth = useSelector((state) => state.auth.isAuth);
+
+    // Redux 스토어에서 사용자 정보를 가져오기
+    const { age, gender, weight, height, nickname } = useSelector((state) => state.user);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -26,11 +28,11 @@ export default function MyPage() {
     const profileData = {
         // base64 이미지 스트링
         profile_image: base64String,
-        nick: "닉네임",
-        age: 26,
-        gender: "male",
-        tall: "175",
-        weight: "65",
+        nick: nickname,
+        age: age,
+        gender: gender === true ? "male" : "female",
+        tall: height,
+        weight: weight,
         diseaseList: [
         {
             name: "병 이름1",
