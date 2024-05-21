@@ -28,7 +28,7 @@ public class PrescriptionController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addPresc(@RequestBody PrescriptionDto dto,
-                                           @RequestHeader("Authorization") String token) {
+            @RequestHeader("Authorization") String token) {
         try {
             UUID id = jwtUtil.getId(token.substring(7)); // 토큰에 저장된 사용자 id(UUID 형식) 가져옴
 
@@ -45,24 +45,24 @@ public class PrescriptionController {
 
     @PostMapping("/modify/{id}")
     public ResponseEntity<String> modifyPrescription(@RequestBody PrescriptionDto dto,
-                                                   @PathVariable("id") UUID id,
-                                                   @RequestHeader("Authorization") String token) {
+            @PathVariable("id") UUID id,
+            @RequestHeader("Authorization") String token) {
         try {
-            UUID patientId = jwtUtil.getId(token.substring(7));  // Extract patient ID from the token
+            UUID patientId = jwtUtil.getId(token.substring(7)); // Extract patient ID from the token
             prescriptionService.deletePresc(id); // 삭제
             prescriptionService.addPresc(dto, patientId); // 생성
-            return new ResponseEntity<>("처방전 수정 성공!",HttpStatus.OK);
+            return new ResponseEntity<>("처방전 수정 성공!", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePresc(@PathVariable("id") UUID id,
-                                              @RequestHeader("Authorization") String token){
-        try{
+            @RequestHeader("Authorization") String token) {
+        try {
             UUID patiendId = jwtUtil.getId(token.substring(7));
             prescriptionService.deletePresc(id);
             return new ResponseEntity<>("처방전이 성공적으로 삭제되었습니다.", HttpStatus.OK);
@@ -76,8 +76,8 @@ public class PrescriptionController {
     }
 
     @GetMapping("/info")
-    public ResponseEntity<List<PrescriptionDto>> getPresc( @RequestHeader("Authorization") String token){
-        try{
+    public ResponseEntity<List<PrescriptionDto>> getPresc(@RequestHeader("Authorization") String token) {
+        try {
             UUID patiendId = jwtUtil.getId(token.substring(7));
             List<PrescriptionDto> prescriptions = prescriptionService.getPresc(patiendId);
             return new ResponseEntity<>(prescriptions, HttpStatus.OK);
