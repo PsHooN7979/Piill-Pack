@@ -14,12 +14,12 @@ const AuthWatcher = () => {
     console.log("isAuth state:", isAuth); // isAuth 상태 확인
 
     if (!isAuth && !initialLoad) {
-      dispatch(
-        addSnackBar({
-          id: Date.now(),
-          message: "로그아웃되어 초기 화면으로 이동합니다.",
-        })
-      );
+      // dispatch(
+      //   addSnackBar({
+      //     id: Date.now(),
+      //     message: "로그아웃되어 초기 화면으로 이동합니다.",
+      //   })
+      // );
       // navigate('/auth');
     }
 

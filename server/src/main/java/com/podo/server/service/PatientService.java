@@ -28,7 +28,6 @@ public class PatientService {
 
     private final JWTUtil jwtUtil;
 
-
     // 회원가입 기능
     public void register(UserDto dto) {
         LocalDateTime now = LocalDateTime.now();
@@ -37,9 +36,9 @@ public class PatientService {
 
         if (isExist) {
 
-            throw new BusinessLogicException("User with email " + dto.getEmail() + " already exists.");  // Raise an exception
+            throw new BusinessLogicException("User with email " + dto.getEmail() + " already exists."); // Raise an
+                                                                                                        // exception
         }
-
 
         PatientEntity patientEntity = PatientEntity.builder()
                 .email(dto.getEmail())
@@ -49,11 +48,12 @@ public class PatientService {
                 .build();
 
         patientRepository.save(patientEntity);
+
     }
 
-    //최초 로그인 -> 회원정보 입력
+    // 최초 로그인 -> 회원정보 입력
     public void registerInfo(PatientDto dto, String email) {
-        PatientEntity patient = patientRepository.findByEmail(email);  // 유저 이메일을 이용해 유저 정보 가져옴
+        PatientEntity patient = patientRepository.findByEmail(email); // 유저 이메일을 이용해 유저 정보 가져옴
 
         // 유저 정보 수정
         patient.setAge(dto.getAge());
@@ -79,10 +79,8 @@ public class PatientService {
 
     }
 
-
-
-
-    public void setPatientInfo( String email, String nickname, Integer age, Integer weight, Integer height, boolean gender) {
+    public void setPatientInfo(String email, String nickname, Integer age, Integer weight, Integer height,
+            boolean gender) {
 
         PatientEntity patient = patientRepository.findByEmail(email);
 
@@ -95,7 +93,6 @@ public class PatientService {
 
         patientRepository.save(patient);
     }
-
 
     public Optional<PatientEntity> patientId(UUID id) {
         return patientRepository.findById(id);
@@ -113,25 +110,22 @@ public class PatientService {
                 .updated(entity.getUpdated())
                 .build();
 
-
     }
 
     // 회원 탈퇴
-//    @Transactional(readOnly = true)
-//    public void deletePatient(UUID id){
-//        try{
-//            Optional<PatientEntity> patientOptional = patientRepository.findById(id);
-//
-//            if(patientOptional.isEmpty()) {
-//                log.error("환자 정보 없음: {}", id);
-//                throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다: " + id);
-//            }
-//
-//            PatientEntity patientEntity = patientOptional.get();
-//
-//        }
-//    }
-
-
+    // @Transactional(readOnly = true)
+    // public void deletePatient(UUID id){
+    // try{
+    // Optional<PatientEntity> patientOptional = patientRepository.findById(id);
+    //
+    // if(patientOptional.isEmpty()) {
+    // log.error("환자 정보 없음: {}", id);
+    // throw new IllegalArgumentException("환자 정보를 찾을 수 없습니다: " + id);
+    // }
+    //
+    // PatientEntity patientEntity = patientOptional.get();
+    //
+    // }
+    // }
 
 }
