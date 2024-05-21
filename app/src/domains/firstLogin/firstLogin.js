@@ -9,6 +9,7 @@ import images from "../../constants/image.constant";
 import GenderButton from "../../common/components/gender.button";
 import FirstLoginHeader from "./components/fistLogin.header";
 import TagList from "../../common/components/tagList";
+import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
 
 export default function FirstLogin() {
   const [nick, setNick] = useState("");
@@ -18,9 +19,7 @@ export default function FirstLogin() {
   const [selectedGender, setSelectedGender] = useState(null);
   const [diseaseList, setDiseaseList] = useState([]);
 
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
-  console.log("로그인 후 인증 상태: ", isAuth);
 
   const navigate = useNavigate();
 
@@ -65,7 +64,7 @@ export default function FirstLogin() {
       isNaN(Number(tall)) ||
       isNaN(Number(weight))
     ) {
-      console.log("정보 입력 후 회원가입을 진행해 주세요");
+      dispatch(addSnackBar({ id: Date.now(), message: "정보 입력 후 회원가입을 진행해 주세요" }));
       return;
     }
 
@@ -81,12 +80,13 @@ export default function FirstLogin() {
 
     saveUserInfo(userInfo)
       .then(() => {
-        console.log('회원 정보 입력이 완료되었습니다');
+        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 수정이 완료되었습니다" }));
         // Redux store에 유저 정보 저장
         dispatch(setUserInfo({ age: userInfo.age, gender: userInfo.gender, weight: userInfo.weight, height: userInfo.height, nickname: userInfo.nickname }));
         navigate('/home'); // 회원 정보 입력 완료 후 홈으로 이동
       })
       .catch((error) => {
+        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 저장 중 오류 발생" }));
         console.error('회원 정보 저장 중 오류 발생:', error);
       });
 
