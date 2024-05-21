@@ -1,8 +1,8 @@
 package com.podo.server.service;
 
 import com.podo.server.dto.PatientDto;
+import com.podo.server.dto.PatientProfileImageDto;
 import com.podo.server.dto.UserDto;
-import com.podo.server.entity.DiseaseEntity;
 import com.podo.server.entity.PatientEntity;
 import com.podo.server.exception.BusinessLogicException;
 import com.podo.server.jwt.JWTUtil;
@@ -11,11 +11,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +67,19 @@ public class PatientService {
         // db에 저장
         patientRepository.save(patient);
     }
+
+    public void profileImage(UUID id, MultipartFile file) throws IOException {
+        PatientEntity patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
+
+        String base64Image = Base64.getEncoder().encodeToString(file.getBytes());
+        patient.setProfileImageBase64(base64Image);
+        patient.setUpdated(LocalDateTime.now());
+
+        patientRepository.save(patient);
+
+    }
+
+
 
 
     public void setPatientInfo( String email, String nickname, Integer age, Integer weight, Integer height, boolean gender) {

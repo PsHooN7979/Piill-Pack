@@ -3,6 +3,7 @@ package com.podo.server.controller;
 
 import com.podo.server.dto.PatientDiseaseDto;
 import com.podo.server.dto.PatientDto;
+import com.podo.server.dto.PatientProfileImageDto;
 import com.podo.server.entity.DiseaseNameList;
 import com.podo.server.entity.PatientEntity;
 import com.podo.server.exception.BusinessLogicException;
@@ -19,13 +20,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@SecurityRequirement(name = "bearerAuth")
+@RequestMapping("/patient")
 public class PatientController {
 
 
@@ -85,7 +88,7 @@ public class PatientController {
         return "ok";
     }
 
-    @GetMapping("patientInfo")
+    @GetMapping("/info")
     public ResponseEntity<PatientDto> getPatientInfo(@RequestHeader("Authorization") String token) {
 
         UUID id = jwtUtil.getId(token.substring(7));  // 토큰에 저장된 유저id 정보 가져옴
@@ -119,7 +122,7 @@ public class PatientController {
     }
 
     // 정보 수정
-    @PutMapping("/member/modify")
+    @PutMapping("/modify")
     public ResponseEntity<String> registerInfo(@RequestBody @Valid PatientDto dto, @RequestHeader("Authorization") String token) {
         try {
             String email = jwtUtil.getUsername(token.substring(7));  // 토큰에 저장된 이메일 정보 가져옴
@@ -127,6 +130,18 @@ public class PatientController {
 
             return new ResponseEntity<>("Information saved successfully!", HttpStatus.OK);  // 성공
         } catch (BusinessLogicException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);  // 실패
+        }
+    }
+
+    @PostMapping("/image")
+    public ResponseEntity<String> profileImage(@RequestHeader("Authorization") String token,
+                                               @RequestBody MultipartFile file) {
+        try {
+            UUID id = jwtUtil.getId(token.substring(7)); // 토큰에 저장된 사용자 id(UUID 형식) 가져옴
+            patientService.profileImage(id, file);
+            return new ResponseEntity<>("프로필 이미지 등록 성공!", HttpStatus.OK);
+        } catch (IOException ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);  // 실패
         }
     }

@@ -54,6 +54,10 @@ public class PatientEntity {
     @Builder.Default
     private Boolean isFist = true;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String profileImageBase64;
+
     @Column
     private LocalDateTime created;
 
