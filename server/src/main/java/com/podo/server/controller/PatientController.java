@@ -1,14 +1,18 @@
 package com.podo.server.controller;
 
 
+import com.podo.server.dto.PatientDiseaseDto;
 import com.podo.server.dto.PatientDto;
 import com.podo.server.entity.DiseaseNameList;
 import com.podo.server.entity.PatientEntity;
+import com.podo.server.exception.BusinessLogicException;
 import com.podo.server.jwt.JWTUtil;
 import com.podo.server.repository.DiseaseNameRepository;
 import com.podo.server.repository.PatientRepository;
+import com.podo.server.service.DiseaseService;
 import com.podo.server.service.PatientService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,6 +34,7 @@ public class PatientController {
     private final PatientService patientService;
     private final PatientRepository patientRepository;
     private final JWTUtil jwtUtil;
+    private final DiseaseService diseaseService;
 
 //      email인증 미구현 상태 나중에 해야함
 //    @GetMapping("/checkisemail")
@@ -95,6 +100,35 @@ public class PatientController {
 
         return new ResponseEntity<>(patientDto, HttpStatus.OK);
 
+    }
+
+    @PostMapping("/addDisease")
+    public ResponseEntity<String> addPatientDisesase(@RequestBody PatientDiseaseDto dto,
+                                                     @RequestHeader("Authorization") String token){
+
+        try {
+            UUID id = jwtUtil.getId(token.substring(7)); // 토큰에 저장된 사용자 id(UUID 형식) 가져옴
+            diseaseService.addPatientDisease(dto, id);
+
+            return new ResponseEntity<>("질병 추가 성공!", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 정보 수정
+    @PutMapping("/member/modify")
+    public ResponseEntity<String> registerInfo(@RequestBody @Valid PatientDto dto, @RequestHeader("Authorization") String token) {
+        try {
+            String email = jwtUtil.getUsername(token.substring(7));  // 토큰에 저장된 이메일 정보 가져옴
+            patientService.registerInfo(dto, email);  // 서비스 로직 불러움
+
+            return new ResponseEntity<>("Information saved successfully!", HttpStatus.OK);  // 성공
+        } catch (BusinessLogicException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);  // 실패
+        }
     }
 
 
