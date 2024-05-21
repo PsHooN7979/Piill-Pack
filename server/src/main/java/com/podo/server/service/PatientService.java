@@ -68,11 +68,10 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
-    public void profileImage(UUID id, MultipartFile file) throws IOException {
+    public void profileImage(UUID id, PatientProfileImageDto dto) throws IOException {
         PatientEntity patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
 
-        String base64Image = Base64.getEncoder().encodeToString(file.getBytes());
-        patient.setProfileImageBase64(base64Image);
+        patient.setProfileImageBase64(dto.getProfileImageBase64());
         patient.setUpdated(LocalDateTime.now());
 
         patientRepository.save(patient);
