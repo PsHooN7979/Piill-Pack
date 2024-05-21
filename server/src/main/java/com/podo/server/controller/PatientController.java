@@ -136,10 +136,10 @@ public class PatientController {
 
     @PostMapping("/image")
     public ResponseEntity<String> profileImage(@RequestHeader("Authorization") String token,
-                                               @RequestBody MultipartFile file) {
+                                               @RequestBody PatientProfileImageDto dto) {
         try {
             UUID id = jwtUtil.getId(token.substring(7)); // 토큰에 저장된 사용자 id(UUID 형식) 가져옴
-            patientService.profileImage(id, file);
+            patientService.profileImage(id, dto);
             return new ResponseEntity<>("프로필 이미지 등록 성공!", HttpStatus.OK);
         } catch (IOException ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);  // 실패
