@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { saveUserInfo } from "../firstLogin/repositories/user.repository";
+import { setUserInfo } from "../../common/feature/slices/user.slice";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import ProfileEditPageHeader from "./compoents/profile.edit.page.header";
 import GenderButton from "../../common/components/gender.button";
 import TagList from "../../common/components/tagList";
+import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
 
 export default function ProfileEditPage() {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { profileData } = location.state || {}; // 프로필 카드에서 navigate할때 state 옵션으로 전달한 데이터를 가져옴
     const initialTags = profileData.diseaseList.map(disease => disease.name); // 받은 리스트 객체 데이터의 name을 가져와 리스트 형식으로 매핑
 
@@ -16,7 +21,7 @@ export default function ProfileEditPage() {
     const [age, setAge] = useState(profileData.age);
     const [tall, setTall] = useState(profileData.tall);
     const [weight, setWeight] = useState(profileData.weight);
-    const [selectedGender, setSelectedGender] = useState(profileData.gender);
+    const [selectedGender, setSelectedGender] = useState(profileData.gender == "male");
     const [diseaseList, setDiseaseList] = useState(initialTags);
   
     const handleNickChange = (event) => {
@@ -36,6 +41,7 @@ export default function ProfileEditPage() {
     };
   
     const handleGenderSelect = (gender) => {
+      console.log("선택된 성별: ", gender);
       setSelectedGender(gender);
     };
   
@@ -51,7 +57,7 @@ export default function ProfileEditPage() {
         // 모든 필드가 비어있지 않고, tall과 weight가 숫자인지 검사
         if (
           !nick ||
-          !selectedGender ||
+          !selectedGender == null ||
           !age ||
           !tall ||
           !weight ||
@@ -59,25 +65,31 @@ export default function ProfileEditPage() {
           isNaN(Number(tall)) ||
           isNaN(Number(weight))
         ) {
-          console.log("정보 입력 후 수정을 진행해주세요");
+          dispatch(addSnackBar({ id: Date.now(), message: "정보 입력 후 회원가입을 진행해 주세요" }));
           return;
         }
-        // 정보 입력 성공
-        console.log("회원 정보 수정이 완료되었습니다.");
-        console.log(
-          "닉네임: " +
-            nick +
-            ", 나이: " +
-            age +
-            ", 키: " +
-            tall +
-            ", 몸무게: " +
-            weight +
-            ", 성별: " +
-            selectedGender
-        );
-        console.log("질환 목록 -> " + diseaseList);
-        navigate(-1);
+
+        const userInfo = {
+          age: Number(age),
+          gender: selectedGender,
+          weight: Number(weight),
+          height: Number(tall),
+          nickname: nick,
+          is_first: true,
+          updated: new Date().toISOString(),
+        };
+    
+        saveUserInfo(userInfo)
+          .then(() => {
+            dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 수정이 완료되었습니다" }));
+            console.log('회원 정보 입력이 완료되었습니다');
+            dispatch(setUserInfo({ age: userInfo.age, gender: userInfo.gender, weight: userInfo.weight, height: userInfo.height, nickname: userInfo.nickname }));
+            navigate(-1); // 뒤로 가기
+          })
+          .catch((error) => {
+            dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 저장 중 오류 발생" }));
+            console.error('회원 정보 저장 중 오류 발생:', error);
+          });
       };
     
     return (
