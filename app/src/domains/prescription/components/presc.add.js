@@ -9,45 +9,37 @@ import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePi
 import dayjs from 'dayjs';
 
 
-export default function PrescAdd({ pill, prescName }) {
+export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, prescriptionData, setPrescriptionData }) {
   const location = useLocation('');
   const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [pills, setPills] = useState('');
+  const [dateRange, setDateRange] = useState([dayjs(), dayjs().add(1, 'day')]);
   const [selectedPills, setSelectedPills] = useState([]);
-
-  const items = pill[0].body.items;
+  const [searchInput, setSearchInput] = useState('');
 
   const handleInputName = (e) => {
     setName(e.target.value);
-  }
+    setPrescriptionData({ ...prescriptionData, name: e.target.value });
+  };
 
-  const handleInputStartDate = (e) => {
-    setStartDate(e.target.value);
-  }
-
-  const handleInputEndDate = (e) => {
-    setEndDate(e.target.value);
-  }
   const handleInputPills = (e, newInputValue) => {
-    setPills(newInputValue);
-    console.log(pills);
-  }
+    setSearchTerm(newInputValue);
+    setSearchInput(newInputValue);
+  };
 
   const handleRegisterPills = (event, newValue) => {
-    setSelectedPills(prevPills => [...prevPills, newValue]);
-
-    console.log(selectedPills);
-    setPills(''); // Clear input after selection
+    if (newValue) {
+      const updatedPills = [...selectedPills, newValue];
+      setSelectedPills(updatedPills);
+      setPrescriptionData({ ...prescriptionData, medicines: updatedPills });
+    }
+    setSearchInput(''); // Clear input after selection
   };
 
-  const handleRemove = (pills) => {
-    // filter 메소드를 사용해 해당 인덱스를 제외한 나머지 약 목록을 설정합니다.
-    const newPills = pills.filter((_, idx) => idx !== pills);
-    setPills(newPills);
+  const handleRemove = (index) => {
+    const newPills = selectedPills.filter((_, idx) => idx !== index);
+    setSelectedPills(newPills);
+    setPrescriptionData({ ...prescriptionData, medicines: newPills });
   };
-
 
 
   return (
@@ -70,19 +62,16 @@ export default function PrescAdd({ pill, prescName }) {
           복용 기간:
         </span>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer
-            components={[
-              'MobileDateRangePicker'
-            ]}
-          >
-
-            <DemoItem  component="MobileDateRangePicker">
+          <DemoContainer components={['MobileDateRangePicker']}>
+            <DemoItem component="MobileDateRangePicker">
               <MobileDateRangePicker
-                defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
+                value={dateRange}
+                onChange={(newValue) => {
+                  setDateRange(newValue);
+                  setPrescriptionData({ ...prescriptionData, dateRange: newValue });
+                }}
               />
             </DemoItem>
-
-
           </DemoContainer>
         </LocalizationProvider>
       </div>
@@ -94,7 +83,7 @@ export default function PrescAdd({ pill, prescName }) {
       {/* 약 이름 검색 컨테이너 */}
 
       <div className="flex items-center bg-warn01 rounded-full p-2 mb-3 w-full max-w-md mx-auto shadow-custom01">
-        <button className="px-2">
+        <button className="px-2" onClick={onSearch}>
           {/* <AiOutlineMenu className="text-gray-600 text-xl" /> */}
           <icons.iconTypes.searchIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
           {/* 검색 아이콘 */}
@@ -102,10 +91,10 @@ export default function PrescAdd({ pill, prescName }) {
         <Autocomplete
           freeSolo
           id="autocomplete-search-bar"
-          options={items}  // Assuming pillData[0] is where your items are located
-          getOptionLabel={(option) => option.ITEM_NAME || "No Name"}  // Display the name
+          options={pill}
+          getOptionLabel={(option) => option.ITEM_NAME || "No Name"}
           onInputChange={handleInputPills}
-          inputValue={pills}
+          inputValue={searchInput}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -114,12 +103,10 @@ export default function PrescAdd({ pill, prescName }) {
               size="small"
             />
           )}
-          filterOptions={(options, state) => {
-            // Custom filtering logic, ensure all string manipulations are on valid strings
-            return options.filter(option =>
-              option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
-            );
-          }}
+          filterOptions={(options, state) => options.filter(option =>
+            option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
+          )}
+          onChange={handleRegisterPills}
           style={{ width: '100%' }}
         />
         <button onClick={handleRegisterPills} className="px-2">
@@ -130,36 +117,24 @@ export default function PrescAdd({ pill, prescName }) {
       {/* 약 이름 검색 컨테이너 종료 */}
 
       {/* 등록한 약 목록 컨테이너 */}
-      <div className="flex  justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-auto">
-        <div className="flex items-center w-full p-3">
-          {/* 이미지 컨테이너 */}
-          <div className='w-10 h-15 flex-shrink-0 px-3'>
-            <icons.iconTypes.pillIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
-          </div>
-          {/* 텍스트 컨테이너 */}
-          <div className="flex-grow ml-4">
-            <div className="text-lg font-semibold w-auto md:w-64 overflow-hidden whitespace-nowrap overflow-ellipsis">
-              직접 추가한 약 이름
-            </div>
-            <div className="text-xs overflow-hidden">
-              직접 추가한 약 간단 효과
-            </div>
-            <div className="text-xs overflow-hidden">
-              직접 추가한 약 생김새
-            </div>
-            <div className="pr-3">
+      {selectedPills.map((pill, index) => (
+        <div key={index} className="flex justify-between items-center border border-gray-300 w-full rounded-lg px-4 py-2 mb-3">
+          <div className="flex items-center">
+            <img src={pill.ITEM_IMAGE} alt={pill.ITEM_NAME} className="w-10 h-10 mr-4" />
+            <div>
+              <div className="font-bold">{pill.ITEM_NAME}</div>
+              <div className="text-sm text-gray-600">{pill.ENTP_NAME}</div>
+              <div className="text-sm text-gray-600">{pill.CHART}</div>
             </div>
           </div>
+          <button
+            onClick={() => handleRemove(index)}
+            className="text-red-600 hover:text-red-800"
+          >
+            <icons.iconTypes.deleteIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
+          </button>
         </div>
-        <button className=" text-xl ml-2 px-3  hover:text-red-600 text-warn02 p-1 inline-flex items-center justify-center focus:outline-none  "
-          onClick={() => handleRemove(pills)}>
-          <icons.iconTypes.deleteIcon style={{ ...icons.baseStyle, ...icons.iconSizes.lg }} />
-        </button>
-      </div>
-
-
-
-      {/* 등록한 약 목록 컨테이너 종료 */}
+      ))}
     </div>
 
 

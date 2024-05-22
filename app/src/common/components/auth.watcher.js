@@ -13,6 +13,7 @@ const AuthWatcher = () => {
     console.log("AuthWatcher mounted"); // 컴포넌트 마운트 확인
     console.log("isAuth state:", isAuth); // isAuth 상태 확인
 
+    // 일시 무력화
     if (!isAuth && !initialLoad) {
       // dispatch(
       //   addSnackBar({

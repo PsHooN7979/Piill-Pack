@@ -80,7 +80,7 @@ export default function FirstLogin() {
 
     saveUserInfo(userInfo)
       .then(() => {
-        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 수정이 완료되었습니다" }));
+        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 등록이 완료되었습니다" }));
         // Redux store에 유저 정보 저장
         dispatch(setUserInfo({ age: userInfo.age, gender: userInfo.gender, weight: userInfo.weight, height: userInfo.height, nickname: userInfo.nickname }));
         navigate('/home'); // 회원 정보 입력 완료 후 홈으로 이동
