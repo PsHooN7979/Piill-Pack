@@ -33,8 +33,8 @@ public class NaverOcrApi {
      * @returns {List} 추출 text list
      */
     public  List<String> callApi(String type, String filePath, String ext) {
-        String apiURL = "https://stytlwh0q0.apigw.ntruss.com/custom/v1/30912/40784180709a609ee79c8a625ead38b7ade37c39bc8fc3e5ce97d1fa9c3eea51/general";
-        String secretKey = "Z1ppRUFVWWVLcGhhbVp0TU5ZR3lYTUptelBoTE1FRkY=";
+        String apiURL = "https://stytlwh0q0.apigw.ntruss.com/custom/v1/31116/6dab4bebc7f7a648a7ceba58619f6ffc750deea82e394b7363bea602ddc7eab9/general";
+        String secretKey = "dElSVU1lUUxxTklXQm5wRElETU1obHBaSUJEWEpxWVE=";
         String imageFile = filePath;
         List<String> parseData = null;
 
