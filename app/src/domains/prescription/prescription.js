@@ -5,6 +5,7 @@ import images from "../../constants/image.constant";
 import { useEffect } from "react";
 import Title from "../_scanner/_organisms/title/_title";
 import constant from "../../constants/constant";
+import { useSelector } from "react-redux";
 
 export default function PrescriptionList() {
   useEffect(() => {
@@ -54,6 +55,8 @@ export default function PrescriptionList() {
     },
   ];
 
+  const data2 = useSelector((state) => state.prescriptions.prescriptions || []);
+  console.dir(data2);
 
 
 
@@ -65,7 +68,7 @@ export default function PrescriptionList() {
       <div className="flex flex-col justify-center items-center">
         <div className=" flex-col bg-opacity-100 mt-6 w-[85%] min-h-screen ">
           {/* 처방전 데이터                    */}
-          <PrescSelect presc={prescData} nameLimit={12} />
+          <PrescSelect presc={data2} nameLimit={12} />
         </div>
       </div>
       <BottomNavigation active="2" />{" "}
