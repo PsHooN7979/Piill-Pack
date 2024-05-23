@@ -25,12 +25,10 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
   const handleInputPills = (e, newInputValue) => {
     setSearchTerm(newInputValue);
     setSearchInput(newInputValue);
-    //setIsDropdownOpen(true); // 검색 결과 박스 열기
   };
 
   const handlePillSelect = (event, newValue) => {
     setSelectedPill(newValue);
-    //setIsDropdownOpen(false);
   };
 
   const handleRegisterPills = () => {
@@ -40,7 +38,6 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
       setPrescriptionData({ ...prescriptionData, medicines: updatedPills });
       setSelectedPill(null); // Clear selected pill after adding
       setSearchInput(''); // Clear input after selection
-     // setIsDropdownOpen(false); // 검색 결과 박스 닫기
     }
   };
 
@@ -100,7 +97,7 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
         <Autocomplete
           freeSolo
           id="autocomplete-search-bar"
-          options={pill}
+          options={pill || []}
           getOptionLabel={(option) => option.ITEM_NAME || "No Name"}
           onInputChange={handleInputPills}
           inputValue={searchInput}
