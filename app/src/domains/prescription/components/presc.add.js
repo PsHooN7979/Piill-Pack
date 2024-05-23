@@ -8,13 +8,14 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePicker';
 import dayjs from 'dayjs';
 
-
-export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, prescriptionData, setPrescriptionData }) {
+export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, prescriptionData, setPrescriptionData, inputRef }) {
   const location = useLocation('');
   const [name, setName] = useState('');
   const [dateRange, setDateRange] = useState([dayjs(), dayjs().add(1, 'day')]);
   const [selectedPills, setSelectedPills] = useState([]);
+  const [selectedPill, setSelectedPill] = useState(null); // 선택된 약 상태
   const [searchInput, setSearchInput] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 검색 결과 박스 열기 상태
 
   const handleInputName = (e) => {
     setName(e.target.value);
@@ -24,15 +25,23 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
   const handleInputPills = (e, newInputValue) => {
     setSearchTerm(newInputValue);
     setSearchInput(newInputValue);
+    //setIsDropdownOpen(true); // 검색 결과 박스 열기
   };
 
-  const handleRegisterPills = (event, newValue) => {
-    if (newValue) {
-      const updatedPills = [...selectedPills, newValue];
+  const handlePillSelect = (event, newValue) => {
+    setSelectedPill(newValue);
+    //setIsDropdownOpen(false);
+  };
+
+  const handleRegisterPills = () => {
+    if (selectedPill) {
+      const updatedPills = [...selectedPills, selectedPill];
       setSelectedPills(updatedPills);
       setPrescriptionData({ ...prescriptionData, medicines: updatedPills });
+      setSelectedPill(null); // Clear selected pill after adding
+      setSearchInput(''); // Clear input after selection
+     // setIsDropdownOpen(false); // 검색 결과 박스 닫기
     }
-    setSearchInput(''); // Clear input after selection
   };
 
   const handleRemove = (index) => {
@@ -101,12 +110,16 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
               label="약 이름으로 검색하기"
               variant="outlined"
               size="small"
+              inputRef={inputRef}
+              onFocus={() => setIsDropdownOpen(true)} // 포커스 시 검색 결과 박스 열기
+              onBlur={() => setIsDropdownOpen(false)} // 포커스 해제 시 검색 결과 박스 닫기
             />
           )}
           filterOptions={(options, state) => options.filter(option =>
             option.ITEM_NAME.toLowerCase().includes(state.inputValue.toLowerCase())
           )}
-          onChange={handleRegisterPills}
+          onChange={handlePillSelect}
+          open={isDropdownOpen} // 검색 결과 박스 열림/닫힘 상태
           style={{ width: '100%' }}
         />
         <button onClick={handleRegisterPills} className="px-2">

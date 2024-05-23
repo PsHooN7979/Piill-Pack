@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewPrescription, fetchMedicine } from "./slices/presc.slice";
 import BottomNavigation from "../../common/components/BottomNavigation";
@@ -8,6 +8,7 @@ import PrescAdd from "./components/presc.add"
 
 export default function PrescAddPage() {
   const dispatch = useDispatch();
+  const inputRef = useRef(null); // 검색 인풋 ref
   const medicines = useSelector((state) => state.prescriptions.medicines);
   const [searchTerm, setSearchTerm] = useState("");
   const [prescriptionData, setPrescriptionData] = useState({
@@ -23,6 +24,9 @@ export default function PrescAddPage() {
 
   const handleSearch = () => {
     dispatch(fetchMedicine(searchTerm));
+    if (inputRef.current) {
+      inputRef.current.focus(); // 검색 아이콘 버튼을 눌렀을 때 인풋 필드에 포커스 설정
+    }
   };
 
   const handleAddPrescription = () => {
@@ -45,6 +49,7 @@ export default function PrescAddPage() {
             setSearchTerm={setSearchTerm}
             prescriptionData={prescriptionData}
             setPrescriptionData={setPrescriptionData}
+            inputRef={inputRef}
           />
         </div>
       </div>
