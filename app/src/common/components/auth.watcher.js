@@ -21,7 +21,7 @@ const AuthWatcher = () => {
           message: "로그아웃되어 초기 화면으로 이동합니다.",
         })
       );
-      navigate("/auth");
+      // navigate("/auth");
     }
 
     if (initialLoad) {

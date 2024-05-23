@@ -57,7 +57,8 @@ public class CheckController {
             return ResponseEntity.badRequest().body("Invalid Base64 data");
         }
 
-        logger.info("Received Base64 string: " + base64String.substring(0, Math.min(base64String.length(), 50)) + "...");
+        logger.info(
+                "Received Base64 string: " + base64String.substring(0, Math.min(base64String.length(), 50)) + "...");
 
         // Base64 -> JPG 변환
         base64String = base64String.trim().replaceAll("[^A-Za-z0-9+/=]", "");
@@ -82,7 +83,8 @@ public class CheckController {
         if (!dir.exists()) {
             if (!dir.mkdirs()) {
                 logger.severe("Failed to create directory: " + outputDir);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create directory: " + outputDir);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to create directory: " + outputDir);
             }
         }
 
@@ -92,7 +94,8 @@ public class CheckController {
             logger.info("Image successfully saved to: " + outputFile);
         } catch (IOException e) {
             logger.severe("Error writing JPG file: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error writing JPG file: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error writing JPG file: " + e.getMessage());
         }
 
         // Process the saved image with OCR and get medicine information
@@ -125,8 +128,9 @@ public class CheckController {
                     String medicineInfo = getMedicineInfo(ediCode);
                     if (medicineInfo != null) {
                         try {
-                            List<Map<String, Object>> medicineInfoList = objectMapper.readValue(medicineInfo, new TypeReference<List<Map<String, Object>>>() {
-                            });
+                            List<Map<String, Object>> medicineInfoList = objectMapper.readValue(medicineInfo,
+                                    new TypeReference<List<Map<String, Object>>>() {
+                                    });
                             if (medicineInfoList != null) {
                                 medicineInfos.addAll(medicineInfoList);
                             }
@@ -135,6 +139,7 @@ public class CheckController {
                         }
                     }
                 }
+                log.info(medicineInfos.toString());
                 return medicineInfos;
             }
         }
@@ -152,7 +157,12 @@ public class CheckController {
     }
 
     private String getMedicineInfo(String ediCode) throws IOException {
-        String serviceKey = "8XF02UiqBjMacUjtyAJt3BuzIPOJjO1MCdRSqeekt68l59GJY2unB1%2FFfl%2BQaP49h6fIN8aiNdIXnft2F3YT1w%3D%3D"; // use the secretKey from the configuration
+        String serviceKey = "8XF02UiqBjMacUjtyAJt3BuzIPOJjO1MCdRSqeekt68l59GJY2unB1%2FFfl%2BQaP49h6fIN8aiNdIXnft2F3YT1w%3D%3D"; // use
+                                                                                                                                // the
+                                                                                                                                // secretKey
+                                                                                                                                // from
+                                                                                                                                // the
+                                                                                                                                // configuration
         String pageNo = "1";
         String numOfRows = "3";
         String type = "json";
@@ -160,8 +170,7 @@ public class CheckController {
         String encodedEdiCode = URLEncoder.encode(ediCode, "UTF-8");
         String urlStr = String.format(
                 "http://apis.data.go.kr/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01?serviceKey=%s&edi_code=%s&pageNo=%s&numOfRows=%s&type=%s",
-                serviceKey, encodedEdiCode, pageNo, numOfRows, type
-        );
+                serviceKey, encodedEdiCode, pageNo, numOfRows, type);
 
         HttpURLConnection urlConnection = null;
         InputStream stream = null;
@@ -182,19 +191,22 @@ public class CheckController {
                 }
 
                 String result = readStreamToString(stream);
-                if (stream != null) stream.close();
+                if (stream != null)
+                    stream.close();
                 return medicineService.transformResponse(result);
             } catch (IOException e) {
                 lastException = e;
-                if (stream != null) try {
-                    stream.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                if (urlConnection != null) urlConnection.disconnect();
+                if (stream != null)
+                    try {
+                        stream.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                if (urlConnection != null)
+                    urlConnection.disconnect();
                 if (i < retryCount - 1) {
                     try {
-                        Thread.sleep(2000);  // wait for 2 seconds before retrying
+                        Thread.sleep(2000); // wait for 2 seconds before retrying
                     } catch (InterruptedException ignored) {
                     }
                 }
@@ -204,8 +216,8 @@ public class CheckController {
     }
 
     private InputStream getNetworkConnection(HttpURLConnection urlConnection) throws IOException {
-        urlConnection.setConnectTimeout(10000);  // 10 seconds for connection timeout
-        urlConnection.setReadTimeout(10000);     // 10 seconds for read timeout
+        urlConnection.setConnectTimeout(10000); // 10 seconds for connection timeout
+        urlConnection.setReadTimeout(10000); // 10 seconds for read timeout
         urlConnection.setRequestMethod("GET");
         urlConnection.setDoInput(true);
 

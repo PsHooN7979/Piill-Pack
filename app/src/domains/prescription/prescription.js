@@ -15,41 +15,28 @@ export default function PrescriptionList() {
   // 처방전 더미 데이터
   const prescData = [
     {
-      name: "처방 1",
+      name: "종양 치료 처방전",
       pills: [
-        {
-          name: "타이레놀8시간이알서방정(아세트아미노펜)",
-          chart: "흰색의 장방형 서방성 필름코팅정제",
-          image: images.logo,
-          description: "해열.진통.소염제",
-        },
         {
           name: "가스디알정50밀리그램(디메크로틴산마그네슘)",
           chart: "녹색의 원형 필름코팅정",
-          image: images.logo,
+          image:
+            "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147426403087300104", // 실제 이미지 URL
           description: "기타의 소화기관용약",
         },
-      ],
-    },
-    {
-      name: "처방 2",
-      pills: [
         {
-          name: "부루펜정200밀리그램(이부프로펜)",
-          chart: "흰색의 장방형 필름코팅 정제",
-          image: images.logo,
-          description: "해열.진통.소염제",
+          name: "페라트라정2.5밀리그램(레트로졸)",
+          chart: "어두운 황색의 원형 필름코팅정",
+          image:
+            "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147426403087300107", // 실제 이미지 URL
+          description: "항악성종양제",
         },
-      ],
-    },
-    {
-      name: "처방 3",
-      pills: [
         {
-          name: "가스모틴정5밀리그램(모사프리드시트르산염수화물)",
-          chart: "이약은 분할선을 가진 흰색의 장방형 필름코팅정제이다",
-          image: images.logo,
-          description: "기타의 소화기관용약",
+          name: "졸뎀속붕정(졸피뎀타르타르산염)",
+          chart: "흰색의 원형 구강붕해정제",
+          image:
+            "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147426403087300128", // 실제 이미지 URL
+          description: "최면진정제",
         },
       ],
     },
@@ -58,9 +45,6 @@ export default function PrescriptionList() {
   const data2 = useSelector((state) => state.prescriptions.prescriptions || []);
   console.dir(data2);
 
-
-
-
   return (
     <div className="relative">
       <PrescHeader />
@@ -68,7 +52,7 @@ export default function PrescriptionList() {
       <div className="flex flex-col justify-center items-center">
         <div className=" flex-col bg-opacity-100 mt-6 w-[85%] min-h-screen ">
           {/* 처방전 데이터                    */}
-          <PrescSelect presc={data2} nameLimit={12} />
+          <PrescSelect presc={prescData} nameLimit={12} />
         </div>
       </div>
       <BottomNavigation active="2" />{" "}

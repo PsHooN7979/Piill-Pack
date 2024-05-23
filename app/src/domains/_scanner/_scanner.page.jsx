@@ -32,22 +32,30 @@ export default function Scanner() {
   React.useEffect(() => {
     async function asyncData() {
       const imageToBase64 = await L().takePhoto();
+      console.log("image: " + imageToBase64);
+      const regex = /^data:image\/(png|jpeg|jpg);base64,/;
+      const newImageToBase64String = imageToBase64.replace(regex, "");
 
       // if (imageToBase64 === "error") return navigate.goPrescription();
 
       setState(false);
       await mutateOCR
-        .mutateAsync(imageToBase64)
+        .mutateAsync(newImageToBase64String)
         .then((result) => {
-          setData(result.data.medicine_list);
+          console.log("OCR Status: " + result.status);
+          console.log("OCR Data: " + result.data[0].ITEM_SEQ);
+
+          // setData(result.data.medicine_list);
+          setData(testSet.modifiedData);
           setTitle(constant.Title.find);
         })
         .catch((error) => {
+          console.log("OCR Error: " + error);
           setTimeout(async () => {
             // return navigate.goHome();
 
             //test
-            setData(testSet.mutateOCRSet);
+            setData(testSet.modifiedData);
             //test
             setTitle(constant.Title.find);
           }, 2100);

@@ -1,3 +1,50 @@
+const modifiedData = [
+  {
+    efficacy: "painkiller",
+    title: "개의 진통제를 찾았어요!",
+    nameList: [
+      {
+        name: "졸뎀속붕정(졸피뎀타르타르산염)",
+        description:
+          "졸뎀속붕정은 최면진정제로, 불면증 치료에 사용됩니다. 흰색의 원형 구강붕해정제입니다.",
+      },
+    ],
+    ko: "아픔을 억제해요.",
+    name: "진통제",
+  },
+  {
+    efficacy: "antacids",
+    title: "개의 소화기관용 약품을 찾았어요!",
+    nameList: [
+      {
+        name: "가스디알정50밀리그램(디메크로틴산마그네슘)",
+        description:
+          "가스디알정은 소화불량과 관련된 증상을 완화시키는 데 사용됩니다. 녹색의 원형 필름코팅정입니다.",
+      },
+    ],
+    ko: "소화기관에 효과가 있어요.",
+    name: "위산제",
+  },
+  {
+    efficacy: "medicine",
+    title: "개의 미분류 의약품이 있어요.",
+    nameList: [
+      {
+        name: "페라트라정2.5밀리그램(레트로졸)",
+        description:
+          "페라트라정은 항악성종양제로, 다양한 종류의 암 치료에 사용됩니다. 어두운 황색의 원형 필름코팅정입니다.",
+      },
+    ],
+    ko: "전문의약품이에요.",
+    name: "미분류 의약품",
+  },
+  {
+    efficacy: "add",
+    title: "의약품 직접 저장하기",
+    ko: "의약품 정보를 입력해주세요.",
+  },
+];
+
 const mutateOCRSet = [
   {
     efficacy: "painkiller",
@@ -17,74 +64,74 @@ const mutateOCRSet = [
     ko: "아픔을 억제해요.",
     name: "진통제",
   },
-  {
-    efficacy: "fever",
-    title: "개의 해열제를 찾았어요!",
-    nameList: [
-      {
-        name: "파라세타몰",
-        description:
-          "파라세타몰은 해열 및 진통 효과가 있으며, 과다 복용 시 간 손상을 일으킬 수 있습니다.",
-      },
-      {
-        name: "나프록센",
-        description:
-          "나프록센은 NSAID에 속해 염증과 통증을 줄이는데 사용되며, 위장 문제를 일으킬 수 있습니다.",
-      },
-      {
-        name: "히히 나 해열제",
-        description: "일반적인 해열제로, 발열과 간단한 통증 완화에 사용됩니다.",
-      },
-    ],
-    ko: "열을 낮춰줘요.",
-    name: "해열제",
-  },
-  {
-    efficacy: "biotics",
-    title: "개의 항생제를 찾았어요!",
-    nameList: [
-      {
-        name: "아목시실린",
-        description:
-          "아목시실린은 광범위한 항생제로 다양한 박테리아 감염에 사용됩니다.",
-      },
-      {
-        name: "클라리스로마이신",
-        description:
-          "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
-      },
-      {
-        name: "클라리스로마이신2",
-        description:
-          "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
-      },
-      {
-        name: "클라리스로마이신3",
-        description:
-          "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
-      },
-    ],
-    ko: "병균을 제거해요.",
-    name: "항생제",
-  },
-  {
-    efficacy: "inflammatory",
-    title: "개의 소염제를 찾았어요!",
-    nameList: [
-      {
-        name: "디클로페낙",
-        description:
-          "디클로페낙은 강력한 통증 완화 및 염증 감소 효과가 있는 NSAID입니다.",
-      },
-      {
-        name: "케토프로펜",
-        description:
-          "케토프로펜은 염증 및 통증을 감소시키는데 사용되며, 피부에 바르는 형태도 있습니다.",
-      },
-    ],
-    ko: "염증을 제거해요",
-    name: "소염제",
-  },
+  // {
+  //   efficacy: "fever",
+  //   title: "개의 해열제를 찾았어요!",
+  //   nameList: [
+  //     {
+  //       name: "파라세타몰",
+  //       description:
+  //         "파라세타몰은 해열 및 진통 효과가 있으며, 과다 복용 시 간 손상을 일으킬 수 있습니다.",
+  //     },
+  //     {
+  //       name: "나프록센",
+  //       description:
+  //         "나프록센은 NSAID에 속해 염증과 통증을 줄이는데 사용되며, 위장 문제를 일으킬 수 있습니다.",
+  //     },
+  //     {
+  //       name: "히히 나 해열제",
+  //       description: "일반적인 해열제로, 발열과 간단한 통증 완화에 사용됩니다.",
+  //     },
+  //   ],
+  //   ko: "열을 낮춰줘요.",
+  //   name: "해열제",
+  // },
+  // {
+  //   efficacy: "biotics",
+  //   title: "개의 항생제를 찾았어요!",
+  //   nameList: [
+  //     {
+  //       name: "아목시실린",
+  //       description:
+  //         "아목시실린은 광범위한 항생제로 다양한 박테리아 감염에 사용됩니다.",
+  //     },
+  //     {
+  //       name: "클라리스로마이신",
+  //       description:
+  //         "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
+  //     },
+  //     {
+  //       name: "클라리스로마이신2",
+  //       description:
+  //         "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
+  //     },
+  //     {
+  //       name: "클라리스로마이신3",
+  //       description:
+  //         "클라리스로마이신은 호흡기 및 피부 감염 치료에 효과적인 매크로라이드 항생제입니다.",
+  //     },
+  //   ],
+  //   ko: "병균을 제거해요.",
+  //   name: "항생제",
+  // },
+  // {
+  //   efficacy: "inflammatory",
+  //   title: "개의 소염제를 찾았어요!",
+  //   nameList: [
+  //     {
+  //       name: "디클로페낙",
+  //       description:
+  //         "디클로페낙은 강력한 통증 완화 및 염증 감소 효과가 있는 NSAID입니다.",
+  //     },
+  //     {
+  //       name: "케토프로펜",
+  //       description:
+  //         "케토프로펜은 염증 및 통증을 감소시키는데 사용되며, 피부에 바르는 형태도 있습니다.",
+  //     },
+  //   ],
+  //   ko: "염증을 제거해요",
+  //   name: "소염제",
+  // },
   // {
   //   efficacy: "asthmatic",
   //   title: "개의 천식 치료제를 찾았어요!",
@@ -211,24 +258,24 @@ const mutateOCRSet = [
   //   ko: "경련을 조절해요.",
   //   name: "항경련제",
   // },
-  {
-    efficacy: "medicine",
-    title: "개의 미분류 의약품이 있어요.",
-    nameList: [
-      {
-        name: "몰네필린",
-        description:
-          "몰네필린은 특정 종류의 기침 치료에 사용되는 의약품입니다.",
-      },
-      {
-        name: "티크로리누스",
-        description:
-          "티크로리누스는 면역 억제제로, 주로 이식 수술 후 거부 반응을 줄이는 데 사용됩니다.",
-      },
-    ],
-    ko: "전문의약품이에요.",
-    name: "미분류 의약품",
-  },
+  // {
+  //   efficacy: "medicine",
+  //   title: "개의 미분류 의약품이 있어요.",
+  //   nameList: [
+  //     {
+  //       name: "몰네필린",
+  //       description:
+  //         "몰네필린은 특정 종류의 기침 치료에 사용되는 의약품입니다.",
+  //     },
+  //     {
+  //       name: "티크로리누스",
+  //       description:
+  //         "티크로리누스는 면역 억제제로, 주로 이식 수술 후 거부 반응을 줄이는 데 사용됩니다.",
+  //     },
+  //   ],
+  //   ko: "전문의약품이에요.",
+  //   name: "미분류 의약품",
+  // },
   {
     efficacy: "add",
     title: "의약품 직접 저장하기",
@@ -243,5 +290,5 @@ const mutateAnalysisSet = {
   dangerList: [],
 };
 
-const testSet = { mutateOCRSet, mutateAnalysisSet };
+const testSet = { mutateOCRSet, mutateAnalysisSet, modifiedData };
 export default testSet;
