@@ -5,6 +5,7 @@ import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
 import PrescAdd from "./components/presc.add"
+import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
 
 export default function PrescAddPage() {
   const dispatch = useDispatch();
@@ -23,7 +24,12 @@ export default function PrescAddPage() {
   }, []);
 
   const handleSearch = () => {
-    dispatch(fetchMedicine(searchTerm));
+    dispatch(fetchMedicine(searchTerm)).then((response) => {
+      if (!response.payload || response.payload.length === 0) {
+        dispatch(addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" }));
+      }
+    });
+    
     if (inputRef.current) {
       inputRef.current.focus(); // 검색 아이콘 버튼을 눌렀을 때 인풋 필드에 포커스 설정
     }
