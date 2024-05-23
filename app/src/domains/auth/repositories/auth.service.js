@@ -57,7 +57,7 @@ export const tryLogin = async (email, password) => {
 
 export const fetchUserInfo = async () => {
   try {
-    const response = await axiosInstance.get("/patient/info");
+    const response = await axiosInstance.get("/patientInfo");
     return response.data;
   } catch (error) {
     console.error("유저 로딩 중 에러 발생", error);

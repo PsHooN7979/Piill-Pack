@@ -17,12 +17,20 @@ function Router() {
         <Route path="/home" element={<Pages.Home />} />
         <Route path="/scanner" element={<Pages.Scanner />} />
 
-
         {/* 처방 목록 */}
-        <Route path="/prescription/edit" element={<Pages.PrescriptionEditPage />} />
+        <Route
+          path="/prescription/edit"
+          element={<Pages.PrescriptionEditPage />}
+        />
         <Route path="/prescription" element={<Pages.Prescription />} />
-        <Route path="/prescription/detail" element={<Pages.PrescriptionDetailPage />} />
-        <Route path="/prescription/add" element={<Pages.PrescriptionAddPage />} />
+        <Route
+          path="/prescription/detail"
+          element={<Pages.PrescriptionDetailPage />}
+        />
+        <Route
+          path="/prescription/add"
+          element={<Pages.PrescriptionAddPage />}
+        />
 
         {/* 건강 상태 */}
         <Route path="/health" element={<Pages.HealthPage />} />
@@ -36,7 +44,7 @@ function Router() {
         <Route path="/profile/privacy" element={<Pages.PrivacyPage />} />
         <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
 
-        <Route path="/" element={<Pages.Home />} />
+        <Route path="/" element={<Pages.Auth />} />
       </Routes>
     </HashRouter>
   );

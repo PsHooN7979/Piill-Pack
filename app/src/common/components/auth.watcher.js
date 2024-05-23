@@ -15,13 +15,13 @@ const AuthWatcher = () => {
 
     // 일시 무력화
     if (!isAuth && !initialLoad) {
-      // dispatch(
-      //   addSnackBar({
-      //     id: Date.now(),
-      //     message: "로그아웃되어 초기 화면으로 이동합니다.",
-      //   })
-      // );
-      // navigate('/auth');
+      dispatch(
+        addSnackBar({
+          id: Date.now(),
+          message: "로그아웃되어 초기 화면으로 이동합니다.",
+        })
+      );
+      navigate("/auth");
     }
 
     if (initialLoad) {
