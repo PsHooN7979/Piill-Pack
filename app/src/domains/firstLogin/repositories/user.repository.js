@@ -4,8 +4,8 @@ import { setUserInfo } from "../../../common/feature/slices/user.slice";
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  // baseURL: 'http://localhost:8443',
-  baseURL: "http://192.168.1.106:8443",
+  baseURL: 'http://localhost:8443',
+  // baseURL: "http://192.168.1.106:8443",
 });
 
 // Axios 인터셉터 설정

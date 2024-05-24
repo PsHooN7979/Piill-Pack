@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import icons from "../../../constants/icon";
+import images from "../../../constants/image.constant";
 import { Autocomplete, TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -128,9 +129,9 @@ export default function PrescAdd({ pill, prescName, onSearch, setSearchTerm, pre
 
       {/* 등록한 약 목록 컨테이너 */}
       {selectedPills.map((pill, index) => (
-        <div key={index} className="flex justify-between items-center border border-gray-300 w-full rounded-lg px-4 py-2 mb-3">
+        <div key={index} className="flex justify-between items-center bg-white border border-gray-300 w-full rounded-lg px-4 py-2 mb-3">
           <div className="flex items-center">
-            <img src={pill.ITEM_IMAGE} alt={pill.ITEM_NAME} className="w-10 h-10 mr-4" />
+            <img src={pill.ITEM_IMAGE || images.no_img} alt={pill.ITEM_NAME} className="w-10 h-10 mr-4" />
             <div>
               <div className="font-bold">{pill.ITEM_NAME}</div>
               <div className="text-sm text-gray-600">{pill.ENTP_NAME}</div>
