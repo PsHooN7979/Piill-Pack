@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import uis from "../../../constants/ui.constant";
 import icons from "../../../constants/icon";
 import { useNavigate } from 'react-router-dom';
+import images from '../../../constants/image.constant';
 
 export default function PrescSelect({ presc }) {
     const [prescList, setPrescList] = useState('');
@@ -84,15 +85,15 @@ export default function PrescSelect({ presc }) {
                 </button>
                 <div className={`absolute top-full left-0 w-full shadow-custom01 bg-white border border-gray-300 rounded-lg z-0 overflow-y-auto transition-all duration-500 ease-in-out transform ${dropdownOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'}`}>
                     {dropdownOpen && (
-                    presc.map((presc, index) => (
-                        <button
-                        key={index}
-                        onClick={() => selectList(presc.name, index)}
-                        className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                        >
-                        {presc.name}
-                        </button>
-                    ))
+                        presc.map((prescItem, index) => (
+                            <button
+                                key={index}
+                                onClick={() => selectList(prescItem.name, index)}
+                                className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                            >
+                                {prescItem.name}
+                            </button>
+                        ))
                     )}
                 </div>
             </div>
@@ -109,13 +110,13 @@ export default function PrescSelect({ presc }) {
                     {/* 처방전 목록 컨테이너 종료 */}
 
                     {/* 약 목록 컨테이너 */}
-                    {presc[activeTab].pills.map((pill, index) => (
+                    {presc[activeTab].medicines && presc[activeTab].medicines.map((pill, index) => (
                         <div key={index} className="flex flex-col justify-start items-start border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
                             <div className="flex justify-start items-start m-2">
                                 {/* 이미지 컨테이너 */}
                                 <div className='w-10'>
                                     <img
-                                        src={pill.image}
+                                        src={pill.image || images.no_img}
                                         alt={`${pill.name} 로고`}
                                         className="flex-none overflow-hidden w-full h-full bg-white object-cover"
                                     />

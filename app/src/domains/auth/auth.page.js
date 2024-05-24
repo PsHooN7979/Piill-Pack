@@ -11,7 +11,8 @@ import { addSnackBar } from '../../common/feature/slices/snackBar.slice';
 import { createUser, fetchUserInfo, tryLogin } from "./repositories/auth.repository";
 import { setIsAuth, clearAuth } from "../../common/feature/slices/auth.slice";
 import { setUserInfo } from '../../common/feature/slices/user.slice';
-import { fetchPrescriptions } from '../prescription/slices/presc.slice';
+import { fetchPrescriptions, setPrescriptions } from '../prescription/slices/presc.slice';
+import { getPrescriptions } from '../prescription/repositories/presc.repository';
 
 export default function Auth() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -65,7 +66,9 @@ export default function Auth() {
       dispatch(setUserInfo({ age, gender, weight, height, nickname }));
 
       // 처방전 데이터 가져와서 Redux 스토어에 저장
-      dispatch(fetchPrescriptions());
+      const prescResponse = await getPrescriptions();
+      console.log("처방 목록 가져옴", prescResponse);
+      dispatch(setPrescriptions(prescResponse.data));
 
       // isFirst 값에 따라 네비게이트
       if (is_first) {

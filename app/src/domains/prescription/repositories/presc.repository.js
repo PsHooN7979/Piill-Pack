@@ -46,7 +46,8 @@ export const modifyPrescription = async (id, prescriptionData) => {
 export const getPrescriptions = async () => {
   try {
     const response = await axiosInstance.get('/presc/info');
-    return response.data;
+    console.log("처방 목록 가져옴", response.data);
+    return response;
   } catch (error) {
     console.error('처방 정보 가져오기 중 오류 발생:', error);
     throw error;
@@ -57,7 +58,7 @@ export const getPrescriptions = async () => {
 export const deletePrescription = async (id) => {
   try {
     const response = await axiosInstance.delete(`/presc/delete/${id}`);
-    return response.data;
+    return response;
   } catch (error) {
     console.error('처방 삭제 중 오류 발생:', error);
     throw error;
