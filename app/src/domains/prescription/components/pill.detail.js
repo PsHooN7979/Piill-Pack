@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import React from "react";
+import images from "../../../constants/image.constant";
 
 export default function PillDetail() {
   const location = useLocation();
@@ -12,7 +13,7 @@ export default function PillDetail() {
         {/* 이미지 컨테이너 */}
         <div className="p-4">
           <img
-            src={pill.image}
+            src={pill.image || images.no_img}
             alt={`${pill.name} 로고`}
             className="flex-none  overflow-hidden w-20 h-25 bg-white border-2 border-gray-300"
           />

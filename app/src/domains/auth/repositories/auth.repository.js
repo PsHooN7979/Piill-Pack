@@ -4,8 +4,8 @@ import { setIsAuth } from "../../../common/feature/slices/auth.slice";
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
-  baseURL: "http://10.0.2.2:8443",
-  // baseURL: "http://localhost:8443",
+  // baseURL: "http://10.0.2.2:8443",
+  baseURL: "http://localhost:8443",
   // baseURL: "http://192.168.1.106:8443",
 });
 
