@@ -6,9 +6,11 @@ import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
 import PrescAdd from "./components/presc.add"
 import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
+import { useNavigate } from "react-router-dom";
 
 export default function PrescAddPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const inputRef = useRef(null); // 검색 인풋 ref
   const medicines = useSelector((state) => state.prescriptions.medicines);
   const [searchTerm, setSearchTerm] = useState("");
@@ -40,8 +42,17 @@ export default function PrescAddPage() {
       ...prescriptionData,
       created: new Date().toISOString(),
       updated: new Date().toISOString(),
+      medicines: prescriptionData.medicines.map(medicine => ({
+        ediCode: medicine.EDI_CODE,
+        name: medicine.ITEM_NAME,
+        chart: medicine.CHART,
+        className: medicine.CLASS_NAME,
+        itemSeq: medicine.ITEM_SEQ
+      }))
     };
+    dispatch(addSnackBar({ id: Date.now(), message: "처방전 등록이 완료되었습니다" }));
     dispatch(addNewPrescription(newPrescriptionData));
+    navigate(-1);
   };
 
   return (
@@ -49,14 +60,17 @@ export default function PrescAddPage() {
       <PrescAddHeader title="처방 목록 추가" onAdd={handleAddPrescription} />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[85%] min-h-screen">
-          <PrescAdd
-            pill={medicines}
-            onSearch={handleSearch}
-            setSearchTerm={setSearchTerm}
-            prescriptionData={prescriptionData}
-            setPrescriptionData={setPrescriptionData}
-            inputRef={inputRef}
-          />
+          <div className=" mb-20">
+            <PrescAdd
+              pill={medicines}
+              onSearch={handleSearch}
+              setSearchTerm={setSearchTerm}
+              prescriptionData={prescriptionData}
+              setPrescriptionData={setPrescriptionData}
+              inputRef={inputRef}
+            />
+          </div>
+
         </div>
       </div>
 

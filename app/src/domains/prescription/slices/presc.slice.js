@@ -52,7 +52,7 @@ const prescSlice = createSlice({
         // fetchPrescriptions 비동기 작업이 fulfilled 상태일 때 실행되는 리듀서
         .addCase(fetchPrescriptions.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.prescriptions = action.payload;
+        state.prescriptions = action.payload || [];
         })
         // fetchPrescriptions 비동기 작업이 rejected 상태일 때 실행되는 리듀서
         .addCase(fetchPrescriptions.rejected, (state, action) => {
@@ -60,10 +60,14 @@ const prescSlice = createSlice({
         state.error = action.error.message;
         })
         .addCase(addNewPrescription.fulfilled, (state, action) => {
-            state.prescriptions.push(action.payload);
+            if (state.prescriptions) {
+                state.prescriptions.push(action.payload);
+            } else {
+                state.prescriptions = [action.payload];
+            }
         })
         .addCase(fetchMedicine.fulfilled, (state, action) => {
-            state.medicines = action.payload;
+            state.medicines = action.payload || [];
         });
     },
 });
