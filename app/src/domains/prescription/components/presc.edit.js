@@ -3,8 +3,9 @@ import uis from "../../../constants/ui.constant";
 import { useEffect, useState } from "react";
 import icons from '../../../constants/icon';
 import PrescAdd from "./presc.add";
+import images from "../../../constants/image.constant";
 
-export default function PrescEdit() {
+export default function PrescEdit({ medicines, handleSearch, setSearchTerm, prescriptionData, setPrescriptionData, inputRef  }) {
     const location = useLocation();
     const { selectPresc } = location.state || {};
     const [pills, setPills] = useState(selectPresc.medicines || []);
@@ -37,12 +38,19 @@ export default function PrescEdit() {
     return (
         <div className="py-1">
             {/* 약 이름 검색 컨테이너 */}
-            <PrescAdd pill={selectPresc} prescName={selectPresc.name}/>
+            <PrescAdd               
+                pill={medicines}
+                onSearch={handleSearch}
+                setSearchTerm={setSearchTerm}
+                prescriptionData={prescriptionData}
+                setPrescriptionData={setPrescriptionData}
+                inputRef={inputRef}
+            />
             {/* 약 이름 검색 컨테이너 종료 */}
 
             {pills.map((pill, index) => (
                 <div key={index}>
-                    <div className="flex  justify-center items-center border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
+                    <div className="flex  justify-center items-center bg-white border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50">
 
 
 
@@ -51,7 +59,7 @@ export default function PrescEdit() {
                             {/* 이미지 컨테이너 */}
                             <div className='flex-none w-10 h-15'>
                                 <img
-                                    src={pill.image}
+                                    src={pill.image || images.no_img}
                                     alt={`${pill.name} 로고`}
                                     className="w-full h-full bg-white object-cover"
                                 />
