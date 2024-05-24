@@ -37,13 +37,6 @@ export default function PrescAddPage() {
       console.error("약 검색 중 오류 발생:", error);
       dispatch(addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" }));
     }
-
-    // dispatch(fetchMedicine(searchTerm)).then((response) => {
-    //   if (!response.payload || response.payload.length === 0) {
-    //     dispatch(addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" }));
-    //   }
-      
-    // });
   };
 
   const handleAddPrescription = async () => {
@@ -68,21 +61,6 @@ export default function PrescAddPage() {
       console.error("처방 추가 중 오류 발생:", error);
       dispatch(addSnackBar({ id: Date.now(), message: "처방전 등록 실패" }));
     }
-    // const newPrescriptionData = {
-    //   ...prescriptionData,
-    //   created: new Date().toISOString(),
-    //   updated: new Date().toISOString(),
-    //   medicines: prescriptionData.medicines.map(medicine => ({
-    //     ediCode: medicine.EDI_CODE,
-    //     name: medicine.ITEM_NAME,
-    //     chart: medicine.CHART,
-    //     className: medicine.CLASS_NAME,
-    //     itemSeq: medicine.ITEM_SEQ
-    //   }))
-    // };
-    // dispatch(addSnackBar({ id: Date.now(), message: "처방전 등록이 완료되었습니다" }));
-    // dispatch(addNewPrescription(newPrescriptionData));
-    // navigate(-1);
   };
 
   return (
