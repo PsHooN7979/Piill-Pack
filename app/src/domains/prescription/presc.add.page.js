@@ -1,13 +1,21 @@
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewPrescription, fetchMedicine, setMedicines, setPrescriptions } from "./slices/presc.slice";
+import {
+  addNewPrescription,
+  fetchMedicine,
+  setMedicines,
+  setPrescriptions,
+} from "./slices/presc.slice";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
 import PrescAdd from "./components/presc.add";
 import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
 import { useNavigate } from "react-router-dom";
-import { addPrescription, searchMedicine } from "./repositories/presc.repository";
+import {
+  addPrescription,
+  searchMedicine,
+} from "./repositories/presc.repository";
 
 export default function PrescAddPage() {
   const dispatch = useDispatch();
@@ -26,7 +34,6 @@ export default function PrescAddPage() {
     window.scrollTo(0, 0);
   }, []);
 
-<<<<<<< Updated upstream
   const handleSearch = async () => {
     try {
       const response = await searchMedicine(searchTerm);
@@ -36,20 +43,9 @@ export default function PrescAddPage() {
       }
     } catch (error) {
       console.error("약 검색 중 오류 발생:", error);
-      dispatch(addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" }));
-=======
-  const handleSearch = () => {
-    dispatch(fetchMedicine(searchTerm)).then((response) => {
-      if (!response.payload || response.payload.length === 0) {
-        dispatch(
-          addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" })
-        );
-      }
-    });
-
-    if (inputRef.current) {
-      inputRef.current.focus(); // 검색 아이콘 버튼을 눌렀을 때 인풋 필드에 포커스 설정
->>>>>>> Stashed changes
+      dispatch(
+        addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" })
+      );
     }
   };
 
@@ -59,17 +55,19 @@ export default function PrescAddPage() {
         ...prescriptionData,
         created: new Date().toISOString(),
         updated: new Date().toISOString(),
-        medicines: prescriptionData.medicines.map(medicine => ({
+        medicines: prescriptionData.medicines.map((medicine) => ({
           ediCode: medicine.EDI_CODE,
           name: medicine.ITEM_NAME,
           chart: medicine.CHART,
           className: medicine.CLASS_NAME,
-          itemSeq: medicine.ITEM_SEQ
-        }))
+          itemSeq: medicine.ITEM_SEQ,
+        })),
       };
       const response = await addPrescription(newPrescriptionData);
       dispatch(setPrescriptions(response)); // 새 처방전을 스토어에 추가
-      dispatch(addSnackBar({ id: Date.now(), message: "처방전 등록이 완료되었습니다" }));
+      dispatch(
+        addSnackBar({ id: Date.now(), message: "처방전 등록이 완료되었습니다" })
+      );
       navigate(-1);
     } catch (error) {
       console.error("처방 추가 중 오류 발생:", error);
@@ -92,7 +90,6 @@ export default function PrescAddPage() {
               inputRef={inputRef}
             />
           </div>
-
         </div>
       </div>
 

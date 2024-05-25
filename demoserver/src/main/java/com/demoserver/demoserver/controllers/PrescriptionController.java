@@ -137,75 +137,70 @@ public class PrescriptionController {
       }
       MedicineModel targetMedicine = targetMedicineOpt.get();
 
-      if ("warning".equalsIgnoreCase(resultDto.getLevel())) {
-        WarningModel warning = WarningModel.builder()
-            .prescription(finalPrescription)
-            .targetMedicine(targetMedicine)
-            .build();
+      if ("warning".equalsIgnoreCase(resultDto.getLevel()) && resultDto.getDescription() != null) {
+        WarningModel warning = new WarningModel();
+        warning.setPrescription(finalPrescription);
+        warning.setTargetMedicine(targetMedicine);
 
         if ("의약품정보".equals(resultDto.getType())) {
           Optional<MedicineModel> warningMedicineOpt = iMedicineRepo.findOneByItemSeq(resultDto.getTypeTarget());
           if (warningMedicineOpt.isPresent()) {
             warning.setWarningMedicine(warningMedicineOpt.get());
             warning.setWarningMedicineDescription(resultDto.getDescription());
+            iWarningRepo.save(warning);
           } else {
             log.warn("Warning medicine not found for itemSeq: {}", resultDto.getTypeTarget());
           }
         } else if ("신체정보".equals(resultDto.getType())) {
           warning.setWarningPatient(patientModel);
           warning.setWarningPatientDescription(resultDto.getDescription());
+          iWarningRepo.save(warning);
         } else if ("질병정보".equals(resultDto.getType())) {
           Optional<DiseaseModel> warningDiseaseOpt = iDiseaseRepo.findDiseaseByName(resultDto.getTypeTarget());
           if (warningDiseaseOpt.isPresent()) {
             warning.setWarningDisease(warningDiseaseOpt.get());
             warning.setWarningDiseaseDescription(resultDto.getDescription());
+            iWarningRepo.save(warning);
           } else {
-            log.warn("Warning disease not found for name: {}", resultDto.getTypeTarget());
           }
         }
 
         if (warning.getWarningMedicine() == null && warning.getWarningPatient() == null
             && warning.getWarningDisease() == null) {
-          log.warn("No warning information set for targetMedicine: {}", targetMedicine.getItemName());
         }
 
-        iWarningRepo.save(warning);
-        log.info("Warning saved: {}", warning);
-
-      } else if ("danger".equalsIgnoreCase(resultDto.getLevel())) {
-        DangerModel danger = DangerModel.builder()
-            .prescription(finalPrescription)
-            .targetMedicine(targetMedicine)
-            .build();
+      } else if ("danger".equalsIgnoreCase(resultDto.getLevel()) && resultDto.getDescription() != null) {
+        DangerModel danger = new DangerModel();
+        danger.setPrescription(finalPrescription);
+        danger.setTargetMedicine(targetMedicine);
 
         if ("의약품정보".equals(resultDto.getType())) {
           Optional<MedicineModel> dangerMedicineOpt = iMedicineRepo.findOneByItemSeq(resultDto.getTypeTarget());
           if (dangerMedicineOpt.isPresent()) {
             danger.setDangerMedicine(dangerMedicineOpt.get());
             danger.setDangerMedicineDescription(resultDto.getDescription());
+            iDangerRepo.save(danger);
           } else {
             log.warn("Danger medicine not found for itemSeq: {}", resultDto.getTypeTarget());
           }
         } else if ("신체정보".equals(resultDto.getType())) {
           danger.setDangerPatient(patientModel);
           danger.setDangerPatientDescription(resultDto.getDescription());
+          iDangerRepo.save(danger);
         } else if ("질병정보".equals(resultDto.getType())) {
           Optional<DiseaseModel> dangerDiseaseOpt = iDiseaseRepo.findDiseaseByName(resultDto.getTypeTarget());
           if (dangerDiseaseOpt.isPresent()) {
             danger.setDangerDisease(dangerDiseaseOpt.get());
             danger.setDangerDiseaseDescription(resultDto.getDescription());
+            iDangerRepo.save(danger);
           } else {
-            log.warn("Danger disease not found for name: {}", resultDto.getTypeTarget());
           }
         }
 
         if (danger.getDangerMedicine() == null && danger.getDangerPatient() == null
             && danger.getDangerDisease() == null) {
-          log.warn("No danger information set for targetMedicine: {}", targetMedicine.getItemName());
         }
 
-        iDangerRepo.save(danger);
-        log.info("Danger saved: {}", danger);
       }
     }
 
