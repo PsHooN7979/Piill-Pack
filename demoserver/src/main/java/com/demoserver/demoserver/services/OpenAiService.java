@@ -95,8 +95,7 @@ public class OpenAiService {
             jsonObject.optString("precaution", ""),
             jsonObject.optString("prevention", ""),
             jsonObject.optString("treatment", ""),
-            true // isValid 필드는 상황에 따라 설정
-        );
+            true);
         diseaseList.add(disease);
       }
     } catch (Exception e) {

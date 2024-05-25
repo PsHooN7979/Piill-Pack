@@ -14,13 +14,6 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-  // @Override
-
-  // public void addResourceHandlers(ResourceHandlerRegistry registry) {
-  // registry.addResourceHandler("/web/**")
-  // .addResourceLocations("classpath:/static/web/dist/");
-  // }
-
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/web/**")
@@ -40,30 +33,3 @@ public class MvcConfig implements WebMvcConfigurer {
         });
   }
 }
-
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.core.io.ClassPathResource;
-// import
-// org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-// import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-// import org.springframework.web.servlet.resource.PathResourceResolver;
-
-// @Configuration
-// public class MvcConfig implements WebMvcConfigurer {
-// @Override
-// public void addResourceHandlers(ResourceHandlerRegistry registry) {
-// registry.addResourceHandler("/web/**")
-// .addResourceLocations("classpath:/static/web/dist")
-// .resourceChain(true)
-// .addResolver(new PathResourceResolver() {
-// @Override
-// protected Resource getResource(String resourcePath,
-// Resource location) throws IOException {
-// Resource requestedResource = location.createRelative(resourcePath);
-// return requestedResource.exists() && requestedResource.isReadable() ?
-// requestedResource
-// : new ClassPathResource("/static/web/dist/index.html");
-// }
-// });
-// }
-// }

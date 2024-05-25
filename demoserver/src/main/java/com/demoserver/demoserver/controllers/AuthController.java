@@ -47,7 +47,6 @@ public class AuthController {
     PatientModel patient = authService.findPatientByToken(token);
     boolean isValid = authService.verificationComplete(patient);
     if (isValid) {
-      // initService.pillpackInit(patient);
     }
 
     String content = authService.loadCompleteVerificationHtml();

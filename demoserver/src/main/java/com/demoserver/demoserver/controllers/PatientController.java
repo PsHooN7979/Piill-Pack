@@ -3,14 +3,11 @@ package com.demoserver.demoserver.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demoserver.demoserver.dtos.DiseaseNameDto;
 import com.demoserver.demoserver.dtos.FirstDto;
 import com.demoserver.demoserver.dtos.PatientInfoDto;
-import com.demoserver.demoserver.dtos.domainDtos.DiseaseDto;
 import com.demoserver.demoserver.global.common.auth.JwtTokenProvider;
 import com.demoserver.demoserver.models.PatientModel;
 import com.demoserver.demoserver.services.AuthService;
-import com.demoserver.demoserver.services.OpenAiService;
 import com.demoserver.demoserver.services.PatientService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,10 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-
-import java.util.*;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +28,6 @@ public class PatientController {
 
   private final PatientService patientService;
   private final AuthService authService;
-  private final OpenAiService openAiService;
 
   @GetMapping("/info")
   public PatientInfoDto allPatientInfo(@RequestHeader(value = "authorization", required = true) String accessToken) {
