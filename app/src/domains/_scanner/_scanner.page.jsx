@@ -58,7 +58,7 @@ export default function Scanner() {
             setData(testSet.modifiedData);
             //test
             setTitle(constant.Title.find);
-          }, 2100);
+          }, 1100);
         });
     }
     asyncData();

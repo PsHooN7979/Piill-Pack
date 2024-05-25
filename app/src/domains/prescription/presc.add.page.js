@@ -4,7 +4,7 @@ import { addNewPrescription, fetchMedicine, setMedicines, setPrescriptions } fro
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
 import PrescAddHeader from "./components/presc.add.header";
-import PrescAdd from "./components/presc.add"
+import PrescAdd from "./components/presc.add";
 import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
 import { useNavigate } from "react-router-dom";
 import { addPrescription, searchMedicine } from "./repositories/presc.repository";
@@ -16,16 +16,17 @@ export default function PrescAddPage() {
   const medicines = useSelector((state) => state.prescriptions.medicines);
   const [searchTerm, setSearchTerm] = useState("");
   const [prescriptionData, setPrescriptionData] = useState({
-    name: '',
+    name: "",
     medicines: [],
-    created: '',
-    updated: '',
+    created: "",
+    updated: "",
   });
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+<<<<<<< Updated upstream
   const handleSearch = async () => {
     try {
       const response = await searchMedicine(searchTerm);
@@ -36,6 +37,19 @@ export default function PrescAddPage() {
     } catch (error) {
       console.error("약 검색 중 오류 발생:", error);
       dispatch(addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" }));
+=======
+  const handleSearch = () => {
+    dispatch(fetchMedicine(searchTerm)).then((response) => {
+      if (!response.payload || response.payload.length === 0) {
+        dispatch(
+          addSnackBar({ id: Date.now(), message: "검색 결과가 없습니다" })
+        );
+      }
+    });
+
+    if (inputRef.current) {
+      inputRef.current.focus(); // 검색 아이콘 버튼을 눌렀을 때 인풋 필드에 포커스 설정
+>>>>>>> Stashed changes
     }
   };
 

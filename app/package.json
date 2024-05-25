@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch-build": "react-scripts build --watch",
-    "remote-build": "react-scripts build && rsync -av --delete ./dist/ ../server/src/main/resources/static/web/dist/",
+    "remote-build": "react-scripts build && rsync -av --delete ./dist/ ../demoserver/src/main/resources/static/web/dist/",
     "watch": "nodemon --watch src --exec \"npm run remote-build\"",
     "start-server": "json-server --watch db.json --port 8443"
   },
@@ -69,5 +69,5 @@
     "react-scripts": "^5.0.1",
     "tailwindcss": "^3.4.3"
   },
-  "proxy": "http://192.168.1.106:8443"
+  "proxy": "http://127.0.0.1:8443"
 }

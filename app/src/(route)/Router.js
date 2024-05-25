@@ -44,7 +44,7 @@ function Router() {
         <Route path="/profile/privacy" element={<Pages.PrivacyPage />} />
         <Route path="/profile/edit" element={<Pages.ProfileEditPage />} />
 
-        <Route path="/" element={<Pages.Home />} />
+        <Route path="/" element={<Pages.Auth />} />
       </Routes>
     </HashRouter>
   );
