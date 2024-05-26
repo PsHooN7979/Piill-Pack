@@ -53,6 +53,7 @@ public class PrescriptionController {
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     String email = userDetails.getUsername();
     PatientModel patientModel = authService.findPatientByEmail(email);
+
     prescriptionService.registerPrescription(patientModel, request);
     return "entity";
   }

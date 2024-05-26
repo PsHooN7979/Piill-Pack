@@ -131,7 +131,8 @@ public class PatientService {
                                                         dangerList);
                                 }).collect(Collectors.toList());
 
-                PatientDto patientDto = new PatientDto(patient.getEmail(), patient.getNick(), patient.getAge(),
+                PatientDto patientDto = new PatientDto(patient.getProfileImageUrl(), patient.getEmail(),
+                                patient.getNick(), patient.getAge(),
                                 patient.getHeight(), patient.getWeight(), patient.getGender());
 
                 return new PatientInfoDto(patientDto, diseaseList, prescriptionList);
@@ -213,6 +214,7 @@ public class PatientService {
                 patient.setHeight(firstDto.getHeight());
                 patient.setWeight(firstDto.getWeight());
                 patient.setGender(firstDto.getGender());
+                patient.setIsFirst(false);
 
                 iPatientRepo.save(patient);
         }

@@ -28,6 +28,7 @@ export default function PrescriptionList() {
   }, [dispatch]);
 
   const data2 = useSelector((state) => state.prescriptions.prescriptions || []);
+  const prescriptionList = useSelector((state) => state.user.prescriptionList);
   const loading = useSelector((state) => state.prescriptions.loading);
   const error = useSelector((state) => state.prescriptions.error);
 
@@ -44,7 +45,7 @@ export default function PrescriptionList() {
       <div className="flex flex-col justify-center items-center">
         <div className=" flex-col bg-opacity-100 mt-6 w-[85%] min-h-screen ">
           {/* 처방전 데이터                    */}
-          <PrescSelect presc={data2} nameLimit={12} />
+          <PrescSelect presc={prescriptionList} nameLimit={12} />
         </div>
       </div>
       <BottomNavigation active="2" />{" "}

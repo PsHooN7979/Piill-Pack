@@ -2,16 +2,11 @@ package com.demoserver.demoserver.services;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.demoserver.demoserver.dtos.PatientInfoDto;
 import com.demoserver.demoserver.dtos.PatientInfoWithMedicineDto;
 import com.demoserver.demoserver.dtos.domainDtos.MedicineDto;
-import com.demoserver.demoserver.global.common.auth.JwtTokenProvider;
 import com.demoserver.demoserver.interfaces.IDangerRepo;
 import com.demoserver.demoserver.interfaces.IDiseaseRepo;
 import com.demoserver.demoserver.interfaces.IMedicineRepo;
@@ -50,7 +45,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PrescriptionService {
@@ -74,7 +68,7 @@ public class PrescriptionService {
     try {
       return naverOCRService.callNaverOcrApi(imagePath);
     } finally {
-      log.info("Deleting image file: {}", imagePath);
+
       Files.deleteIfExists(imagePath);
     }
   }
@@ -84,7 +78,7 @@ public class PrescriptionService {
     Path imagePath = Paths.get(imageUploadDir, fileName);
     Files.createDirectories(imagePath.getParent());
     Files.write(imagePath, imageBytes);
-    log.info("Image saved to: {}", imagePath);
+
     return imagePath;
   }
 
@@ -146,7 +140,7 @@ public class PrescriptionService {
         int responseCode = urlConnection.getResponseCode();
         if (responseCode != HttpURLConnection.HTTP_OK) {
           String errorResponse = new String(stream.readAllBytes());
-          log.error("Error response from API: {}", errorResponse);
+
           throw new IOException("HTTP error code : " + responseCode);
         }
 
@@ -220,12 +214,11 @@ public class PrescriptionService {
 
     iPrescriptionMedicineBridgeRepo.saveAll(bridgeModels);
 
-    log.info("resultDto: {}", resultDtos.toString());
     for (ResultDto resultDto : resultDtos) {
 
       Optional<MedicineModel> targetMedicineOpt = iMedicineRepo.findOneByItemSeq(resultDto.getTarget());
       if (!targetMedicineOpt.isPresent()) {
-        log.warn("Target medicine not found for itemSeq: {}", resultDto.getTarget());
+
         continue;
       }
       MedicineModel targetMedicine = targetMedicineOpt.get();
@@ -242,7 +235,7 @@ public class PrescriptionService {
             warning.setWarningMedicineDescription(resultDto.getDescription());
             iWarningRepo.save(warning);
           } else {
-            log.warn("Warning medicine not found for itemSeq: {}", resultDto.getTypeTarget());
+
           }
         } else if ("신체정보".equals(resultDto.getType())) {
           warning.setWarningPatient(patientModel);
@@ -274,7 +267,7 @@ public class PrescriptionService {
             danger.setDangerMedicineDescription(resultDto.getDescription());
             iDangerRepo.save(danger);
           } else {
-            log.warn("Danger medicine not found for itemSeq: {}", resultDto.getTypeTarget());
+
           }
         } else if ("신체정보".equals(resultDto.getType())) {
           danger.setDangerPatient(patientModel);

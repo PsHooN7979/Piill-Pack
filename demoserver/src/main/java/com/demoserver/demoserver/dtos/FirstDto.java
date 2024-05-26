@@ -14,7 +14,7 @@ public class FirstDto {
   private int age;
   private int height;
   private int weight;
-  private Boolean gender;
+  private String gender;
   @JsonProperty(value = "disease_list")
   private List<String> diseaseList;
 }

@@ -7,9 +7,11 @@ import HomeHeader from "./components/home.header";
 import PillScroll from "./components/pill.scroll";
 import constant from "../../constants/constant";
 import Title from "../_scanner/_organisms/title/_title";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
   // 탭 테스트 데이터
   const tabData = [
     {
@@ -80,23 +82,34 @@ export default function Home() {
   // 슬라이더 테스트 더미 데이터
   const products = [
     {
-      name: "상품 이름1",
+      name: "사랑약국",
       image: null,
-      desc: "설명",
+      desc: "환자의 치료를 위해 최선을 다하는 사랑약국",
     },
     {
-      name: "상품 이름2",
+      name: "S척센 정형외과",
       image: null,
-      desc: "설명",
+      desc: "멈추지 않는 허리 통증 치료 전문 병원!",
     },
     {
-      name: "상품 이름 길이 테스트 상품 이름 길이 테스트",
+      name: "The 리뉴얼 판콜",
       image: null,
-      desc: "상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트 상품 설명 길이 테스트",
+      desc: "감기, 독감, 코로나까지 모든 호흡기 질환을 한방에! 새로나온 판콜 리뉴얼. 지금 바로 구매하세요!",
     },
   ];
 
+  const {
+    age,
+    gender,
+    weight,
+    height,
+    nickname,
+    diseaseList,
+    prescriptionList,
+  } = useSelector((state) => state.user);
+
   useEffect(() => {
+    console.log(token);
     window.scrollTo(0, 0);
 
     M.onBack(function (e) {
@@ -104,13 +117,25 @@ export default function Home() {
     });
   }, []);
 
+  const userTitle = {
+    before: "" + nickname + "님이 복용중인",
+    middle: "약",
+    after: "이에요.",
+  };
+
+  const userTitle2 = {
+    before: "" + nickname + "님의",
+    middle: "약",
+    after: "을 준비중이에요.",
+  };
+
   return (
     <div className="relative">
       <HomeHeader />
-      <Title title={constant.Title.home} />
+      <Title title={prescriptionList.length === 0 ? userTitle2 : userTitle} />
       <div className="flex justify-center items-center">
         <div className="bg-opacity-100 w-[95%] min-h-screen">
-          <PillScroll tabs={tabData} wordLimit={10} />
+          <PillScroll prescriptionList={prescriptionList} wordLimit={10} />
           <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>
       </div>

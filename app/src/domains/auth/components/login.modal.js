@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { addSnackBar } from '../../../common/feature/slices/snackBar.slice';
+import { useDispatch } from "react-redux";
+import { addSnackBar } from "../../../common/feature/slices/snackBar.slice";
 import uis from "../../../constants/ui.constant";
 
 export default function LoginModal({ onLogin, onClose, onJoinClick }) {
@@ -28,7 +28,12 @@ export default function LoginModal({ onLogin, onClose, onJoinClick }) {
 
   const handleLoginClick = () => {
     if (!email || !password) {
-      dispatch(addSnackBar({ id: Date.now(), message: '정보 입력 후 로그인 해주세요!' }));
+      dispatch(
+        addSnackBar({
+          id: Date.now(),
+          message: "정보 입력 후 로그인 해주세요!",
+        })
+      );
       return;
     }
     onLogin(email, password, isKeepLogin);
@@ -89,7 +94,7 @@ export default function LoginModal({ onLogin, onClose, onJoinClick }) {
         {/* 로그인 버튼 */}
         <button
           onClick={handleLoginClick}
-          className="px-20 py-1 text-s bg-mint02 text-white rounded-lg hover:bg-mint03 transition-colors mx-auto block"
+          className="px-20 py-1 text-s bg-mint03 text-white rounded-lg hover:bg-mint03 transition-colors mx-auto block"
         >
           로그인
         </button>

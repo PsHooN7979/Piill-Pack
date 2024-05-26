@@ -11,7 +11,7 @@ const authSlice = createSlice({
   reducers: {
     setIsAuth: (state, action) => {
       state.isAuth = action.payload.isAuth;
-      state.token = action.payload.token;
+      state.token = action.payload.accessToken;
     },
     clearAuth: (state) => {
       state.isAuth = false;

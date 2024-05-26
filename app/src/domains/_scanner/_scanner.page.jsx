@@ -1,17 +1,13 @@
-//Library
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Box } from "@mui/material";
-//Hooks
+import { useSelector } from "react-redux";
 import L from "./logic";
 import useCustomNavigate from "../../common/hooks/useCustomNavigate";
-//Constant
 import constant from "../../constants/constant";
-import testSet from "../../constants/json.server";
-//Repository
-import scannerRepo from "./repositories/scanner.repository";
-//TestSet
+import images from "../../constants/image.constant";
 import ScannerTemplate from "./_scanner.template";
+import scannerRepo from "./repositories/scanner.repository";
 
 export default function Scanner() {
   const navigate = useCustomNavigate();
@@ -29,35 +25,28 @@ export default function Scanner() {
     mutationFn: scannerRepo.ocr,
   });
 
+  const token = useSelector((state) => state.auth.token);
+
   React.useEffect(() => {
     async function asyncData() {
       const imageToBase64 = await L().takePhoto();
-      console.log("image: " + imageToBase64);
-      const regex = /^data:image\/(png|jpeg|jpg);base64,/;
-      const newImageToBase64String = imageToBase64.replace(regex, "");
 
-      // if (imageToBase64 === "error") return navigate.goPrescription();
+      const regex = /^data:image\/(png|jpeg|jpg);base64,/;
+      let newImageToBase64String = imageToBase64.replace(regex, "");
+
+      if (imageToBase64 === "error")
+        newImageToBase64String = images.scanTestImage;
 
       setState(false);
       await mutateOCR
-        .mutateAsync(newImageToBase64String)
+        .mutateAsync({ newImageToBase64String, token })
         .then((result) => {
-          console.log("OCR Status: " + result.status);
-          console.log("OCR Data: " + result.data[0].ITEM_SEQ);
-
-          // setData(result.data.medicine_list);
-          setData(testSet.modifiedData);
+          setData(result.data);
           setTitle(constant.Title.find);
         })
         .catch((error) => {
-          console.log("OCR Error: " + error);
           setTimeout(async () => {
-            // return navigate.goHome();
-
-            //test
-            setData(testSet.modifiedData);
-            //test
-            setTitle(constant.Title.find);
+            return navigate.goHome();
           }, 1100);
         });
     }
@@ -72,7 +61,7 @@ export default function Scanner() {
           const cleanText = phrases[content.count];
           const dotCount = prevText.text.length - cleanText.length;
           if (dotCount < 3) {
-            const text = cleanText + ".".repeat(dotCount + 1);
+            const text = cleanText + ".".repeat(Math.max(dotCount + 1, 0));
             return { text: text, count: content.count };
           } else {
             const nextIndex = (content.count + 1) % phrases.length;
@@ -80,7 +69,9 @@ export default function Scanner() {
           }
         });
       }, 550);
-    } else clearInterval(intervalId);
+    } else {
+      clearInterval(intervalId);
+    }
     return () => clearInterval(intervalId);
   }, [state, content.count]);
 

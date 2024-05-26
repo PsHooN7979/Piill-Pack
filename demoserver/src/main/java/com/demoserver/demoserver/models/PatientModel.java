@@ -75,8 +75,8 @@ public class PatientModel implements UserDetails {
   @Column(nullable = true)
   private int weight;
 
-  @Column(nullable = true)
-  private Boolean gender;
+  @Column(nullable = true, length = 255)
+  private String gender;
 
   @CreatedDate
   @Column(nullable = false)

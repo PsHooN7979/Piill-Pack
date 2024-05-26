@@ -10,9 +10,6 @@ const AuthWatcher = () => {
   const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
-    console.log("AuthWatcher mounted"); // 컴포넌트 마운트 확인
-    console.log("isAuth state:", isAuth); // isAuth 상태 확인
-
     // 일시 무력화
     if (!isAuth && !initialLoad) {
       dispatch(
@@ -21,7 +18,7 @@ const AuthWatcher = () => {
           message: "로그아웃되어 초기 화면으로 이동합니다.",
         })
       );
-      // navigate("/auth");
+      navigate("/auth");
     }
 
     if (initialLoad) {

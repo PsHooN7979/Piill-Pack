@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { saveUserInfo } from './repositories/user.repository';
+import { useDispatch, useSelector } from "react-redux";
+import { saveUserInfo } from "./repositories/user.repository";
 import { setUserInfo } from "../../common/feature/slices/user.slice";
 
 import images from "../../constants/image.constant";
@@ -10,14 +10,20 @@ import GenderButton from "../../common/components/gender.button";
 import FirstLoginHeader from "./components/fistLogin.header";
 import TagList from "../../common/components/tagList";
 import { addSnackBar } from "../../common/feature/slices/snackBar.slice";
+import axios from "axios";
 
 export default function FirstLogin() {
+  const imageUrl =
+    "https://i.pinimg.com/564x/d6/4e/97/d64e9765deca662e8fa07d2cfdb67f7c.jpg";
+
   const [nick, setNick] = useState("");
   const [age, setAge] = useState("");
   const [tall, setTall] = useState("");
   const [weight, setWeight] = useState("");
   const [selectedGender, setSelectedGender] = useState(null);
   const [diseaseList, setDiseaseList] = useState([]);
+
+  const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
 
@@ -40,7 +46,6 @@ export default function FirstLogin() {
   };
 
   const handleGenderSelect = (gender) => {
-    console.log("선택된 성별: ", gender);
     setSelectedGender(gender);
   };
 
@@ -49,7 +54,7 @@ export default function FirstLogin() {
   };
 
   const handleHome = () => {
-    navigate("/");
+    navigate("/auth");
   };
 
   const handleDone = async () => {
@@ -64,41 +69,86 @@ export default function FirstLogin() {
       isNaN(Number(tall)) ||
       isNaN(Number(weight))
     ) {
-      dispatch(addSnackBar({ id: Date.now(), message: "정보 입력 후 회원가입을 진행해 주세요" }));
+      dispatch(
+        addSnackBar({
+          id: Date.now(),
+          message: "정보 입력 후 회원가입을 진행해 주세요",
+        })
+      );
       return;
     }
 
     const userInfo = {
+      image: imageUrl,
+      nick: nick,
       age: Number(age),
-      gender: selectedGender,
-      weight: Number(weight),
       height: Number(tall),
-      nickname: nick,
-      is_first: true,
-      updated: new Date().toISOString(),
+      weight: Number(weight),
+      gender: selectedGender,
+      disease_list: diseaseList,
     };
 
-    saveUserInfo(userInfo)
+    await saveUserInfo(userInfo, token)
       .then(() => {
-        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 등록이 완료되었습니다" }));
+        dispatch(
+          addSnackBar({
+            id: Date.now(),
+            message: "회원 정보 등록이 완료되었습니다",
+          })
+        );
         // Redux store에 유저 정보 저장
-        dispatch(setUserInfo({ age: userInfo.age, gender: userInfo.gender, weight: userInfo.weight, height: userInfo.height, nickname: userInfo.nickname }));
-        navigate('/home'); // 회원 정보 입력 완료 후 홈으로 이동
+        // dispatch(
+        //   setUserInfo({
+        //     age: userInfo.age,
+        //     gender: userInfo.gender,
+        //     weight: userInfo.weight,
+        //     height: userInfo.height,
+        //     nickname: userInfo.nickname,
+        //   })
+        // );
+        navigate("/home"); // 회원 정보 입력 완료 후 홈으로 이동
       })
       .catch((error) => {
-        dispatch(addSnackBar({ id: Date.now(), message: "회원 정보 저장 중 오류 발생" }));
-        console.error('회원 정보 저장 중 오류 발생:', error);
+        dispatch(
+          addSnackBar({
+            id: Date.now(),
+            message: "회원 정보 저장 중 오류 발생",
+          })
+        );
       });
 
+    const res = await axios.get("/patient/info", {
+      headers: { Authorization: token },
+    });
+
+    dispatch(
+      setUserInfo({
+        image: res.data.patient.image,
+        nickname: res.data.patient.nick,
+        age: res.data.patient.age,
+        height: res.data.patient.height,
+        weight: res.data.patient.weight,
+        gender: res.data.patient.gender,
+        diseaseList: res.data.diseaseList,
+        prescriptionList: res.data.prescriptionList,
+      })
+    );
   };
 
   return (
     <div className="relative">
       <FirstLoginHeader title="회원 정보 입력" />
       <div className="flex justify-center items-center">
-        <div className="bg-opacity-100 mt-6 w-80 min-h-screen">
+        <div
+          className="bg-opacity-100 mt-6 w-80 min-h-screen"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           {/* 입력 필드 */}
-          <div className="mb-3 px-6">
+          <div className="mb-14 px-6">
             <div className="text-sm mb-1 ml-1">별명</div>
             <input
               type="text"
@@ -108,11 +158,11 @@ export default function FirstLogin() {
             />
             <div className="text-sm mb-1 ml-1">나이</div>
             <input
-            type="number"
-            placeholder="나이를 입력하세요"
-            value={age}
-            onChange={handleAgeChange}
-            className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
+              type="number"
+              placeholder="나이를 입력하세요"
+              value={age}
+              onChange={handleAgeChange}
+              className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
             />
             <div className="text-sm mb-1 ml-1">키</div>
             <input
@@ -129,6 +179,7 @@ export default function FirstLogin() {
               className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
             />
             <div className="text-sm mb-1 ml-1">성별</div>
+            {/* 남자가 true, 여자가 false */}
             <GenderButton onGenderSelect={handleGenderSelect} />
             <div className="text-sm mt-3 mb-1 ml-1">질병 입력</div>
             <TagList
@@ -138,7 +189,10 @@ export default function FirstLogin() {
             />
           </div>
           {/* 버튼 */}
-          <div className="flex flex-row justify-between">
+          <div
+            className="flex flex-row justify-between"
+            style={{ marginBottom: "120px" }}
+          >
             <button
               onClick={handleHome}
               className="w-24 py-1 font-semibold border-2 border-slate-500 text-s bg-white rounded-lg hover:bg-slate-300 transition-colors mx-auto block"

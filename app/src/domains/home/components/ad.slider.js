@@ -27,7 +27,7 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
     cssEase: "linear",
     centerMode: true,
     autoplay: true, // 자동 넘김 항상 활성화
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3500,
     pauseOnHover: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -53,7 +53,7 @@ const AdSlider = ({ products, nameLimit, descLimit }) => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <h2 className="text-center text-sm font-semibold mb-4">오늘은 이거다!</h2>
+      <h2 className="text-center text-sm font-semibold mb-4">필팩 AI 추천</h2>
       <Slider ref={sliderRef} {...settings}>
         {products.map((product, index) => (
           <div key={index} className="p-4 text-center">

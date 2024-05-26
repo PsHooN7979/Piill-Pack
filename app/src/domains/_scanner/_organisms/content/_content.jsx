@@ -5,8 +5,10 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import scannerRepo from "../../repositories/scanner.repository";
 import useCustomNavigate from "../../../../common/hooks/useCustomNavigate";
+import testSet from "../../../../constants/json.server";
 
 import constant from "../../../../constants/constant";
+import { useSelector } from "react-redux";
 
 export default function Content({ data }) {
   const navigate = useCustomNavigate();
@@ -18,6 +20,9 @@ export default function Content({ data }) {
   const mutateAnalysis = useMutation({
     mutationFn: scannerRepo.analysis,
   });
+
+  const token = useSelector((state) => state.auth.token);
+
   async function asyncData() {
     setPhrases(constant.Phrases2);
     setContent({
@@ -27,8 +32,10 @@ export default function Content({ data }) {
     setTitle(constant.Title.analysis);
     setMedicines([]);
     await mutateAnalysis
-      .mutateAsync(medicineList)
-      .then((result) => {})
+      .mutateAsync({ medicineList, token })
+      .then((result) => {
+        return navigate.goPrescription();
+      })
       .catch((error) => {
         setTimeout(async () => {
           return navigate.goPrescription();

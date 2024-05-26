@@ -31,14 +31,12 @@ export default function SignupModal({ onJoin, onClose }) {
     // 수신 동의 확인
     if (isAgree === "on") {
       // 비밀번호 확인
-      if (password === confirmPassword) {
+      if (password !== confirmPassword) {
         onJoin(email, password, isAgree);
         onClose();
       } else {
-        console.log("비밀번호를 확인해주세요");
       }
     } else {
-      console.log("이메일 수신 동의에 체크해 주세요");
     }
   };
 
@@ -72,10 +70,16 @@ export default function SignupModal({ onJoin, onClose }) {
             type="text"
             placeholder="이메일 형식의 아이디"
             onChange={handleEmailChange}
-            className="w-full px-3 py-2 mb-1 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
+            className="w-full px-3 py-2 mb-4 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
           />
           {/* 이메일 수신 동의 */}
-          <div className="flex items-center justify-start mb-3">
+          <input
+            type="password"
+            placeholder="비밀번호"
+            onChange={handlePasswordChange}
+            className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
+          />
+          <div className="flex items-center justify-start mb-7">
             <input
               type="checkbox"
               id="agree"
@@ -86,23 +90,17 @@ export default function SignupModal({ onJoin, onClose }) {
               이메일 수신 동의
             </label>
           </div>
-          <input
-            type="password"
-            placeholder="비밀번호"
-            onChange={handlePasswordChange}
-            className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
-          />
-          <input
+          {/* <input
             type="password"
             placeholder="비밀번호 확인"
             onChange={handleConfirmPasswordChange}
             className="w-full px-3 py-2 mb-3 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mx-auto"
-          />
+          /> */}
         </div>
         {/* 회원가입 버튼 */}
         <button
           onClick={handleJoinClick}
-          className="px-20 py-1 text-s bg-mint02 text-white rounded-lg hover:bg-mint03 transition-colors mx-auto block"
+          className="px-20 py-1 text-s bg-mint03 text-white rounded-lg hover:bg-mint03 transition-colors mx-auto block"
         >
           회원가입
         </button>
