@@ -29,15 +29,24 @@ export default function PillDetail() {
         <div className="relative flex justify-between items-center w-full py-2 bg-white rounded-b-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
           <div className="flex flex-col items-start text-sm text-black font-semibold pl-4">
             <span className="ml-1 my-1">{"용도: "}</span>
-            <span className="ml-1 my-1" style={{ color: "black" }}>
+            <span
+              className="ml-1 my-1"
+              style={{ color: "black", marginLeft: "10px" }}
+            >
               {pill.effect}
             </span>
             <span className="ml-1 my-1">{"보관 방법: "}</span>
-            <span className="ml-1 my-1" style={{ color: "black" }}>
+            <span
+              className="ml-1 my-1"
+              style={{ color: "black", marginLeft: "10px" }}
+            >
               {pill.storageMethod}
             </span>
             <span className="ml-1 my-1">{"섭취 방법: "}</span>
-            <span className="ml-1 my-1" style={{ color: "black" }}>
+            <span
+              className="ml-1 my-1"
+              style={{ color: "black", marginLeft: "10px" }}
+            >
               {pill.intakeMethod}
             </span>
           </div>

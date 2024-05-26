@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function useACustomNavigate() {
+function useCustomNavigate() {
   const navigate = useNavigate();
 
   const goAuth = () => navigate("/");
@@ -25,4 +25,4 @@ function useACustomNavigate() {
   };
 }
 
-export default useACustomNavigate;
+export default useCustomNavigate;

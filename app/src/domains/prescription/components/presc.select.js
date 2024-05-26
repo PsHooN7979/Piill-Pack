@@ -4,11 +4,23 @@ import icons from "../../../constants/icon";
 import { useNavigate } from "react-router-dom";
 import images from "../../../constants/image.constant";
 
+import S from "../../_scanner/_organisms/_molecules/efficacies/style";
+
 export default function PrescSelect({ presc }) {
   const [prescList, setPrescList] = useState("");
   const [activeTab, setActiveTab] = useState(null); // 초기값을 null로 설정
   const [nameLimit, setNameLimit] = useState(getNameLimit());
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState("");
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTooltipVisible((prev) => (prev === "" ? "hidden" : "")); // 1초마다 토글
+    }, 1000);
+
+    // 컴포넌트가 언마운트될 때 인터벌 정리
+    return () => clearInterval(intervalId);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -62,6 +74,10 @@ export default function PrescSelect({ presc }) {
     navigate("/prescription/detail", { state: { pill } });
   };
 
+  const handleAnalyzePresc = (analyze) => {
+    navigate("/prescription/analyze", { state: { analyze } });
+  };
+
   const handleDeletePresc = () => {
     if (activeTab !== null && activeTab >= 0) {
       const updatedPresc = presc.filter((_, index) => index !== activeTab);
@@ -71,7 +87,6 @@ export default function PrescSelect({ presc }) {
       setPrescList(""); // 선택 초기화
     }
   };
-
   function formatDateRange(dateString) {
     // 날짜 부분만 추출
     const datePart = dateString.split("-").slice(0, 3).join("-");
@@ -120,10 +135,10 @@ export default function PrescSelect({ presc }) {
           </div>
         </button>
         <div
-          className={`absolute top-full left-0 w-full shadow-custom01 bg-white border border-gray-300 rounded-lg overflow-y-auto transition-all duration-500 ease-in-out transform ${
+          className={`absolute top-full left-0 w-full shadow-custom01 bg-white border border-gray-300 rounded-lg z-0 overflow-y-auto transition-all duration-500 ease-in-out transform ${
             dropdownOpen
-              ? "translate-y-0 opacity-100 z-20"
-              : "-translate-y-2 opacity-0 z-0"
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-2 opacity-0"
           }`}
         >
           {dropdownOpen &&
@@ -151,7 +166,35 @@ export default function PrescSelect({ presc }) {
             <button className="flex items-center hover:text-black"></button>
           </div>
           {/* 처방전 목록 컨테이너 종료 */}
-
+          {presc[activeTab].medicineList && (
+            <>
+              <S.TooltipBox state={tooltipVisible} sx={{ marginLeft: "13%" }}>
+                click!
+              </S.TooltipBox>
+              <div
+                className="flex flex-col justify-start items-start border border-gray-400 rounded-lg shadow-custom01 my-2 w-full h-50"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  height: "50px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                  marginBottom: "30px",
+                }}
+                onClick={() => {
+                  handleAnalyzePresc(presc[activeTab]);
+                }}
+              >
+                <img
+                  src={images.prescription}
+                  style={{ height: "30px" }}
+                  alt=""
+                />
+                필팩 AI 처방전 분석결과 확인하기
+              </div>
+            </>
+          )}
           {/* 약 목록 컨테이너 */}
           {presc[activeTab].medicineList &&
             presc[activeTab].medicineList.map((pill, index) => (

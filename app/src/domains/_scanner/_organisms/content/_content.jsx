@@ -8,11 +8,15 @@ import useCustomNavigate from "../../../../common/hooks/useCustomNavigate";
 import testSet from "../../../../constants/json.server";
 
 import constant from "../../../../constants/constant";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setUserInfo } from "../../../../common/feature/slices/user.slice";
 
 export default function Content({ data }) {
   const navigate = useCustomNavigate();
   const { medicineList, content, setPhrases, setTitle, setContent } = data;
+
+  const dispatch = useDispatch();
 
   const [isDetail, setIsDetail] = React.useState(false);
   const [medicines, setMedicines] = React.useState([]);
@@ -41,6 +45,23 @@ export default function Content({ data }) {
           return navigate.goPrescription();
         }, 2100);
       });
+
+    const res = await axios.get("/patient/info", {
+      headers: { Authorization: token },
+    });
+
+    dispatch(
+      setUserInfo({
+        image: res.data.patient.image,
+        nickname: res.data.patient.nick,
+        age: res.data.patient.age,
+        height: res.data.patient.height,
+        weight: res.data.patient.weight,
+        gender: res.data.patient.gender,
+        diseaseList: res.data.diseaseList,
+        prescriptionList: res.data.prescriptionList,
+      })
+    );
   }
 
   return (

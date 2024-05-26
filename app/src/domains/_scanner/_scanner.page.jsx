@@ -31,13 +31,22 @@ export default function Scanner() {
     async function asyncData() {
       const imageToBase64 = await L().takePhoto();
 
-      const regex = /^data:image\/(png|jpeg|jpg);base64,/;
-      let newImageToBase64String = imageToBase64.replace(regex, "");
+      const removeBase64Prefix = (base64String) => {
+        const prefixLength = "data:image/png;base64,".length;
+        return base64String.substring(prefixLength);
+      };
+
+      const cleanBase64String = removeBase64Prefix(imageToBase64);
+
+      // const regex = /^data:image\/(png|jpeg|jpg);base64,/;
+      let newImageToBase64String = cleanBase64String;
 
       if (imageToBase64 === "error")
         newImageToBase64String = images.scanTestImage;
 
       setState(false);
+
+      console.log(newImageToBase64String);
       await mutateOCR
         .mutateAsync({ newImageToBase64String, token })
         .then((result) => {

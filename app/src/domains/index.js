@@ -14,23 +14,28 @@ import PrivacyPage from "./myPage/privacy.page";
 import HealthPage from "./health/health.page";
 import DiseaseAddPage from "./health/disease.add";
 import DiseaseDetailPage from "./health/disease.detail";
+import Analyze from "./prescription/components/analyze";
+import PatientInfoPage from "./myPage/patientInfo.page";
 
-
-const Pages = { 
-    Auth, 
-    FistLogin, Home, 
-    Scanner, 
-    HealthPage,
-    DiseaseAddPage,
-    DiseaseDetailPage,
-    MyPage, 
-    ProfileEditPage, 
-    GuidePage, 
-    TermsPage, 
-    PrivacyPage, 
-    Prescription, 
-    PrescriptionEditPage, 
-    PrescriptionDetailPage,
-    PrescriptionAddPage };
+const Pages = {
+  Auth,
+  FistLogin,
+  Home,
+  Scanner,
+  HealthPage,
+  DiseaseAddPage,
+  DiseaseDetailPage,
+  MyPage,
+  ProfileEditPage,
+  GuidePage,
+  TermsPage,
+  PrivacyPage,
+  Prescription,
+  PrescriptionEditPage,
+  PrescriptionDetailPage,
+  PrescriptionAddPage,
+  Analyze,
+  PatientInfoPage,
+};
 
 export default Pages;

@@ -62,7 +62,16 @@ public class PrescriptionService {
   private final IDangerRepo iDangerRepo;
 
   public String processBase64Image(String base64Image) throws IOException {
-    byte[] decodedBytes = Base64.getDecoder().decode(base64Image);
+    base64Image = base64Image.replaceAll("\\s+", "");
+
+    // Base64 디코딩
+    byte[] decodedBytes = null;
+    try {
+      decodedBytes = Base64.getDecoder().decode(base64Image);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid Base64 input", e);
+    }
+
     Path imagePath = saveImageToFile(decodedBytes);
 
     try {

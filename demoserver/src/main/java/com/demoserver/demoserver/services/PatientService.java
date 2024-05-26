@@ -85,10 +85,20 @@ public class PatientService {
                                                                                         ? warning.getTargetMedicine()
                                                                                                         .getUuid()
                                                                                         : null,
+                                                                        warning.getTargetMedicine()
+                                                                                        .getItemName() != null
+                                                                                                        ? warning.getTargetMedicine()
+                                                                                                                        .getItemName()
+                                                                                                        : null,
                                                                         warning.getWarningMedicine() != null
                                                                                         ? warning.getWarningMedicine()
                                                                                                         .getUuid()
                                                                                         : null,
+                                                                        warning.getWarningMedicine()
+                                                                                        .getItemName() != null
+                                                                                                        ? warning.getWarningMedicine()
+                                                                                                                        .getItemName()
+                                                                                                        : null,
                                                                         warning.getWarningPatient() != null
                                                                                         ? warning.getWarningPatient()
                                                                                                         .getUuid()
@@ -110,10 +120,20 @@ public class PatientService {
                                                                                         ? danger.getTargetMedicine()
                                                                                                         .getUuid()
                                                                                         : null,
+                                                                        danger.getTargetMedicine()
+                                                                                        .getItemName() != null
+                                                                                                        ? danger.getTargetMedicine()
+                                                                                                                        .getItemName()
+                                                                                                        : null,
                                                                         danger.getDangerMedicine() != null
                                                                                         ? danger.getDangerMedicine()
                                                                                                         .getUuid()
                                                                                         : null,
+                                                                        danger.getDangerMedicine()
+                                                                                        .getItemName() != null
+                                                                                                        ? danger.getDangerMedicine()
+                                                                                                                        .getItemName()
+                                                                                                        : null,
                                                                         danger.getDangerPatient() != null
                                                                                         ? danger.getDangerPatient()
                                                                                                         .getUuid()

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsAuth } from "../../common/feature/slices/auth.slice";
@@ -51,6 +51,27 @@ export default function MyPage() {
     dispatch(setIsAuth(false)); // 인증 상태를 false로 설정
   };
 
+  const [tooltipVisible, setTooltipVisible] = useState("");
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTooltipVisible((prev) => (prev === "" ? "hidden" : "")); // 1초마다 토글
+    }, 1000);
+
+    // 컴포넌트가 언마운트될 때 인터벌 정리
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleAnalyzePresc = (analyze) => {
+    navigate("/profile/info", { state: { analyze } });
+  };
+
+  const title = {
+    before: "필팩AI가",
+    middle: "건강",
+    after: "보고서를 작성해드려요.",
+  };
+
   return (
     <div className="relative">
       <MyPageHeader />
@@ -59,7 +80,38 @@ export default function MyPage() {
         <div className="bg-opacity-100 w-[85%] min-h-[80vh]">
           {/* <div className="font-semibold text-sm  my-2">내 프로필</div> */}
           <ProfileCard data={profileData} diseasesLimit={25} />
-
+          <>
+            {/* <S.TooltipBox
+              state={tooltipVisible}
+              sx={{ marginLeft: "13%", marginTop: "5%" }}
+            >
+              click!
+            </S.TooltipBox> */}
+            <div
+              className="flex flex-col justify-start items-start border border-gray-400 rounded-lg  my-2 w-full h-50"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                height: "50px",
+                justifyContent: "center",
+                alignItems: "center",
+                fontWeight: "bold",
+                marginBottom: "30px",
+                background: "white",
+                marginTop: "30px",
+              }}
+              onClick={() => {
+                handleAnalyzePresc([]);
+              }}
+            >
+              <img
+                src={images.prescription}
+                style={{ height: "30px" }}
+                alt=""
+              />
+              외래 의료 양식 작성하기
+            </div>
+          </>
           <div className="mt-6">
             <div className="font-semibold text-sm mb-2">이용 안내</div>
             <div className="text-xs text-gray-500 mb-2">

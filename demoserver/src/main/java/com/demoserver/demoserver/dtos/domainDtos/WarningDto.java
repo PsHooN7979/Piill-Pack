@@ -8,7 +8,9 @@ import lombok.Data;
 public class WarningDto {
   private String uuid;
   private String targetMedicineUuid;
+  private String targeMedicineName;
   private String warningMedicineUuid;
+  private String warningMedicineName;
   private String warningPatientUuid;
   private String warningDiseaseUuid;
   private String warningMedicineDescription;

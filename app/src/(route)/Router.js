@@ -16,12 +16,14 @@ function Router() {
         <Route path="/first" element={<Pages.FistLogin />} />
         <Route path="/home" element={<Pages.Home />} />
         <Route path="/scanner" element={<Pages.Scanner />} />
+        <Route path="/profile/info" element={<Pages.PatientInfoPage />} />
 
         {/* 처방 목록 */}
         <Route
           path="/prescription/edit"
           element={<Pages.PrescriptionEditPage />}
         />
+        <Route path="/prescription/analyze" element={<Pages.Analyze />} />
         <Route path="/prescription" element={<Pages.Prescription />} />
         <Route
           path="/prescription/detail"

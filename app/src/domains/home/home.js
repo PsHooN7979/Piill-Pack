@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavigation from "../../common/components/BottomNavigation";
 import images from "../../constants/image.constant";
@@ -8,6 +8,7 @@ import PillScroll from "./components/pill.scroll";
 import constant from "../../constants/constant";
 import Title from "../_scanner/_organisms/title/_title";
 import { useSelector } from "react-redux";
+import S from "../_scanner/_organisms/_molecules/efficacies/style";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -133,14 +134,23 @@ export default function Home() {
     <div className="relative">
       <HomeHeader />
       <Title title={prescriptionList.length === 0 ? userTitle2 : userTitle} />
-      <div className="flex justify-center items-center">
-        <div className="bg-opacity-100 w-[95%] min-h-screen">
+      <div
+        className="flex justify-center items-center"
+        style={{ flexDirection: "column" }}
+      >
+        <div
+          className="bg-opacity-100 w-[95%]"
+          style={{ marginBottom: "30px" }}
+        >
           <PillScroll prescriptionList={prescriptionList} wordLimit={10} />
+          {/* <Title title={title} /> */}
+
           <AdSlider products={products} nameLimit={12} descLimit={62} />
         </div>
       </div>
 
       <BottomNavigation active="1" />
+
       {/* 배경 */}
       <div className="absolute bottom-0 w-full">
         <div className="relative w-full h-auto bottom-0">

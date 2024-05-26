@@ -34,9 +34,6 @@ export default function DiseaseAddPage() {
   };
 
   const handleDone = async () => {
-    console.log("질병 추가가 완료되었습니다.");
-    console.log("질환 목록 -> " + diseaseList);
-
     const userInfo = {
       image: image,
       nick: nickname,
