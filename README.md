@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=AI%20Healthcare&fontSize=80)
+![header](https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=나만의 작은 건강비서%20Pill-Pack (필팩)&fontSize=80)
 
 <h2 align="center">인공지능 기반 환자 의약품 복용 및 부작용 관리 서비스</h2>
 
